@@ -108,7 +108,12 @@ support-bubble, внутренности `SupportWidget`/`CommandPalette`.
 
 ---
 
-## 5. Модалки 🟡
+## 5. Модалки ✅ — сделано
+
+> Все модалки (Confirm/ComingSoon/CreateTeam/Upload/RepoFolder/Install) уже на
+> примитиве `Dialog`. Ad-hoc оверлеи оставлены намеренно: мобильный drawer
+> (Sidebar) и CommandPalette — это не диалоги.
+
 
 Примитив `Dialog` (Radix) — 🟢 канон. Поверх него — много самописных оболочек с
 дублирующейся структурой:
@@ -136,7 +141,7 @@ support-bubble, внутренности `SupportWidget`/`CommandPalette`.
 
 ---
 
-## 7. Пикеры / свитчеры 🟡 — самое сложное
+## 7. Пикеры / свитчеры 🟡 — в работе
 
 Общий паттерн «триггер → поиск → список → выбор» в 6 местах:
 
