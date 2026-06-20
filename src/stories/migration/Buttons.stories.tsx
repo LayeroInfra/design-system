@@ -457,8 +457,8 @@ export const Tier3IconButtons: Story = {
         story:
           "Иконочные контролы (крестики, удаление) → <Button variant='ghost'>. " +
           "Финальный маппинг: (1) крестик в шапке → size='icon' (36px); " +
-          "(2) мелкий × в плотной строке → size='icon-sm' (28px). Оба дают " +
-          "hover-фон и единый focus-ring.",
+          "(2) мелкий × в плотной строке → size='icon-sm' (32px, в высоту как " +
+          "обычная sm-кнопка). Оба дают hover-фон и единый focus-ring.",
       },
     },
   },
@@ -500,8 +500,8 @@ export const Tier3IconButtons: Story = {
       <div>
         <div className="mb-1 text-sm font-medium">2. Мелкий × в плотной строке (env-var)</div>
         <p className="mb-3 text-xs text-neutral-500">
-          size="icon-sm" (28×28) садится в плотную строку, не раздувая её, и
-          даёт нормальную хит-область + focus-ring.
+          size="icon-sm" (32×32 — как обычная sm-кнопка по высоте) садится в
+          строку и даёт нормальную хит-область + focus-ring.
         </p>
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
