@@ -149,7 +149,12 @@ support-bubble, внутренности `SupportWidget`/`CommandPalette`.
 
 ---
 
-## 8. Аватары 🟡
+## 8. Аватары ✅ — сделано
+
+> Общий примитив `ui/avatar.tsx` (форма square/circle, градиент по seed, инициал,
+> опц. картинка). `ProjectAvatar` и `OrgAvatar` (в OrganizationSwitcher) переведены
+> на него; personal-аккаунт — фикс. emerald→cyan через `gradient`-оверрайд.
+
 
 - `ProjectAvatar` 🟢 (градиент-куб + буква / favicon)
 - `OrgAvatar` — инлайновый внутри `OrganizationSwitcher` 🟡 → вынести в `<Avatar>`
