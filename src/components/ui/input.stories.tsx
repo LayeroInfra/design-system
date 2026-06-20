@@ -6,7 +6,22 @@ const meta = {
   title: "Primitives/Input",
   component: Input,
   tags: ["autodocs"],
-  args: { placeholder: "you@example.com" },
+  parameters: {
+    docs: {
+      description: {
+        component:
+          "Текстовое поле. Крутится в Playground: placeholder, type, disabled, " +
+          "invalid (ошибка). Заменяет сырые <input> (см. Migration/Inputs).",
+      },
+    },
+  },
+  argTypes: {
+    placeholder: { control: "text" },
+    type: { control: "select", options: ["text", "email", "password", "number"] },
+    disabled: { control: "boolean" },
+    invalid: { control: "boolean" },
+  },
+  args: { placeholder: "you@example.com", type: "text", disabled: false, invalid: false },
 } satisfies Meta<typeof Input>;
 
 export default meta;
@@ -23,4 +38,12 @@ export const WithLabel: Story = {
   ),
 };
 
-export const Disabled: Story = { args: { disabled: true, value: "disabled" } };
+export const States: Story = {
+  render: () => (
+    <div className="grid w-72 gap-3">
+      <Input placeholder="Обычное" />
+      <Input placeholder="Disabled" disabled value="readonly" readOnly />
+      <Input placeholder="Invalid" invalid defaultValue="неверно" />
+    </div>
+  ),
+};
