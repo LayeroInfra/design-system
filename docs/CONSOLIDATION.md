@@ -12,22 +12,35 @@
 | Что | Где | Решение |
 |---|---|---|
 | `<Button>` (cva: default/destructive/outline/secondary/ghost/link + sizes) | 31 файл | 🟢 **канон** |
-| `.btn`, `.btn-primary`, `.btn-ghost`, `.btn-danger`, `.btn-danger-ghost`, `.btn-sm` (CSS) | ~7 использований | 🔴 удалить, заменить на `<Button>` |
-| Сырые `<button className="…">` | **126** | 🟡 мигрировать в `<Button>` |
+| `.btn*` (CSS-кнопки) | 3 места | 🔴 заменить на `<Button>`, удалить классы |
+| Сырые `<button className="…">` | 126 всего | 🟡 **но мигрируется не всё** — см. ниже |
 
-Сигнатуры сырых CTA: `bg-primary` ×30, `bg-white` ×14, `bg-red-500` ×9, `bg-black` ×6,
-плюс множество ghost/icon-кнопок (крестики, «…», стрелки).
+> **Уточнение по аудиту.** Из 126 сырых `<button>` ~104 — это НЕ кнопки-действия,
+> а интерактивные элементы (пункты меню/дропдаунов, триггеры свитчеров, строки
+> списков в пикерах, подложки оверлеев, выбираемые карточки, плавающая
+> support-кнопка). Они остаются `<button>`. Большинство настоящих CTA уже на
+> `<Button>`. Реальная цель миграции — небольшая.
 
-**Маппинг → варианты `<Button>`:**
-- `bg-primary` / `bg-black` → `variant="default"`
-- `bg-white` + border → `variant="outline"`
-- `bg-red-500/600` / `bg-destructive` → `variant="destructive"`
-- иконка без фона (крестик, меню) → `variant="ghost" size="icon"`
-- текст-ссылка → `variant="link"`
-- `.btn-sm` → `size="sm"`
+**Tier 1 — явные CTA (заменить):**
+- `.btn-ghost` → `<Button variant="ghost" size="sm">`: `RuntimeOomBanner.tsx:51,57`
+- `.btn-primary btn-sm` (disabled) → `<Button size="sm" disabled>`: `Overview.tsx:580`
+- инлайн primary → `<Button>`: `DropDeploy.tsx:315`
+- chip-кнопки (ревью на `secondary`): `SupportWidget.tsx:1013`, `NewProject.tsx:548`
+- затем удалить `.btn*` из `index.css`.
 
-**Не трогать:** кнопки-обёртки вокруг `ProjectAvatar`/`OrgAvatar` (это аватары),
-`rounded-full` плавающие (support-bubble) — оформить отдельным вариантом при миграции.
+**Tier 2 — текст-ссылки (8) → опц. `<Button variant="link">`:**
+`Team.tsx:482,654,664`, `Members.tsx:135`, `Overview.tsx:751`,
+`Settings.tsx:1125,1789`, `DropDeploy.tsx:420`.
+
+**Tier 3 — иконочные/«крестики» → опц. `<Button variant="ghost" size="icon">`**
+(единые focus-ring/hover; выше churn, по желанию).
+
+**Маппинг вариантов:** `bg-primary`/`bg-black`→`default`; `bg-white`+border→`outline`;
+`bg-red-500/600`/`bg-destructive`→`destructive`; иконка без фона→`ghost size="icon"`;
+текст-ссылка→`link`; `.btn-sm`→`size="sm"`.
+
+**Не трогать:** триггеры свитчеров/аватаров, подложки оверлеев, выбираемые карточки,
+support-bubble, внутренности `SupportWidget`/`CommandPalette`.
 
 ---
 
