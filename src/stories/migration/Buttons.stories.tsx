@@ -440,3 +440,101 @@ export const InContextSegmentedToggle: Story = {
     </div>
   ),
 };
+
+function XIcon() {
+  return (
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" aria-hidden="true">
+      <path d="M6 6l12 12M18 6L6 18" />
+    </svg>
+  );
+}
+
+export const Tier3IconButtons: Story = {
+  name: "Tier 3: иконочные кнопки",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Иконочные контролы (крестики, удаление). Канон — <Button " +
+          "variant='ghost' size='icon'> (h-9 w-9, hover-фон, focus-ring). " +
+          "Два случая: (1) крестик в шапке — ложится идеально; (2) мелкий × в " +
+          "плотной строке — size='icon' (36px) великоват, нужен icon-sm.",
+      },
+    },
+  },
+  render: () => (
+    <div className="max-w-2xl space-y-8">
+      <div>
+        <div className="mb-3 text-sm font-medium">1. Крестик в шапке (модалка / баннер)</div>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <div>
+            <div className="mb-2 text-xs font-medium uppercase tracking-wide text-red-600 dark:text-red-400">
+              сейчас
+            </div>
+            <div className="flex items-center justify-between rounded-lg border border-border p-3">
+              <span className="text-sm font-medium">Заголовок</span>
+              <button
+                aria-label="Закрыть"
+                className="rounded-md p-1.5 text-neutral-500 hover:bg-neutral-100 hover:text-neutral-900 dark:hover:bg-neutral-800"
+              >
+                <span className="block h-[18px] w-[18px]">
+                  <XIcon />
+                </span>
+              </button>
+            </div>
+          </div>
+          <div>
+            <div className="mb-2 text-xs font-medium uppercase tracking-wide text-green-700 dark:text-green-400">
+              канон · ghost size="icon"
+            </div>
+            <div className="flex items-center justify-between rounded-lg border border-border p-3">
+              <span className="text-sm font-medium">Заголовок</span>
+              <Button variant="ghost" size="icon" aria-label="Закрыть">
+                <XIcon />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div className="mb-1 text-sm font-medium">2. Мелкий × в плотной строке (env-var)</div>
+        <p className="mb-3 text-xs text-neutral-500">
+          size="icon" = 36×36 — заметно крупнее текущего инлайн-крестика и
+          раздувает строку. Кандидат на новый размер icon-sm.
+        </p>
+        <div className="grid gap-5 sm:grid-cols-2">
+          <div>
+            <div className="mb-2 text-xs font-medium uppercase tracking-wide text-red-600 dark:text-red-400">
+              сейчас
+            </div>
+            <div className="flex items-center gap-2 rounded-lg border border-border p-2">
+              <code className="flex-1 rounded-md bg-neutral-100 px-2 py-1.5 font-mono text-sm dark:bg-neutral-800">
+                API_KEY=•••
+              </code>
+              <button
+                aria-label="Удалить"
+                className="shrink-0 px-2 text-sm text-neutral-400 hover:text-red-600"
+              >
+                ×
+              </button>
+            </div>
+          </div>
+          <div>
+            <div className="mb-2 text-xs font-medium uppercase tracking-wide text-green-700 dark:text-green-400">
+              канон · ghost size="icon" (великоват)
+            </div>
+            <div className="flex items-center gap-2 rounded-lg border border-border p-2">
+              <code className="flex-1 rounded-md bg-neutral-100 px-2 py-1.5 font-mono text-sm dark:bg-neutral-800">
+                API_KEY=•••
+              </code>
+              <Button variant="ghost" size="icon" aria-label="Удалить" className="shrink-0">
+                <XIcon />
+              </Button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  ),
+};
