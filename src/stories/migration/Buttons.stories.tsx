@@ -455,10 +455,10 @@ export const Tier3IconButtons: Story = {
     docs: {
       description: {
         story:
-          "Иконочные контролы (крестики, удаление). Канон — <Button " +
-          "variant='ghost' size='icon'> (h-9 w-9, hover-фон, focus-ring). " +
-          "Два случая: (1) крестик в шапке — ложится идеально; (2) мелкий × в " +
-          "плотной строке — size='icon' (36px) великоват, нужен icon-sm.",
+          "Иконочные контролы (крестики, удаление) → <Button variant='ghost'>. " +
+          "Финальный маппинг: (1) крестик в шапке → size='icon' (36px); " +
+          "(2) мелкий × в плотной строке → size='icon-sm' (28px). Оба дают " +
+          "hover-фон и единый focus-ring.",
       },
     },
   },
@@ -500,8 +500,8 @@ export const Tier3IconButtons: Story = {
       <div>
         <div className="mb-1 text-sm font-medium">2. Мелкий × в плотной строке (env-var)</div>
         <p className="mb-3 text-xs text-neutral-500">
-          size="icon" = 36×36 — заметно крупнее текущего инлайн-крестика и
-          раздувает строку. Кандидат на новый размер icon-sm.
+          size="icon-sm" (28×28) садится в плотную строку, не раздувая её, и
+          даёт нормальную хит-область + focus-ring.
         </p>
         <div className="grid gap-5 sm:grid-cols-2">
           <div>
@@ -522,13 +522,13 @@ export const Tier3IconButtons: Story = {
           </div>
           <div>
             <div className="mb-2 text-xs font-medium uppercase tracking-wide text-green-700 dark:text-green-400">
-              канон · ghost size="icon" (великоват)
+              канон · ghost size="icon-sm"
             </div>
             <div className="flex items-center gap-2 rounded-lg border border-border p-2">
               <code className="flex-1 rounded-md bg-neutral-100 px-2 py-1.5 font-mono text-sm dark:bg-neutral-800">
                 API_KEY=•••
               </code>
-              <Button variant="ghost" size="icon" aria-label="Удалить" className="shrink-0">
+              <Button variant="ghost" size="icon-sm" aria-label="Удалить" className="shrink-0">
                 <XIcon />
               </Button>
             </div>
