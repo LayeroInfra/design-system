@@ -33,3 +33,18 @@ export const Default: Story = {
     </Tooltip>
   ),
 };
+
+export const Sides: Story = {
+  render: () => (
+    <div className="flex flex-wrap gap-4 p-10">
+      {(["top", "right", "bottom", "left"] as const).map((side) => (
+        <Tooltip key={side}>
+          <TooltipTrigger asChild>
+            <Button variant="outline">{side}</Button>
+          </TooltipTrigger>
+          <TooltipContent side={side}>Сторона: {side}</TooltipContent>
+        </Tooltip>
+      ))}
+    </div>
+  ),
+};
