@@ -57,7 +57,12 @@ support-bubble, внутренности `SupportWidget`/`CommandPalette`.
 
 ---
 
-## 2. Бейджи 🟡 — приоритет №2
+## 2. Бейджи ✅ — сделано
+
+> Мигрировано в `control-plane`: статус/роль-бейджи (.pill-leaf/.pill-amber и
+> инлайн-спаны) → `<Badge variant>`. Компонент: обводка убрана у
+> secondary/warning/destructive (остаётся только у outline); все строковые
+> подписи авто-приводятся к «Заглавная + строчные» (normal-case + sentence-case).
 
 | Что | Где | Решение |
 |---|---|---|
