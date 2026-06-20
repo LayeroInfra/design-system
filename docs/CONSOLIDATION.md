@@ -22,7 +22,9 @@
 > `<Button>`. Реальная цель миграции — небольшая.
 
 **Tier 1 — явные CTA (заменить):**
-- `.btn-ghost` → `<Button variant="ghost" size="sm">`: `RuntimeOomBanner.tsx:51,57`
+- `.btn-ghost` → `<Button variant="outline" size="sm">`: `RuntimeOomBanner.tsx:51,57`
+  ⚠️ `.btn-ghost` — название обманчивое: в CSS это `bg-card + border + shadow`,
+  визуально это **outline**, а не прозрачный ghost. Маппим в `outline`.
 - `.btn-primary btn-sm` (disabled) → `<Button size="sm" disabled>`: `Overview.tsx:580`
 - инлайн primary → `<Button>`: `DropDeploy.tsx:315`
 - chip-кнопки (ревью на `secondary`): `SupportWidget.tsx:1013`, `NewProject.tsx:548`

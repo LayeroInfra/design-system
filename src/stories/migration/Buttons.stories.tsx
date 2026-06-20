@@ -101,11 +101,27 @@ export const ButtonsBeforeAfter: Story = {
       />
 
       <Row
-        label="Ghost"
-        legacy={<button className="btn-ghost px-3 py-1.5 text-sm">Действие</button>}
-        legacyCode=".btn-ghost px-3 py-1.5 text-sm"
-        canon={<Button variant="ghost">Действие</Button>}
-        canonCode='<Button variant="ghost">Действие</Button>'
+        label=".btn-ghost → outline"
+        legacy={<button className="btn-ghost px-3 py-1.5 text-sm">Логи деплоя</button>}
+        legacyCode=".btn-ghost = bg-card + border + shadow (визуально outline!)"
+        canon={
+          <Button variant="outline" size="sm">
+            Логи деплоя
+          </Button>
+        }
+        canonCode='<Button variant="outline" size="sm">'
+      />
+
+      <Row
+        label="Настоящий ghost"
+        legacy={
+          <button className="rounded-md px-3 py-1.5 text-sm text-neutral-700 hover:bg-neutral-100">
+            Пункт меню
+          </button>
+        }
+        legacyCode="прозрачный, hover:bg-neutral-100 (меню, табы)"
+        canon={<Button variant="ghost">Пункт меню</Button>}
+        canonCode='<Button variant="ghost">'
       />
 
       <Row
@@ -164,6 +180,76 @@ export const ButtonsBeforeAfter: Story = {
         }
         canonCode='<Button size="sm">Мелкая</Button>'
       />
+    </div>
+  ),
+};
+
+function OomBanner({ actions }: { actions: React.ReactNode }) {
+  return (
+    <div className="flex items-start gap-3 rounded-xl border border-red-200 bg-red-50 p-4 sm:p-5 dark:border-red-900/50 dark:bg-red-950/30">
+      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-red-100 text-lg text-red-700 dark:bg-red-900/40">
+        🧠
+      </div>
+      <div className="min-w-0 flex-1">
+        <h2 className="text-sm font-semibold text-red-900 dark:text-red-200">
+          Приложению не хватает памяти
+        </h2>
+        <p className="mt-1 text-sm text-red-900/80 dark:text-red-200/80">
+          Сайт <span className="font-mono text-[13px]">app.example.ru</span>{" "}
+          превысил лимит памяти инстанса и был остановлен платформой (OOM).
+        </p>
+        <div className="mt-3 flex flex-wrap items-center gap-2">{actions}</div>
+      </div>
+    </div>
+  );
+}
+
+export const InContextOomBanner: Story = {
+  name: "В контексте: баннер «нехватка памяти»",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Тот самый экран (RuntimeOomBanner), где сейчас стоят .btn-ghost. " +
+          "Видно, что .btn-ghost — это card + рамка + тень, т.е. визуально " +
+          "outline. Поэтому канон здесь — <Button variant=\"outline\">, не ghost.",
+      },
+    },
+  },
+  render: () => (
+    <div className="max-w-2xl space-y-5">
+      <div>
+        <div className="mb-2 text-xs font-medium uppercase tracking-wide text-red-600 dark:text-red-400">
+          Сейчас — .btn-ghost
+        </div>
+        <OomBanner
+          actions={
+            <>
+              <button className="btn-ghost px-3 py-1.5 text-sm">Логи деплоя</button>
+              <button className="btn-ghost px-3 py-1.5 text-sm">
+                Настройки инстанса
+              </button>
+            </>
+          }
+        />
+      </div>
+      <div>
+        <div className="mb-2 text-xs font-medium uppercase tracking-wide text-green-700 dark:text-green-400">
+          Канон — &lt;Button variant="outline"&gt;
+        </div>
+        <OomBanner
+          actions={
+            <>
+              <Button variant="outline" size="sm">
+                Логи деплоя
+              </Button>
+              <Button variant="outline" size="sm">
+                Настройки инстанса
+              </Button>
+            </>
+          }
+        />
+      </div>
     </div>
   ),
 };
