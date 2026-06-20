@@ -253,3 +253,190 @@ export const InContextOomBanner: Story = {
     </div>
   ),
 };
+
+function BA({
+  legacy,
+  canon,
+  canonLabel = '<Button>',
+}: {
+  legacy: React.ReactNode;
+  canon: React.ReactNode;
+  canonLabel?: string;
+}) {
+  return (
+    <div className="grid max-w-2xl gap-5 sm:grid-cols-2">
+      <div>
+        <div className="mb-2 text-xs font-medium uppercase tracking-wide text-red-600 dark:text-red-400">
+          сейчас
+        </div>
+        <div className="rounded-lg border border-dashed border-border p-4">{legacy}</div>
+      </div>
+      <div>
+        <div className="mb-2 text-xs font-medium uppercase tracking-wide text-green-700 dark:text-green-400">
+          канон · {canonLabel}
+        </div>
+        <div className="rounded-lg border border-dashed border-border p-4">{canon}</div>
+      </div>
+    </div>
+  );
+}
+
+export const InContextPublishFooter: Story = {
+  name: "В контексте: футер «Опубликовать» (DropDeploy)",
+  render: () => (
+    <BA
+      canonLabel='outline + default'
+      legacy={
+        <div className="flex items-center justify-between gap-2">
+          <button className="rounded-md border border-neutral-300 px-3 py-2 text-sm hover:bg-neutral-100">
+            Назад
+          </button>
+          <button className="rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground hover:bg-neutral-700">
+            Опубликовать
+          </button>
+        </div>
+      }
+      canon={
+        <div className="flex items-center justify-between gap-2">
+          <Button variant="outline">Назад</Button>
+          <Button>Опубликовать</Button>
+        </div>
+      }
+    />
+  ),
+};
+
+export const InContextDisabledPlaceholder: Story = {
+  name: "В контексте: заглушка «Открыть» (Overview)",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Сейчас это <span class=btn-primary btn-sm opacity-40> — не кнопка, " +
+          "а заглушка, пока деплой не готов. Канон: <Button size='sm' disabled>.",
+      },
+    },
+  },
+  render: () => (
+    <BA
+      canonLabel='size="sm" disabled'
+      legacy={
+        <span className="btn-primary btn-sm cursor-not-allowed select-none opacity-40">
+          Открыть ↗
+        </span>
+      }
+      canon={
+        <Button size="sm" disabled>
+          Открыть ↗
+        </Button>
+      }
+    />
+  ),
+};
+
+export const InContextCopyChip: Story = {
+  name: "В контексте: чип «Копировать» (SupportWidget)",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Мелкий чип в строке с командой. Кандидат на secondary/outline, но " +
+          "размер меньше sm — возможно нужен size='xs' в Button.",
+      },
+    },
+  },
+  render: () => (
+    <BA
+      canonLabel='outline size="sm"'
+      legacy={
+        <div className="flex items-center gap-1.5 rounded-lg bg-neutral-100 p-2 dark:bg-neutral-800">
+          <code className="flex-1 truncate font-mono text-sm">/start ab12cd</code>
+          <button className="rounded-md border border-neutral-200 bg-card px-2 py-1 text-[11px] font-medium text-neutral-700">
+            Копировать
+          </button>
+        </div>
+      }
+      canon={
+        <div className="flex items-center gap-1.5 rounded-lg bg-neutral-100 p-2 dark:bg-neutral-800">
+          <code className="flex-1 truncate font-mono text-sm">/start ab12cd</code>
+          <Button variant="outline" size="sm" className="h-7 px-2 text-[11px]">
+            Копировать
+          </Button>
+        </div>
+      }
+    />
+  ),
+};
+
+export const InContextDestructiveLink: Story = {
+  name: "В контексте: ссылка «Удалить» (Members / Team)",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Красные текст-ссылки удаления. Канон: <Button variant='link'> с " +
+          "destructive-цветом. Возможно стоит завести вариант link-destructive.",
+      },
+    },
+  },
+  render: () => {
+    const Row = ({ remove }: { remove: React.ReactNode }) => (
+      <div className="flex items-center gap-3 text-sm">
+        <span className="flex-1">maria@example.com</span>
+        <span className="rounded-md bg-neutral-100 px-2 py-1 text-xs text-neutral-700">
+          member
+        </span>
+        {remove}
+      </div>
+    );
+    return (
+      <BA
+        canonLabel='variant="link" (destructive)'
+        legacy={
+          <Row
+            remove={
+              <button className="text-xs text-red-600 hover:underline dark:text-red-400">
+                Удалить
+              </button>
+            }
+          />
+        }
+        canon={
+          <Row
+            remove={
+              <Button
+                variant="link"
+                className="h-auto p-0 text-xs text-red-600 hover:text-red-700 dark:text-red-400"
+              >
+                Удалить
+              </Button>
+            }
+          />
+        }
+      />
+    );
+  },
+};
+
+export const InContextSegmentedToggle: Story = {
+  name: "В контексте: переключатель типа (NewProject) — остаётся",
+  parameters: {
+    docs: {
+      description: {
+        story:
+          "Это segmented-переключатель, а не кнопка-действие. В <Button> не " +
+          "переводим — кандидат на будущий компонент <Segmented>. Оставляем.",
+      },
+    },
+  },
+  render: () => (
+    <div className="inline-flex gap-1 rounded-lg bg-neutral-100 p-1 dark:bg-neutral-800">
+      <button className="rounded-md bg-primary px-2.5 py-1.5 text-sm font-medium text-primary-foreground">
+        Статика
+      </button>
+      <button className="rounded-md px-2.5 py-1.5 text-sm text-neutral-600 hover:text-neutral-900 dark:text-neutral-300">
+        Сервер
+      </button>
+    </div>
+  ),
+};
