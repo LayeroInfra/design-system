@@ -77,7 +77,10 @@ support-bubble, внутренности `SupportWidget`/`CommandPalette`.
 
 ---
 
-## 3. Карточки 🔴 — быстрый выигрыш
+## 3. Карточки ✅ — сделано
+
+> `ui/card.tsx` удалён (0 импортов) в обоих репо; канон контейнера — `.surface`.
+
 
 | Что | Где | Решение |
 |---|---|---|
@@ -89,7 +92,12 @@ support-bubble, внутренности `SupportWidget`/`CommandPalette`.
 
 ---
 
-## 4. Поля ввода 🟡
+## 4. Поля ввода 🟡 — частично
+
+> Стандартные text-поля → `<Input>` (Settings hex, DropDeploy name). Сырые поиски
+> в пикерах/Command Palette — категория 7; спец-типы (color/radio/checkbox/file/
+> сгруппированные/mono-строки env) оставлены.
+
 
 | Что | Где | Решение |
 |---|---|---|
@@ -113,7 +121,12 @@ support-bubble, внутренности `SupportWidget`/`CommandPalette`.
 
 ---
 
-## 6. Баннеры / информеры 🟡
+## 6. Баннеры / информеры ✅ — сделано
+
+> `Informer` получил тоны success/warning/danger/info. Проектные баннеры
+> (RuntimeOom/CdnFailed → danger, RuntimeType/Suspended → warning) переведены
+> на `<Informer tone>`. `MaintenanceBanner` (узкая полоса) оставлен отдельным.
+
 
 `Informer` (success) — 🟢 канон. Доработать: тоны `success | warning | danger | info`.
 Затем мигрировать:
