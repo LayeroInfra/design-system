@@ -21,10 +21,12 @@ const buttonVariants = cva(
         link: "text-foreground underline-offset-4 hover:underline",
       },
       size: {
-        default: "h-9 px-4 py-2",
         sm: "h-8 rounded-md px-3 text-[13px]",
+        default: "h-9 px-4 py-2",
         lg: "h-11 rounded-lg px-6 text-[15px]",
+        "icon-sm": "h-7 w-7 [&_svg]:size-3.5",
         icon: "h-9 w-9",
+        "icon-lg": "h-11 w-11 [&_svg]:size-5",
       },
     },
     defaultVariants: {
@@ -34,21 +36,86 @@ const buttonVariants = cva(
   },
 );
 
+function Spinner() {
+  return (
+    <svg className="animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle
+        className="opacity-25"
+        cx="12"
+        cy="12"
+        r="10"
+        stroke="currentColor"
+        strokeWidth="4"
+      />
+      <path
+        className="opacity-75"
+        fill="currentColor"
+        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"
+      />
+    </svg>
+  );
+}
+
 export interface ButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
+  /** Render as the child element (Radix Slot) — e.g. wrap a router <Link>.
+   *  In this mode icon/loading props are ignored; compose them in the child. */
   asChild?: boolean;
+  /** Leading icon node (rendered before the label). */
+  leftIcon?: React.ReactNode;
+  /** Trailing icon node (rendered after the label) — e.g. a disclosure chevron. */
+  rightIcon?: React.ReactNode;
+  /** Shows a spinner and disables the button. */
+  loading?: boolean;
+  /** Stretches the button to the full width of its container. */
+  fullWidth?: boolean;
 }
 
 const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ className, variant, size, asChild = false, ...props }, ref) => {
-    const Comp = asChild ? Slot : "button";
+  (
+    {
+      className,
+      variant,
+      size,
+      asChild = false,
+      leftIcon,
+      rightIcon,
+      loading = false,
+      fullWidth = false,
+      disabled,
+      children,
+      ...props
+    },
+    ref,
+  ) => {
+    const classes = cn(
+      buttonVariants({ variant, size }),
+      fullWidth && "w-full",
+      className,
+    );
+
+    // asChild composes a single child (Slot constraint) — pass through as-is.
+    if (asChild) {
+      return (
+        <Slot className={classes} ref={ref} {...props}>
+          {children}
+        </Slot>
+      );
+    }
+
     return (
-      <Comp
-        className={cn(buttonVariants({ variant, size, className }))}
+      <button
+        className={classes}
         ref={ref}
+        disabled={disabled || loading}
+        aria-busy={loading || undefined}
         {...props}
-      />
+      >
+        {loading ? <Spinner /> : leftIcon}
+        {children}
+        {rightIcon}
+      </button>
     );
   },
 );
