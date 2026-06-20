@@ -9,10 +9,15 @@
 
 ## 1. Кнопки ✅ — сделано
 
-> Мигрировано в `control-plane` (commit на `main`): `.btn*` удалены, Tier 1+2
-> переведены на `<Button>` (CTA, заглушка, чип, текст-ссылки). Segmented-
-> переключатель оставлен. Tier 3 (иконочные крестики) — опциональный отдельный
-> заход, ещё не делали.
+> Мигрировано в `control-plane` (на `main`): `.btn*` удалены; Tier 1+2 → `<Button>`
+> (CTA, заглушка, чип, текст-ссылки); **Tier 3** (нейтральные крестики/удаления:
+> toast, тост Team, панель SupportWidget, удаление в EnvVars/ProjectSetup) →
+> `<Button variant="ghost" size="icon" | "icon-sm">`. Сам `Button` расширен:
+> `leftIcon`/`rightIcon`/`loading`/`fullWidth` + размеры `icon-sm/icon/icon-lg`.
+>
+> **Оставлено намеренно:** segmented-переключатель (NewProject) → будущий
+> `<Segmented>`; цветные `×` внутри цветных алертов (Login/Integrations/
+> LinkedAccounts) — они привязаны к цвету баннера, ghost-фон им вредит.
 
 
 | Что | Где | Решение |
