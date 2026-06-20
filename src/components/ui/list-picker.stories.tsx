@@ -9,7 +9,6 @@ import { Avatar } from "./avatar";
 
 const meta = {
   title: "Components/ListPicker",
-  component: ListPicker,
   tags: ["autodocs"],
   parameters: {
     docs: {
@@ -21,7 +20,7 @@ const meta = {
       },
     },
   },
-} satisfies Meta<typeof ListPicker>;
+} satisfies Meta;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
