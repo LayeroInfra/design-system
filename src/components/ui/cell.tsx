@@ -31,7 +31,7 @@ export const Cell = React.forwardRef<HTMLDivElement, CellProps>(
         "flex items-center gap-2 rounded-md px-2 py-1.5 text-left",
         interactive &&
           "cursor-pointer transition hover:bg-overlay focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-        active && "bg-secondary",
+        active && "bg-overlay",
         className,
       )}
       {...props}

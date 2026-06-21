@@ -101,7 +101,12 @@ export const Sizes: Story = {
 };
 
 export const WithIcon: Story = {
+  args: {
+    variant: "default"
+  },
+
   name: "С иконкой",
+
   render: () => (
     <div className="flex flex-wrap items-end gap-6">
       <div className="space-y-2 text-center">
@@ -119,7 +124,7 @@ export const WithIcon: Story = {
         <Button rightIcon={<ChevronIcon />}>Button</Button>
       </div>
     </div>
-  ),
+  )
 };
 
 export const IconSizes: Story = {

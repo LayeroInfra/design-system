@@ -18,7 +18,6 @@ const preview: Preview = {
           "Atoms",
           "Molecules",
           "Organisms",
-          "Сравнение",
           "Patterns",
         ],
       },
