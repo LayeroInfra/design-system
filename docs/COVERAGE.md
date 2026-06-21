@@ -43,3 +43,9 @@
 3. ⬜ Tabs / Segmented
 4. ✅ Spinner + Skeleton (generic канон в ДС)
 5. ⬜ Checkbox / RadioGroup, CodeBlock, EmptyState
+
+
+## Стандартные компоненты (задел, в каталоге)
+
+Добавлены впрок (ещё не на платформе): Progress, Tag, Kbd, Breadcrumbs, Pagination,
+Tabs, Accordion, Slider. Адоптируются по мере появления кейсов.
