@@ -27,7 +27,7 @@
 | | Что | Статус |
 |---|---|---|
 | **Select** | 11 нативных `<select>` → `ui/select` (Team/Members/Perf/PageSpeed/DropDeploy/Integrations) | ✅ |
-| **Skeleton** | у app богаче (`SkeletonRows/Text/Page/Project…`), в ДС базовый → перенести набор в ДС | ⬜ |
+| **Skeleton** | generic-набор (`Skeleton/Text/Rows`) канон в ДС; роут-скелетоны остаются в app | ✅ |
 | **Tooltip** | 1 использование vs **114 нативных `title=`** → выборочно перевести важные | ⬜ (низкий) |
 
 ## Осознанно НЕ трогаем
@@ -41,5 +41,5 @@
 1. ✅ Textarea
 2. ✅ Select (мердж нативных)
 3. ⬜ Tabs / Segmented
-4. ⬜ Spinner + Skeleton-мердж
+4. ✅ Spinner + Skeleton (generic канон в ДС)
 5. ⬜ Checkbox / RadioGroup, CodeBlock, EmptyState
