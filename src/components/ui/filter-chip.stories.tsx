@@ -18,10 +18,10 @@ const meta = {
   argTypes: {
     active: { control: "boolean" },
     count: { control: "number" },
-    tone: { control: "inline-radio", options: [undefined, "blue", "green", "amber", "red"] },
+    tone: { control: "inline-radio", options: [undefined, "info", "success", "warning", "negative"] },
     children: { control: "text" },
   },
-  args: { active: true, count: 7, children: "Активные", tone: "green" },
+  args: { active: true, count: 7, children: "Активные", tone: "success" },
 } satisfies Meta<typeof FilterChip>;
 
 export default meta;
@@ -36,10 +36,10 @@ export const FilterRow: Story = {
       const [f, setF] = useState("all");
       const chips = [
         { id: "all", label: "Все", count: 7, tone: undefined },
-        { id: "build", label: "Сборка", count: 1, tone: "blue" as const },
-        { id: "active", label: "Активные", count: 3, tone: "green" as const },
-        { id: "error", label: "Ошибки", count: 1, tone: "red" as const },
-        { id: "idle", label: "Приостановлено", count: 2, tone: "amber" as const },
+        { id: "build", label: "Сборка", count: 1, tone: "info" as const },
+        { id: "active", label: "Активные", count: 3, tone: "success" as const },
+        { id: "error", label: "Ошибки", count: 1, tone: "negative" as const },
+        { id: "idle", label: "Приостановлено", count: 2, tone: "warning" as const },
       ];
       return (
         <div className="flex flex-wrap gap-2">

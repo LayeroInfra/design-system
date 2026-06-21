@@ -9,8 +9,8 @@ const TONE: Record<
   { box: string; badge: string; glyph: React.ReactNode }
 > = {
   success: {
-    box: "bg-green-50 dark:bg-green-950",
-    badge: "bg-green-500 text-white dark:text-green-950",
+    box: "bg-success-50 dark:bg-success-950",
+    badge: "bg-success-500 text-white dark:text-success-950",
     glyph: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <polyline points="20 6 9 17 4 12" />
@@ -18,8 +18,8 @@ const TONE: Record<
     ),
   },
   warning: {
-    box: "bg-amber-50 dark:bg-amber-950/40",
-    badge: "bg-amber-500 text-white dark:text-amber-950",
+    box: "bg-warning-50 dark:bg-warning-950/40",
+    badge: "bg-warning-500 text-white dark:text-warning-950",
     glyph: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M12 9v4M12 17h.01" />
@@ -28,8 +28,8 @@ const TONE: Record<
     ),
   },
   danger: {
-    box: "bg-red-50 dark:bg-red-950/40",
-    badge: "bg-red-500 text-white",
+    box: "bg-negative-50 dark:bg-negative-950/40",
+    badge: "bg-negative-500 text-white",
     glyph: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" aria-hidden="true">
         <path d="M6 6l12 12M18 6L6 18" />
@@ -37,8 +37,8 @@ const TONE: Record<
     ),
   },
   info: {
-    box: "bg-blue-50 dark:bg-blue-950/40",
-    badge: "bg-blue-500 text-white",
+    box: "bg-info-50 dark:bg-info-950/40",
+    badge: "bg-info-500 text-white",
     glyph: (
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
         <path d="M12 11v5M12 8h.01" />
@@ -135,7 +135,7 @@ export function InformerAction({
     <button
       type="button"
       className={cn(
-        "inline-flex items-center rounded-lg bg-green-100 px-3.5 py-2 text-sm font-semibold text-foreground transition hover:bg-green-200 dark:bg-green-900/50 dark:text-white dark:hover:bg-green-900",
+        "inline-flex items-center rounded-lg bg-success-100 px-3.5 py-2 text-sm font-semibold text-foreground transition hover:bg-success-200 dark:bg-success-900/50 dark:text-white dark:hover:bg-success-900",
         className,
       )}
       {...props}

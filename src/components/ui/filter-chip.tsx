@@ -3,10 +3,10 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 
 const DOT: Record<string, string> = {
-  blue: "bg-blue-500",
-  green: "bg-green-500",
-  amber: "bg-amber-500",
-  red: "bg-red-500",
+  info: "bg-info-500",
+  success: "bg-success-500",
+  warning: "bg-warning-500",
+  negative: "bg-negative-500",
   neutral: "bg-neutral-400",
 };
 
@@ -16,7 +16,7 @@ export interface FilterChipProps
   /** Trailing count (e.g. number of items in this filter). */
   count?: number;
   /** Status dot colour. */
-  tone?: "blue" | "green" | "amber" | "red";
+  tone?: "info" | "success" | "warning" | "negative";
 }
 
 /** Pill-shaped toggle for filtering lists — optional status dot + count. */
