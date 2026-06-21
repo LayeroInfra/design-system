@@ -25,7 +25,7 @@
 
 | | Что | Статус |
 |---|---|---|
-| **Select** | в ДС есть `ui/select`, но в app **12 нативных `<select>`** (7 файлов) → мигрировать | ⬜ |
+| **Select** | 11 нативных `<select>` → `ui/select` (Team/Members/Perf/PageSpeed/DropDeploy/Integrations) | ✅ |
 | **Skeleton** | у app богаче (`SkeletonRows/Text/Page/Project…`), в ДС базовый → перенести набор в ДС | ⬜ |
 | **Tooltip** | 1 использование vs **114 нативных `title=`** → выборочно перевести важные | ⬜ (низкий) |
 
@@ -38,7 +38,7 @@
 ## Порядок
 
 1. ✅ Textarea
-2. ⬜ Select (мердж 12 нативных)
+2. ✅ Select (мердж нативных)
 3. ⬜ Tabs / Segmented
 4. ⬜ Spinner + Skeleton-мердж
 5. ⬜ Checkbox / RadioGroup, CodeBlock, EmptyState
