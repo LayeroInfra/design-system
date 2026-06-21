@@ -18,9 +18,9 @@ const buttonVariants = cva(
           "border border-border bg-card text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground hover:border-foreground/30",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:opacity-80",
-        // Translucent hover (alpha-capable neutral) so it stays visible on tinted
-        // / grey backgrounds too — unlike the solid `accent` token.
-        ghost: "text-foreground hover:bg-neutral-500/15",
+        // Same hover shade as outline/secondary and the cell/checklist rows
+        // (accent == secondary == #f3f1ea) for one consistent hover tint.
+        ghost: "text-foreground hover:bg-accent hover:text-accent-foreground",
         link: "text-foreground underline-offset-4 hover:underline",
       },
       size: {
