@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { Cell } from "./cell";
 
 /** Surface container — rounded-2xl, hairline border, card fill. The base for
  *  every panel/card on the platform. */
@@ -71,22 +72,31 @@ export interface CardSectionHeaderProps
   meta?: React.ReactNode;
   /** Trailing slot — a chevron link, button, etc. */
   action?: React.ReactNode;
+  /** Clickable header — adds a full-row hover (e.g. linking to the section). */
+  interactive?: boolean;
 }
 
-/** Card header row with a title, a muted meta suffix and an optional trailing
- *  action (the "Мониторинг · за 24ч · ›" pattern). */
+/** Card header row built on Cell — title + muted meta + optional trailing
+ *  action (the "Мониторинг · за 24ч · ›" pattern). With `interactive` the whole
+ *  row gets a hover, matching list rows. */
 export const CardSectionHeader = React.forwardRef<
   HTMLDivElement,
   CardSectionHeaderProps
->(({ title, meta, action, className, ...props }, ref) => (
-  <div
+>(({ title, meta, action, interactive, className, ...props }, ref) => (
+  <Cell
     ref={ref}
-    className={cn("flex items-center gap-2 p-5 pb-4", className)}
+    interactive={interactive}
+    className={cn("gap-2 rounded-none px-5 py-4", className)}
+    title={
+      <span className="text-sm font-semibold text-foreground">
+        {title}
+        {meta && (
+          <span className="ml-2 text-xs font-normal text-neutral-500">{meta}</span>
+        )}
+      </span>
+    }
+    trailing={action}
     {...props}
-  >
-    <span className="text-sm font-semibold text-foreground">{title}</span>
-    {meta && <span className="text-xs text-neutral-500">{meta}</span>}
-    {action && <span className="ml-auto">{action}</span>}
-  </div>
+  />
 ));
 CardSectionHeader.displayName = "CardSectionHeader";

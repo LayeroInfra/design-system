@@ -33,23 +33,25 @@ const GridOutline = () => (
 const Plus = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
 );
-const SearchIcon = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
-);
 
-/** Search field with a leading magnifier. */
+/** Search field — uses the Input atom's built-in search variant. */
 function SearchRow({ placeholder }: { placeholder: string }) {
   return (
     <div className="p-1.5">
-      <div className="relative">
-        <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-400">
-          <SearchIcon />
-        </span>
-        <Input className="pl-8" placeholder={placeholder} />
-      </div>
+      <Input search placeholder={placeholder} />
     </div>
   );
 }
+/** Settings gear as a self-contained icon button with its own hover. */
+const GearButton = () => (
+  <button
+    type="button"
+    aria-label="Настройки команды"
+    className="rounded-md p-1 text-neutral-500 transition hover:bg-neutral-200/70 hover:text-foreground"
+  >
+    <Gear />
+  </button>
+);
 const IconLead = ({ children }: { children: ReactNode }) => (
   <span className="flex h-5 w-5 items-center justify-center text-neutral-500">{children}</span>
 );
@@ -105,9 +107,9 @@ export const AccountSwitcher: Story = {
           leading={<Avatar name="valya-team" className="h-5 w-5 text-[10px]" />}
           title="valya-team"
           subtitle="Admin · Team"
-          trailing={<div className="flex items-center gap-1.5"><Gear /><Check /></div>}
+          trailing={<div className="flex items-center gap-3"><GearButton /><Check /></div>}
         />
-        <Cell interactive leading={<Avatar name="murzak" className="h-5 w-5 text-[10px]" />} title="murzak" subtitle="Admin · Team" trailing={<Gear />} />
+        <Cell interactive leading={<Avatar name="murzak" className="h-5 w-5 text-[10px]" />} title="murzak" subtitle="Admin · Team" trailing={<GearButton />} />
       </div>
       <Divider />
       <div className="px-1 py-1">

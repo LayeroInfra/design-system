@@ -60,7 +60,7 @@ const Check = ({ cls = "text-neutral-700" }: { cls?: string }) => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className={cls} aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
 );
 const Grid = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" className="text-neutral-500" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" /></svg>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="text-neutral-500" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>
 );
 const Plus = () => (
   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
@@ -119,10 +119,7 @@ export const ProjectSwitcher: Story = {
       after={
         <div className="w-80 overflow-hidden rounded-lg border border-border bg-card shadow-lg">
           <div className="p-1.5">
-            <div className="relative">
-              <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-400"><Search /></span>
-              <Input className="pl-8" placeholder="Найти проект…" />
-            </div>
+            <Input search placeholder="Найти проект…" />
           </div>
           <div className="px-1 pb-1">
             <Cell interactive leading={<span className="flex h-5 w-5 items-center justify-center text-neutral-500"><Grid /></span>} title="Все проекты" />
@@ -200,8 +197,8 @@ export const ChecklistCard: Story = {
         </section>
       }
       after={
-        <Card className="w-80">
-          <CardSectionHeader title="Чеклист продакшена" meta="2 из 5" />
+        <Card className="w-80 overflow-hidden">
+          <CardSectionHeader interactive title="Чеклист продакшена" meta="2 из 5" />
           <CardContent className="pb-4">
             <Checklist>
               {CHECK.map(([label, done]) => (
@@ -265,8 +262,8 @@ export const MonitoringCard: Story = {
         </section>
       }
       after={
-        <Card className="w-80">
-          <CardSectionHeader title="Мониторинг" meta="за 24ч" action={<span className="text-neutral-400"><Chevron /></span>} />
+        <Card className="w-80 overflow-hidden">
+          <CardSectionHeader interactive title="Мониторинг" meta="за 24ч" action={<span className="text-neutral-400"><Chevron /></span>} />
           <div className="px-5 pb-4">
             <div className="divide-y divide-neutral-100 [&>*]:py-2.5">
               <Metric label="Запросы" value="2 956" chart={<Sparkline data={REQ} tone="success" area format={(v) => Math.round(v).toLocaleString("ru-RU")} />} />
@@ -304,8 +301,8 @@ export const AnalyticsEmpty: Story = {
         </section>
       }
       after={
-        <Card className="w-80">
-          <CardSectionHeader title="Веб-аналитика" meta="за 7д" action={<span className="text-neutral-400"><Chevron /></span>} />
+        <Card className="w-80 overflow-hidden">
+          <CardSectionHeader interactive title="Веб-аналитика" meta="за 7д" action={<span className="text-neutral-400"><Chevron /></span>} />
           <CardContent className="pb-4">
             <EmptyState variant="plain" icon={ChartIcon} description="Веб-аналитика ещё не подключена" action={<Button size="sm" variant="outline">Подключить</Button>} />
           </CardContent>
