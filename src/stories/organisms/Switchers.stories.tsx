@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import type { ReactNode } from "react";
 import { Cell } from "../../components/ui/cell";
 import { Avatar } from "../../components/ui/avatar";
 import { Input } from "../../components/ui/input";
@@ -12,7 +13,7 @@ const meta: Meta = {
       description: {
         component:
           "Дропдауны выбора проекта и команды — организмы, собранные из атомов/" +
-          "молекул ДС: Input (поиск), Cell + Avatar (строки), Badge, Separator.",
+          "молекул ДС: Input (поиск с иконкой), Cell + Avatar (строки), Separator.",
       },
     },
   },
@@ -21,69 +22,67 @@ export default meta;
 type Story = StoryObj;
 
 const Check = () => (
-  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-foreground" aria-hidden="true">
-    <polyline points="20 6 9 17 4 12" />
-  </svg>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-foreground" aria-hidden="true"><polyline points="20 6 9 17 4 12" /></svg>
 );
 const Gear = () => (
-  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="text-neutral-400" aria-hidden="true">
-    <circle cx="12" cy="12" r="3" />
-    <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
-  </svg>
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" className="text-neutral-500" aria-hidden="true"><circle cx="12" cy="12" r="3" /><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" /></svg>
+);
+const GridOutline = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" /><rect x="14" y="14" width="7" height="7" rx="1" /><rect x="3" y="14" width="7" height="7" rx="1" /></svg>
+);
+const Plus = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
+);
+const SearchIcon = () => (
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="m20 20-3.5-3.5" /></svg>
 );
 
-function Panel({ children }: { children: React.ReactNode }) {
+/** Search field with a leading magnifier. */
+function SearchRow({ placeholder }: { placeholder: string }) {
   return (
-    <div className="w-80 rounded-lg border border-border bg-card p-2 shadow-lg">
-      <div className="p-1.5">
-        <Input placeholder="Найти проект…" />
+    <div className="p-1.5">
+      <div className="relative">
+        <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-400">
+          <SearchIcon />
+        </span>
+        <Input className="pl-8" placeholder={placeholder} />
       </div>
-      {children}
     </div>
   );
 }
+const IconLead = ({ children }: { children: ReactNode }) => (
+  <span className="flex h-5 w-5 items-center justify-center text-neutral-500">{children}</span>
+);
+const Eyebrow = ({ children }: { children: ReactNode }) => (
+  <div className="px-3 pb-1 pt-2 text-[11px] font-medium uppercase tracking-wide text-neutral-400">
+    {children}
+  </div>
+);
+const Divider = () => <Separator className="bg-neutral-100" />;
+const Panel = ({ children }: { children: ReactNode }) => (
+  <div className="w-80 overflow-hidden rounded-lg border border-border bg-card shadow-lg">
+    {children}
+  </div>
+);
 
 export const ProjectSwitcher: Story = {
   name: "Выбор проекта",
   render: () => (
     <Panel>
-      <Cell
-        interactive
-        className="mt-1"
-        leading={
-          <span className="flex h-5 w-5 items-center justify-center rounded bg-secondary text-neutral-500">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" /></svg>
-          </span>
-        }
-        title="Все проекты"
-      />
-      <div className="px-3 pb-1 pt-3 text-[11px] font-medium uppercase tracking-wide text-neutral-400">
-        Проекты
+      <SearchRow placeholder="Найти проект…" />
+      <div className="px-1 pb-1">
+        <Cell interactive leading={<IconLead><GridOutline /></IconLead>} title="Все проекты" />
       </div>
-      <Cell
-        interactive
-        leading={<Avatar name="layero-docs" shape="square" className="h-5 w-5 text-[10px]" />}
-        title="layero-docs"
-        subtitle="LayeroInfra/layero-docs"
-      />
-      <Cell
-        interactive
-        active
-        leading={<Avatar name="design-system" shape="square" className="h-5 w-5 text-[10px]" />}
-        title="ds"
-        subtitle="LayeroInfra/design-system"
-        trailing={<Check />}
-      />
-      <Separator className="my-1.5" />
-      <Cell
-        interactive
-        leading={
-          <span className="flex h-5 w-5 items-center justify-center rounded text-neutral-500">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-          </span>
-        }
-        title="Новый проект"
-      />
+      <Divider />
+      <Eyebrow>Проекты</Eyebrow>
+      <div className="px-1 pb-1">
+        <Cell interactive leading={<Avatar name="layero-docs" shape="square" className="h-5 w-5 text-[10px]" />} title="layero-docs" subtitle="LayeroInfra/layero-docs" />
+        <Cell interactive active leading={<Avatar name="design-system" shape="square" className="h-5 w-5 text-[10px]" />} title="ds" subtitle="LayeroInfra/design-system" trailing={<Check />} />
+      </div>
+      <Divider />
+      <div className="px-1 py-1">
+        <Cell interactive leading={<IconLead><Plus /></IconLead>} title="Новый проект" />
+      </div>
     </Panel>
   ),
 };
@@ -91,53 +90,29 @@ export const ProjectSwitcher: Story = {
 export const AccountSwitcher: Story = {
   name: "Выбор команды",
   render: () => (
-    <div className="w-80 rounded-lg border border-border bg-card p-2 shadow-lg">
-      <div className="p-1.5">
-        <Input placeholder="Найти команду…" />
+    <Panel>
+      <SearchRow placeholder="Найти команду…" />
+      <Eyebrow>Personal account</Eyebrow>
+      <div className="px-1 pb-1">
+        <Cell interactive leading={<Avatar name="mixa" className="h-5 w-5 text-[10px]" />} title="mixa" subtitle="Личный аккаунт" />
       </div>
-      <div className="px-3 pb-1 pt-3 text-[11px] font-medium uppercase tracking-wide text-neutral-400">
-        Personal account
+      <Divider />
+      <Eyebrow>Teams</Eyebrow>
+      <div className="px-1 pb-1">
+        <Cell
+          interactive
+          active
+          leading={<Avatar name="valya-team" className="h-5 w-5 text-[10px]" />}
+          title="valya-team"
+          subtitle="Admin · Team"
+          trailing={<div className="flex items-center gap-1.5"><Gear /><Check /></div>}
+        />
+        <Cell interactive leading={<Avatar name="murzak" className="h-5 w-5 text-[10px]" />} title="murzak" subtitle="Admin · Team" trailing={<Gear />} />
       </div>
-      <Cell
-        interactive
-        leading={<Avatar name="mixa" className="h-5 w-5 text-[10px]" />}
-        title="mixa"
-        subtitle="Личный аккаунт"
-      />
-      <Separator className="my-1.5" />
-      <div className="px-3 pb-1 text-[11px] font-medium uppercase tracking-wide text-neutral-400">
-        Teams
+      <Divider />
+      <div className="px-1 py-1">
+        <Cell interactive leading={<IconLead><Plus /></IconLead>} title="Создать команду" />
       </div>
-      <Cell
-        interactive
-        active
-        leading={<Avatar name="valya-team" className="h-5 w-5 text-[10px]" />}
-        title="valya-team"
-        subtitle="Admin · Team"
-        trailing={
-          <div className="flex items-center gap-2">
-            <Gear />
-            <Check />
-          </div>
-        }
-      />
-      <Cell
-        interactive
-        leading={<Avatar name="murzak" className="h-5 w-5 text-[10px]" />}
-        title="murzak"
-        subtitle="Admin · Team"
-        trailing={<Gear />}
-      />
-      <Separator className="my-1.5" />
-      <Cell
-        interactive
-        leading={
-          <span className="flex h-5 w-5 items-center justify-center rounded text-neutral-500">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
-          </span>
-        }
-        title="Создать команду"
-      />
-    </div>
+    </Panel>
   ),
 };

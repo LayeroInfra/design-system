@@ -6,24 +6,30 @@ export const Checklist = React.forwardRef<
   HTMLUListElement,
   React.HTMLAttributes<HTMLUListElement>
 >(({ className, ...props }, ref) => (
-  <ul ref={ref} className={cn("space-y-3", className)} {...props} />
+  <ul ref={ref} className={cn("flex flex-col gap-0.5", className)} {...props} />
 ));
 Checklist.displayName = "Checklist";
 
 export interface ChecklistItemProps
   extends React.LiHTMLAttributes<HTMLLIElement> {
   done?: boolean;
+  /** Adds a hover background — use when the row is clickable (links to a step). */
+  interactive?: boolean;
 }
 
 /** A single checklist row — filled success circle + struck-through label when
- *  done, hollow circle otherwise. */
+ *  done, hollow circle otherwise. `interactive` adds a hover affordance. */
 export const ChecklistItem = React.forwardRef<
   HTMLLIElement,
   ChecklistItemProps
->(({ done, className, children, ...props }, ref) => (
+>(({ done, interactive, className, children, ...props }, ref) => (
   <li
     ref={ref}
-    className={cn("flex items-center gap-2.5 text-sm", className)}
+    className={cn(
+      "flex items-center gap-2.5 rounded-md px-2 py-1.5 text-sm",
+      interactive && "-mx-2 cursor-pointer transition hover:bg-secondary",
+      className,
+    )}
     {...props}
   >
     {done ? (

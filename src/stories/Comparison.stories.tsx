@@ -117,14 +117,26 @@ export const ProjectSwitcher: Story = {
         </div>
       }
       after={
-        <div className="w-80 rounded-lg border border-border bg-card p-2 shadow-lg">
-          <div className="p-1.5"><Input placeholder="Найти проект…" /></div>
-          <Cell className="mt-1" interactive leading={<span className="flex h-5 w-5 items-center justify-center rounded bg-secondary"><Grid /></span>} title="Все проекты" />
-          <div className="px-3 pb-1 pt-3 text-[11px] font-medium uppercase tracking-wide text-neutral-400">Проекты</div>
-          <Cell interactive leading={<Avatar name="layero-docs" shape="square" className="h-5 w-5 text-[10px]" />} title="layero-docs" subtitle="LayeroInfra/layero-docs" />
-          <Cell interactive active leading={<Avatar name="design-system" shape="square" className="h-5 w-5 text-[10px]" />} title="ds" subtitle="LayeroInfra/design-system" trailing={<Check cls="text-foreground" />} />
-          <Separator className="my-1.5" />
-          <Cell interactive leading={<span className="flex h-5 w-5 items-center justify-center rounded text-neutral-500"><Plus /></span>} title="Новый проект" />
+        <div className="w-80 overflow-hidden rounded-lg border border-border bg-card shadow-lg">
+          <div className="p-1.5">
+            <div className="relative">
+              <span className="pointer-events-none absolute left-2.5 top-1/2 -translate-y-1/2 text-neutral-400"><Search /></span>
+              <Input className="pl-8" placeholder="Найти проект…" />
+            </div>
+          </div>
+          <div className="px-1 pb-1">
+            <Cell interactive leading={<span className="flex h-5 w-5 items-center justify-center text-neutral-500"><Grid /></span>} title="Все проекты" />
+          </div>
+          <Separator className="bg-neutral-100" />
+          <div className="px-3 pb-1 pt-2 text-[11px] font-medium uppercase tracking-wide text-neutral-400">Проекты</div>
+          <div className="px-1 pb-1">
+            <Cell interactive leading={<Avatar name="layero-docs" shape="square" className="h-5 w-5 text-[10px]" />} title="layero-docs" subtitle="LayeroInfra/layero-docs" />
+            <Cell interactive active leading={<Avatar name="design-system" shape="square" className="h-5 w-5 text-[10px]" />} title="ds" subtitle="LayeroInfra/design-system" trailing={<Check cls="text-foreground" />} />
+          </div>
+          <Separator className="bg-neutral-100" />
+          <div className="px-1 py-1">
+            <Cell interactive leading={<span className="flex h-5 w-5 items-center justify-center text-neutral-500"><Plus /></span>} title="Новый проект" />
+          </div>
         </div>
       }
     />
@@ -190,10 +202,10 @@ export const ChecklistCard: Story = {
       after={
         <Card className="w-80">
           <CardSectionHeader title="Чеклист продакшена" meta="2 из 5" />
-          <CardContent>
+          <CardContent className="pb-4">
             <Checklist>
               {CHECK.map(([label, done]) => (
-                <ChecklistItem key={label} done={done}>{label}</ChecklistItem>
+                <ChecklistItem key={label} interactive done={done}>{label}</ChecklistItem>
               ))}
             </Checklist>
           </CardContent>
@@ -255,10 +267,12 @@ export const MonitoringCard: Story = {
       after={
         <Card className="w-80">
           <CardSectionHeader title="Мониторинг" meta="за 24ч" action={<span className="text-neutral-400"><Chevron /></span>} />
-          <div className="divide-y divide-border [&>*]:px-5 [&>*]:py-2.5">
-            <Metric label="Запросы" value="2 956" chart={<Sparkline data={REQ} tone="success" area />} />
-            <Metric label="Latency (p95)" value="1198 мс" chart={<Sparkline data={LAT} tone="info" area />} />
-            <Metric label="Доля ошибок" value="0.3%" chart={<Sparkline data={ERR} tone="negative" area />} />
+          <div className="px-5 pb-4">
+            <div className="divide-y divide-neutral-100 [&>*]:py-2.5">
+              <Metric label="Запросы" value="2 956" chart={<Sparkline data={REQ} tone="success" area format={(v) => Math.round(v).toLocaleString("ru-RU")} />} />
+              <Metric label="Latency (p95)" value="1198 мс" chart={<Sparkline data={LAT} tone="info" area format={(v) => `${Math.round(v)} мс`} />} />
+              <Metric label="Доля ошибок" value="0.3%" chart={<Sparkline data={ERR} tone="negative" area format={(v) => `${v.toFixed(1)}%`} />} />
+            </div>
           </div>
         </Card>
       }
@@ -292,8 +306,8 @@ export const AnalyticsEmpty: Story = {
       after={
         <Card className="w-80">
           <CardSectionHeader title="Веб-аналитика" meta="за 7д" action={<span className="text-neutral-400"><Chevron /></span>} />
-          <CardContent>
-            <EmptyState icon={ChartIcon} title="Веб-аналитика ещё не подключена" action={<Button size="sm" variant="outline">Подключить</Button>} />
+          <CardContent className="pb-4">
+            <EmptyState variant="plain" icon={ChartIcon} description="Веб-аналитика ещё не подключена" action={<Button size="sm" variant="outline">Подключить</Button>} />
           </CardContent>
         </Card>
       }
