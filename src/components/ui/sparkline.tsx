@@ -4,19 +4,14 @@ import { cn } from "@/lib/utils";
 
 export type SparklineTone = "success" | "info" | "negative" | "warning" | "neutral";
 
-const STROKE: Record<SparklineTone, string> = {
-  success: "stroke-success-500",
-  info: "stroke-info-500",
-  negative: "stroke-negative-500",
-  warning: "stroke-warning-500",
-  neutral: "stroke-neutral-400",
-};
-const FILL: Record<SparklineTone, string> = {
-  success: "fill-success-500/10",
-  info: "fill-info-500/10",
-  negative: "fill-negative-500/10",
-  warning: "fill-warning-500/10",
-  neutral: "fill-neutral-400/10",
+// Colour comes from `currentColor` (a text-* utility) so a single class drives
+// both the line stroke and the area fill — no stroke-*/fill-* utilities needed.
+const TONE: Record<SparklineTone, string> = {
+  success: "text-success-500",
+  info: "text-info-500",
+  negative: "text-negative-500",
+  warning: "text-warning-500",
+  neutral: "text-neutral-400",
 };
 
 export interface SparklineProps extends React.SVGAttributes<SVGSVGElement> {
@@ -54,14 +49,16 @@ export const Sparkline = React.forwardRef<SVGSVGElement, SparklineProps>(
         width={width}
         height={height}
         fill="none"
-        className={cn("overflow-visible", className)}
+        className={cn("overflow-visible", TONE[tone], className)}
         aria-hidden="true"
         {...props}
       >
-        {area && <path d={areaPath} className={cn("stroke-none", FILL[tone])} />}
+        {area && (
+          <path d={areaPath} fill="currentColor" fillOpacity={0.1} stroke="none" />
+        )}
         <polyline
           points={line}
-          className={STROKE[tone]}
+          stroke="currentColor"
           strokeWidth={2}
           strokeLinecap="round"
           strokeLinejoin="round"
