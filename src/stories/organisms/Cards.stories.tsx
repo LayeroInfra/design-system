@@ -38,8 +38,8 @@ const Chevron = () => (
 export const ChecklistCard: Story = {
   name: "Чеклист продакшена",
   render: () => (
-    <Card className="max-w-md overflow-hidden">
-      <CardSectionHeader interactive title="Чеклист продакшена" meta="2 из 5" />
+    <Card className="max-w-md">
+      <CardSectionHeader title="Чеклист продакшена" meta="2 из 5" />
       <CardContent className="pb-4">
         <Checklist>
           <ChecklistItem interactive done>Подключить Git-репозиторий</ChecklistItem>
@@ -56,7 +56,7 @@ export const ChecklistCard: Story = {
 export const MonitoringCard: Story = {
   name: "Мониторинг",
   render: () => (
-    <Card className="max-w-sm overflow-hidden">
+    <Card className="max-w-sm">
       <CardSectionHeader interactive title="Мониторинг" meta="за 24ч" action={<Chevron />} />
       <div className="px-5 pb-4">
         <div className="divide-y divide-neutral-100 [&>*]:py-2.5">
@@ -84,7 +84,7 @@ export const MonitoringCard: Story = {
 export const AnalyticsEmptyCard: Story = {
   name: "Аналитика — пусто",
   render: () => (
-    <Card className="max-w-sm overflow-hidden">
+    <Card className="max-w-sm">
       <CardSectionHeader interactive title="Веб-аналитика" meta="за 7д" action={<Chevron />} />
       <CardContent className="pb-4">
         <EmptyState

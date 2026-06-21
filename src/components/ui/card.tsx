@@ -86,7 +86,12 @@ export const CardSectionHeader = React.forwardRef<
   <Cell
     ref={ref}
     interactive={interactive}
-    className={cn("gap-2 rounded-none px-5 py-4", className)}
+    className={cn(
+      "gap-2",
+      // Interactive: inset, rounded hover like list cells (not full-bleed).
+      interactive ? "m-2 mb-0 px-3 py-2.5" : "px-5 py-4",
+      className,
+    )}
     title={
       <span className="text-sm font-semibold text-foreground">
         {title}

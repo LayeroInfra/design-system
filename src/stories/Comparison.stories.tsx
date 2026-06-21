@@ -197,8 +197,8 @@ export const ChecklistCard: Story = {
         </section>
       }
       after={
-        <Card className="w-80 overflow-hidden">
-          <CardSectionHeader interactive title="Чеклист продакшена" meta="2 из 5" />
+        <Card className="w-80">
+          <CardSectionHeader title="Чеклист продакшена" meta="2 из 5" />
           <CardContent className="pb-4">
             <Checklist>
               {CHECK.map(([label, done]) => (
@@ -262,7 +262,7 @@ export const MonitoringCard: Story = {
         </section>
       }
       after={
-        <Card className="w-80 overflow-hidden">
+        <Card className="w-80">
           <CardSectionHeader interactive title="Мониторинг" meta="за 24ч" action={<span className="text-neutral-400"><Chevron /></span>} />
           <div className="px-5 pb-4">
             <div className="divide-y divide-neutral-100 [&>*]:py-2.5">
@@ -301,7 +301,7 @@ export const AnalyticsEmpty: Story = {
         </section>
       }
       after={
-        <Card className="w-80 overflow-hidden">
+        <Card className="w-80">
           <CardSectionHeader interactive title="Веб-аналитика" meta="за 7д" action={<span className="text-neutral-400"><Chevron /></span>} />
           <CardContent className="pb-4">
             <EmptyState variant="plain" icon={ChartIcon} description="Веб-аналитика ещё не подключена" action={<Button size="sm" variant="outline">Подключить</Button>} />

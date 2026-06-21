@@ -4,6 +4,7 @@ import { Cell } from "../../components/ui/cell";
 import { Avatar } from "../../components/ui/avatar";
 import { Input } from "../../components/ui/input";
 import { Separator } from "../../components/ui/separator";
+import { Button } from "../../components/ui/button";
 
 const meta: Meta = {
   title: "Organisms/Switchers",
@@ -42,15 +43,11 @@ function SearchRow({ placeholder }: { placeholder: string }) {
     </div>
   );
 }
-/** Settings gear as a self-contained icon button with its own hover. */
+/** Settings gear — DS icon button (size icon-sm, 32×32) with its own hover. */
 const GearButton = () => (
-  <button
-    type="button"
-    aria-label="Настройки команды"
-    className="rounded-md p-1 text-neutral-500 transition hover:bg-neutral-200/70 hover:text-foreground"
-  >
+  <Button variant="ghost" size="icon-sm" aria-label="Настройки команды" className="text-neutral-500">
     <Gear />
-  </button>
+  </Button>
 );
 const IconLead = ({ children }: { children: ReactNode }) => (
   <span className="flex h-5 w-5 items-center justify-center text-neutral-500">{children}</span>
