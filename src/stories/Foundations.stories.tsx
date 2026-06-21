@@ -33,6 +33,36 @@ const GREEN: Array<[string, string]> = [
   ["green-950", "bg-green-950"],
 ];
 
+const NEUTRAL: Array<[string, string]> = [
+  ["neutral-50", "bg-neutral-50"],
+  ["neutral-100", "bg-neutral-100"],
+  ["neutral-200", "bg-neutral-200"],
+  ["neutral-300", "bg-neutral-300"],
+  ["neutral-400", "bg-neutral-400"],
+  ["neutral-500", "bg-neutral-500"],
+  ["neutral-600", "bg-neutral-600"],
+  ["neutral-700", "bg-neutral-700"],
+  ["neutral-800", "bg-neutral-800"],
+  ["neutral-900", "bg-neutral-900"],
+];
+
+export const Neutral: Story = {
+  name: "Neutral (тема-зависимая)",
+  render: () => (
+    <div className="space-y-2">
+      <p className="text-sm text-muted-foreground">
+        Нейтральная шкала завязана на CSS-переменные и флипается между светлой и
+        тёмной темой. Все `bg-neutral-*` / `text-neutral-*` авто-адаптируются.
+      </p>
+      <div className="grid grid-cols-5 gap-3">
+        {NEUTRAL.map(([label, cls]) => (
+          <Swatch key={label} label={label} className={cls} />
+        ))}
+      </div>
+    </div>
+  ),
+};
+
 export const Green: Story = {
   name: "Green (success)",
   render: () => (
