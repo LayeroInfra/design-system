@@ -15,13 +15,13 @@ const buttonVariants = cva(
         destructive:
           "bg-destructive text-destructive-foreground shadow-sm hover:opacity-90",
         outline:
-          "border border-border bg-card text-foreground shadow-sm hover:bg-neutral-900/8 hover:border-foreground/30",
+          "border border-border bg-card text-foreground shadow-sm hover:bg-overlay hover:border-foreground/30",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:opacity-80",
         // Translucent darkening overlay (theme-aware, alpha-capable) — composites
         // over any backdrop so the hover stays visible on white AND on grey rows,
         // and matches the outline / cell / checklist hover exactly.
-        ghost: "text-foreground hover:bg-neutral-900/8",
+        ghost: "text-foreground hover:bg-overlay",
         link: "text-foreground underline-offset-4 hover:underline",
       },
       size: {

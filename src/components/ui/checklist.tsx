@@ -27,7 +27,7 @@ export const ChecklistItem = React.forwardRef<
     ref={ref}
     className={cn(
       "flex items-center gap-2.5 rounded-md px-2 py-1.5 text-sm",
-      interactive && "-mx-2 cursor-pointer transition hover:bg-neutral-900/8",
+      interactive && "-mx-2 cursor-pointer transition hover:bg-overlay",
       className,
     )}
     {...props}

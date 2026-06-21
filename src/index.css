@@ -72,6 +72,9 @@
   --muted-foreground: #73726c;
   --accent: #f3f1ea;
   --accent-foreground: #141413;
+  /* Translucent hover overlay — over the white (#fff) card it composites to
+     exactly the warm hover shade #f3f1ea, and darkens any tinted/grey backdrop. */
+  --hover-overlay: rgba(135, 115, 45, 0.1);
   --destructive: rgb(255 56 60);
   --destructive-foreground: #fafafa;
   --input: #dedcd1;
@@ -139,6 +142,8 @@
   --muted-foreground: #9b9ba6;
   --accent: #2e2e35;
   --accent-foreground: #f5f5f7;
+  /* Dark: a translucent light overlay → lands on the dark accent shade. */
+  --hover-overlay: rgba(255, 255, 255, 0.08);
   --destructive: rgb(255 66 69);
   --destructive-foreground: #fafafa;
   --input: #3c3c44;

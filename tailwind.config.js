@@ -108,6 +108,9 @@ export default {
           DEFAULT: "var(--card)",
           foreground: "var(--card-foreground)",
         },
+        // Translucent hover overlay (full rgba, theme-aware) — composites over any
+        // backdrop; over the white card it equals the warm hover shade #f3f1ea.
+        overlay: "var(--hover-overlay)",
       },
       borderRadius: {
         lg: "var(--radius)",
