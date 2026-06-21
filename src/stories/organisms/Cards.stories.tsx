@@ -27,12 +27,12 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
+// Decorative chevron — the whole header is the click target, so this is a
+// plain (non-interactive) svg without its own hover.
 const Chevron = () => (
-  <button className="text-neutral-400 transition hover:text-foreground" aria-label="Открыть">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-      <path d="M9 6l6 6-6 6" />
-    </svg>
-  </button>
+  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="block text-neutral-400" aria-hidden="true">
+    <path d="M9 6l6 6-6 6" />
+  </svg>
 );
 
 export const ChecklistCard: Story = {
