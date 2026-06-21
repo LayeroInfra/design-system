@@ -43,16 +43,11 @@ function SearchRow({ placeholder }: { placeholder: string }) {
     </div>
   );
 }
-/** Settings gear — DS icon button (size icon-sm, 32×32). Hover is a
- *  translucent overlay (visible even on the selected row's grey bg); icon
- *  colour matches the check (foreground). */
+/** Settings gear — the DS ghost icon button atom (size icon-sm, 32×32). Its
+ *  translucent hover stays visible even on the selected row's grey bg; the icon
+ *  inherits the button's foreground colour (dark, like the check). */
 const GearButton = () => (
-  <Button
-    variant="ghost"
-    size="icon-sm"
-    aria-label="Настройки команды"
-    className="text-foreground hover:bg-foreground/10"
-  >
+  <Button variant="ghost" size="icon-sm" aria-label="Настройки команды">
     <Gear />
   </Button>
 );

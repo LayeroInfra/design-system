@@ -83,25 +83,24 @@ export const CardSectionHeader = React.forwardRef<
   HTMLDivElement,
   CardSectionHeaderProps
 >(({ title, meta, action, interactive, className, ...props }, ref) => (
-  <Cell
-    ref={ref}
-    interactive={interactive}
-    className={cn(
-      "gap-2",
-      // Interactive: inset, rounded hover like list cells (not full-bleed).
-      interactive ? "m-2 mb-0 px-3 py-2.5" : "px-5 py-4",
-      className,
-    )}
-    title={
-      <span className="text-sm font-semibold text-foreground">
-        {title}
-        {meta && (
-          <span className="ml-2 text-xs font-normal text-neutral-500">{meta}</span>
-        )}
-      </span>
-    }
-    trailing={action}
-    {...props}
-  />
+  // Wrapper holds the card padding; the inner Cell gets the exact same inset
+  // rounded hover as a list/checklist row (12px inset, px-2 py-1.5).
+  <div ref={ref} className={cn("px-3 py-2.5", className)} {...props}>
+    <Cell
+      interactive={interactive}
+      className="gap-2"
+      title={
+        <span className="text-sm font-semibold text-foreground">
+          {title}
+          {meta && (
+            <span className="ml-2 text-xs font-normal text-neutral-500">
+              {meta}
+            </span>
+          )}
+        </span>
+      }
+      trailing={action}
+    />
+  </div>
 ));
 CardSectionHeader.displayName = "CardSectionHeader";

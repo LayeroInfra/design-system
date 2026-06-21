@@ -18,7 +18,9 @@ const buttonVariants = cva(
           "border border-border bg-card text-foreground shadow-sm hover:bg-accent hover:text-accent-foreground hover:border-foreground/30",
         secondary:
           "bg-secondary text-secondary-foreground shadow-sm hover:opacity-80",
-        ghost: "text-foreground hover:bg-accent hover:text-accent-foreground",
+        // Translucent hover (alpha-capable neutral) so it stays visible on tinted
+        // / grey backgrounds too — unlike the solid `accent` token.
+        ghost: "text-foreground hover:bg-neutral-500/15",
         link: "text-foreground underline-offset-4 hover:underline",
       },
       size: {
