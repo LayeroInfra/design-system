@@ -12,7 +12,8 @@
 | Компонент | Где нужно | Статус |
 |---|---|---|
 | **Textarea** | DebugPanel, BetaProgram | ✅ |
-| **Tabs / Segmented** | NewProject (тип), Dashboard (фильтр-чипы), таб-навигация проекта | ⬜ |
+| **Segmented** | NewProject (выбор IDE) | ✅ |
+| **FilterChip** | Dashboard (фильтры статусов) | ✅ |
 | **Spinner** | 5 мест ad-hoc + инлайн в Button | ⬜ |
 | **Checkbox** | Billing | ⬜ |
 | **RadioGroup** | Settings (prod-окружение) | ⬜ |
