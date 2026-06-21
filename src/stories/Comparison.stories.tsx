@@ -117,14 +117,14 @@ export const ProjectSwitcher: Story = {
         </div>
       }
       after={
-        <div className="w-80 rounded-2xl border border-border bg-card p-2 shadow-lg">
+        <div className="w-80 rounded-lg border border-border bg-card p-2 shadow-lg">
           <div className="p-1.5"><Input placeholder="Найти проект…" /></div>
-          <Cell className="mt-1" interactive leading={<span className="flex h-8 w-8 items-center justify-center rounded-md bg-secondary"><Grid /></span>} title="Все проекты" />
+          <Cell className="mt-1" interactive leading={<span className="flex h-5 w-5 items-center justify-center rounded bg-secondary"><Grid /></span>} title="Все проекты" />
           <div className="px-3 pb-1 pt-3 text-[11px] font-medium uppercase tracking-wide text-neutral-400">Проекты</div>
-          <Cell interactive leading={<Avatar name="layero-docs" shape="square" className="h-8 w-8" />} title="layero-docs" subtitle="LayeroInfra/layero-docs" />
-          <Cell interactive active leading={<Avatar name="design-system" shape="square" className="h-8 w-8" />} title="ds" subtitle="LayeroInfra/design-system" trailing={<Check cls="text-foreground" />} />
+          <Cell interactive leading={<Avatar name="layero-docs" shape="square" className="h-5 w-5 text-[10px]" />} title="layero-docs" subtitle="LayeroInfra/layero-docs" />
+          <Cell interactive active leading={<Avatar name="design-system" shape="square" className="h-5 w-5 text-[10px]" />} title="ds" subtitle="LayeroInfra/design-system" trailing={<Check cls="text-foreground" />} />
           <Separator className="my-1.5" />
-          <Cell interactive leading={<span className="flex h-8 w-8 items-center justify-center rounded-md text-neutral-500"><Plus /></span>} title="Новый проект" />
+          <Cell interactive leading={<span className="flex h-5 w-5 items-center justify-center rounded text-neutral-500"><Plus /></span>} title="Новый проект" />
         </div>
       }
     />
@@ -255,7 +255,7 @@ export const MonitoringCard: Story = {
       after={
         <Card className="w-80">
           <CardSectionHeader title="Мониторинг" meta="за 24ч" action={<span className="text-neutral-400"><Chevron /></span>} />
-          <div className="divide-y divide-border [&>*]:px-5 [&>*]:py-4">
+          <div className="divide-y divide-border [&>*]:px-5 [&>*]:py-2.5">
             <Metric label="Запросы" value="2 956" chart={<Sparkline data={REQ} tone="success" area />} />
             <Metric label="Latency (p95)" value="1198 мс" chart={<Sparkline data={LAT} tone="info" area />} />
             <Metric label="Доля ошибок" value="0.3%" chart={<Sparkline data={ERR} tone="negative" area />} />

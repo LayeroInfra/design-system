@@ -34,7 +34,7 @@ const Gear = () => (
 
 function Panel({ children }: { children: React.ReactNode }) {
   return (
-    <div className="w-80 rounded-2xl border border-border bg-card p-2 shadow-lg">
+    <div className="w-80 rounded-lg border border-border bg-card p-2 shadow-lg">
       <div className="p-1.5">
         <Input placeholder="Найти проект…" />
       </div>
@@ -51,7 +51,7 @@ export const ProjectSwitcher: Story = {
         interactive
         className="mt-1"
         leading={
-          <span className="flex h-8 w-8 items-center justify-center rounded-md bg-secondary text-neutral-500">
+          <span className="flex h-5 w-5 items-center justify-center rounded bg-secondary text-neutral-500">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 3h7v7H3zM14 3h7v7h-7zM14 14h7v7h-7zM3 14h7v7H3z" /></svg>
           </span>
         }
@@ -62,14 +62,14 @@ export const ProjectSwitcher: Story = {
       </div>
       <Cell
         interactive
-        leading={<Avatar name="layero-docs" shape="square" className="h-8 w-8" />}
+        leading={<Avatar name="layero-docs" shape="square" className="h-5 w-5 text-[10px]" />}
         title="layero-docs"
         subtitle="LayeroInfra/layero-docs"
       />
       <Cell
         interactive
         active
-        leading={<Avatar name="design-system" shape="square" className="h-8 w-8" />}
+        leading={<Avatar name="design-system" shape="square" className="h-5 w-5 text-[10px]" />}
         title="ds"
         subtitle="LayeroInfra/design-system"
         trailing={<Check />}
@@ -78,7 +78,7 @@ export const ProjectSwitcher: Story = {
       <Cell
         interactive
         leading={
-          <span className="flex h-8 w-8 items-center justify-center rounded-md text-neutral-500">
+          <span className="flex h-5 w-5 items-center justify-center rounded text-neutral-500">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
           </span>
         }
@@ -91,7 +91,7 @@ export const ProjectSwitcher: Story = {
 export const AccountSwitcher: Story = {
   name: "Выбор команды",
   render: () => (
-    <div className="w-80 rounded-2xl border border-border bg-card p-2 shadow-lg">
+    <div className="w-80 rounded-lg border border-border bg-card p-2 shadow-lg">
       <div className="p-1.5">
         <Input placeholder="Найти команду…" />
       </div>
@@ -100,7 +100,7 @@ export const AccountSwitcher: Story = {
       </div>
       <Cell
         interactive
-        leading={<Avatar name="mixa" className="h-8 w-8" />}
+        leading={<Avatar name="mixa" className="h-5 w-5 text-[10px]" />}
         title="mixa"
         subtitle="Личный аккаунт"
       />
@@ -111,7 +111,7 @@ export const AccountSwitcher: Story = {
       <Cell
         interactive
         active
-        leading={<Avatar name="valya-team" className="h-8 w-8" />}
+        leading={<Avatar name="valya-team" className="h-5 w-5 text-[10px]" />}
         title="valya-team"
         subtitle="Admin · Team"
         trailing={
@@ -123,7 +123,7 @@ export const AccountSwitcher: Story = {
       />
       <Cell
         interactive
-        leading={<Avatar name="murzak" className="h-8 w-8" />}
+        leading={<Avatar name="murzak" className="h-5 w-5 text-[10px]" />}
         title="murzak"
         subtitle="Admin · Team"
         trailing={<Gear />}
@@ -132,7 +132,7 @@ export const AccountSwitcher: Story = {
       <Cell
         interactive
         leading={
-          <span className="flex h-8 w-8 items-center justify-center rounded-md text-neutral-500">
+          <span className="flex h-5 w-5 items-center justify-center rounded text-neutral-500">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14" /></svg>
           </span>
         }

@@ -81,14 +81,12 @@ export const CardSectionHeader = React.forwardRef<
 >(({ title, meta, action, className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center justify-between gap-3 p-5", className)}
+    className={cn("flex items-center gap-2 p-5 pb-4", className)}
     {...props}
   >
-    <div className="flex items-baseline gap-2">
-      <span className="text-lg font-semibold text-foreground">{title}</span>
-      {meta && <span className="text-sm text-neutral-400">{meta}</span>}
-    </div>
-    {action}
+    <span className="text-sm font-semibold text-foreground">{title}</span>
+    {meta && <span className="text-xs text-neutral-500">{meta}</span>}
+    {action && <span className="ml-auto">{action}</span>}
   </div>
 ));
 CardSectionHeader.displayName = "CardSectionHeader";

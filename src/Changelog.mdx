@@ -9,6 +9,19 @@ import { Meta } from "@storybook/blocks";
 
 ---
 
+## 0.18.0
+
+**ДС подогнан под прод (компактный вид)**
+
+- По итогам Before/After целевой вид — текущий компактный прод (1:1).
+  Уменьшены: `CardSectionHeader` (заголовок text-sm, мета text-xs),
+  `Metric` (значение text-base, лейбл text-xs), `Cell` (отступы px-2 py-1.5,
+  подпись text-[11px]), `Checklist` (кружок 16px), `BranchCard` (rounded-xl,
+  p-4, компактные размеры). Свитчеры — аватары 20px, панель rounded-lg.
+- Тег ветки переведён на `Badge` «Production» (sentence-case).
+- Раздел «Сравнение» теперь показывает паритет — миграция без визуальных
+  изменений.
+
 ## 0.17.0
 
 **Раздел «Сравнение» (Before · After)**

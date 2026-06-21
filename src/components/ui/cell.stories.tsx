@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Playground: Story = {
   args: {
-    leading: <Avatar name="ds" shape="square" className="h-8 w-8" />,
+    leading: <Avatar name="ds" shape="square" className="h-5 w-5 text-[10px]" />,
     trailing: <Check />,
     active: true,
   },
@@ -46,21 +46,21 @@ export const List: Story = {
     <div className="w-72 space-y-1 rounded-xl border border-border bg-card p-1.5">
       <Cell
         interactive
-        leading={<Avatar name="layero-docs" shape="square" className="h-8 w-8" />}
+        leading={<Avatar name="layero-docs" shape="square" className="h-5 w-5 text-[10px]" />}
         title="layero-docs"
         subtitle="LayeroInfra/layero-docs"
       />
       <Cell
         interactive
         active
-        leading={<Avatar name="ds" shape="square" className="h-8 w-8" />}
+        leading={<Avatar name="ds" shape="square" className="h-5 w-5 text-[10px]" />}
         title="ds"
         subtitle="LayeroInfra/design-system"
         trailing={<Check />}
       />
       <Cell
         interactive
-        leading={<Avatar name="valya-team" className="h-8 w-8" />}
+        leading={<Avatar name="valya-team" className="h-5 w-5 text-[10px]" />}
         title="valya-team"
         subtitle="Admin · Team"
         trailing={<Badge variant="secondary">Team</Badge>}

@@ -15,12 +15,12 @@ export const Metric = React.forwardRef<HTMLDivElement, MetricProps>(
   ({ label, value, chart, className, ...props }, ref) => (
     <div
       ref={ref}
-      className={cn("flex items-end justify-between gap-4", className)}
+      className={cn("flex items-center justify-between gap-4", className)}
       {...props}
     >
       <div className="min-w-0">
-        <div className="text-sm text-neutral-500">{label}</div>
-        <div className="mt-0.5 text-2xl font-semibold tracking-tightish text-foreground">
+        <div className="truncate text-xs text-neutral-500">{label}</div>
+        <div className="mt-0.5 text-base font-semibold tracking-tightish text-foreground">
           {value}
         </div>
       </div>

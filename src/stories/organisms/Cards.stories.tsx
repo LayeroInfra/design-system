@@ -58,7 +58,7 @@ export const MonitoringCard: Story = {
   render: () => (
     <Card className="max-w-sm">
       <CardSectionHeader title="Мониторинг" meta="за 24ч" action={<Chevron />} />
-      <div className="divide-y divide-border [&>*]:px-5 [&>*]:py-4">
+      <div className="divide-y divide-border [&>*]:px-5 [&>*]:py-2.5">
         <Metric
           label="Запросы"
           value="2 956"

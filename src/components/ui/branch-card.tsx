@@ -33,19 +33,25 @@ export const BranchCard = React.forwardRef<HTMLDivElement, BranchCardProps>(
   ) => (
     <div
       ref={ref}
-      className={cn("rounded-2xl border border-border bg-card p-5", className)}
+      className={cn("rounded-xl border border-border bg-card p-4", className)}
       {...props}
     >
-      <div className="flex items-center justify-between gap-3">
-        <div className="flex items-center gap-2.5">
-          <span className={cn("h-2.5 w-2.5 rounded-full", DOT[status])} />
-          <span className="text-lg font-semibold text-foreground">{name}</span>
-        </div>
-        {production && <Badge variant="secondary">PRODUCTION</Badge>}
+      <div className="flex items-center gap-2">
+        <span className={cn("h-2 w-2 shrink-0 rounded-full", DOT[status])} />
+        <span className="truncate font-medium text-foreground">{name}</span>
+        {production && (
+          <Badge variant="secondary" className="ml-auto shrink-0">
+            PRODUCTION
+          </Badge>
+        )}
       </div>
-      {url && <div className="mt-2 font-mono text-sm text-neutral-600">{url}</div>}
+      {url && (
+        <div className="mt-1.5 truncate font-mono text-xs text-neutral-500">
+          {url}
+        </div>
+      )}
       {(statusLabel || timestamp) && (
-        <div className="mt-2 text-sm text-neutral-400">
+        <div className="mt-1.5 text-xs text-neutral-400">
           {[statusLabel, timestamp].filter(Boolean).join(" · ")}
         </div>
       )}
