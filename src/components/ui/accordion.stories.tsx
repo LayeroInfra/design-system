@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "./accordion";
 
-const meta = { title: "Components/Accordion", component: Accordion, tags: ["autodocs"], args: { type: "single" } } satisfies Meta<typeof Accordion>;
+const meta = { title: "Molecules/Accordion", component: Accordion, tags: ["autodocs"], args: { type: "single" } } satisfies Meta<typeof Accordion>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CodeBlock } from "./code-block";
 
 const meta = {
-  title: "Components/CodeBlock",
+  title: "Molecules/CodeBlock",
   component: CodeBlock,
   tags: ["autodocs"],
   args: { children: "npx layero deploy" },

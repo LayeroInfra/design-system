@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Progress } from "./progress";
 
 const meta = {
-  title: "Components/Progress",
+  title: "Atoms/Progress",
   component: Progress,
   tags: ["autodocs"],
   argTypes: { value: { control: { type: "range", min: 0, max: 100 } } },

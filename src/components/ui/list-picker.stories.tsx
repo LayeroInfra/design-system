@@ -8,7 +8,7 @@ import {
 import { Avatar } from "./avatar";
 
 const meta = {
-  title: "Components/ListPicker",
+  title: "Molecules/ListPicker",
   tags: ["autodocs"],
   parameters: {
     docs: {

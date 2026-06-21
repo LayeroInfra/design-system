@@ -12,7 +12,7 @@ import {
 import { Button } from "./button";
 
 const meta = {
-  title: "Components/Dialog",
+  title: "Molecules/Dialog",
   component: Dialog,
   tags: ["autodocs"],
   parameters: {

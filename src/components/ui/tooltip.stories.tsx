@@ -8,7 +8,7 @@ import {
 import { Button } from "./button";
 
 const meta = {
-  title: "Primitives/Tooltip",
+  title: "Molecules/Tooltip",
   component: Tooltip,
   tags: ["autodocs"],
   decorators: [

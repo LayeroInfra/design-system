@@ -9,6 +9,19 @@ import { Meta } from "@storybook/blocks";
 
 ---
 
+## 0.16.0
+
+**Atomic Design + новые блоки**
+
+- Навигация каталога переустроена по **Atomic Design**:
+  Foundations → Atoms → Molecules → Organisms.
+- Новые **атомы**: `Text` (текстовый блок, 6 стилей), `Sparkline` (мини-тренд).
+- Новые **молекулы**: `Card` (+ Header/Title/Description/Content/Footer и
+  `CardSectionHeader`), `Cell` (строка списка), `Checklist`, `Metric`.
+- **Организмы** — собраны из ДС-атомов/молекул: `Switchers` (выбор проекта/
+  команды), `Cards` (Мониторинг, Веб-аналитика — пусто, Чеклист продакшена,
+  Ветка). `BranchCard` вынесен как переиспользуемый компонент.
+
 ## 0.15.0
 
 **Семантические цвета**

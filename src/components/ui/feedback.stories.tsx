@@ -3,7 +3,7 @@ import { Separator } from "./separator";
 import { Skeleton } from "./skeleton";
 
 const meta = {
-  title: "Primitives/Feedback & Layout",
+  title: "Atoms/Feedback & Layout",
   tags: ["autodocs"],
 } satisfies Meta;
 

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Kbd } from "./kbd";
 
-const meta = { title: "Components/Kbd", component: Kbd, tags: ["autodocs"], args: { children: "K" } } satisfies Meta<typeof Kbd>;
+const meta = { title: "Atoms/Kbd", component: Kbd, tags: ["autodocs"], args: { children: "K" } } satisfies Meta<typeof Kbd>;
 export default meta;
 type Story = StoryObj<typeof meta>;
 

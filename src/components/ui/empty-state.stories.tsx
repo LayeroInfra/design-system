@@ -3,7 +3,7 @@ import { EmptyState } from "./empty-state";
 import { Button } from "./button";
 
 const meta = {
-  title: "Components/EmptyState",
+  title: "Molecules/EmptyState",
   component: EmptyState,
   tags: ["autodocs"],
   args: { title: "Пусто" },

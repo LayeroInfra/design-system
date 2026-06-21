@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Informer, InformerAction } from "./informer";
 
 const meta = {
-  title: "Components/Informer",
+  title: "Molecules/Informer",
   component: Informer,
   tags: ["autodocs"],
   parameters: {

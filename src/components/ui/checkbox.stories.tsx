@@ -3,7 +3,7 @@ import { Checkbox } from "./checkbox";
 import { Radio } from "./radio";
 
 const meta = {
-  title: "Primitives/Checkbox & Radio",
+  title: "Atoms/Checkbox & Radio",
   tags: ["autodocs"],
 } satisfies Meta;
 export default meta;

@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { FilterChip } from "./filter-chip";
 
 const meta = {
-  title: "Components/FilterChip",
+  title: "Atoms/FilterChip",
   component: FilterChip,
   tags: ["autodocs"],
   parameters: {

@@ -15,9 +15,9 @@ const preview: Preview = {
         order: [
           "Introduction",
           "Foundations",
-          "Primitives",
-          "Components",
-          "Migration",
+          "Atoms",
+          "Molecules",
+          "Organisms",
           "Patterns",
         ],
       },

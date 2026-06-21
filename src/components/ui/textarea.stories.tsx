@@ -3,7 +3,7 @@ import { Textarea } from "./textarea";
 import { Label } from "./label";
 
 const meta = {
-  title: "Primitives/Textarea",
+  title: "Atoms/Textarea",
   component: Textarea,
   tags: ["autodocs"],
   parameters: {

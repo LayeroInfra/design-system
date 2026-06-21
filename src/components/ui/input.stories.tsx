@@ -3,7 +3,7 @@ import { Input } from "./input";
 import { Label } from "./label";
 
 const meta = {
-  title: "Primitives/Input",
+  title: "Atoms/Input",
   component: Input,
   tags: ["autodocs"],
   parameters: {

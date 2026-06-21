@@ -18,7 +18,7 @@ function ChevronIcon() {
 }
 
 const meta = {
-  title: "Primitives/Button",
+  title: "Atoms/Button",
   component: Button,
   tags: ["autodocs"],
   parameters: {

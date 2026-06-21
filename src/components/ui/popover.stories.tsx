@@ -3,7 +3,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "./popover";
 import { Button } from "./button";
 
 const meta = {
-  title: "Components/Popover",
+  title: "Molecules/Popover",
   component: Popover,
   tags: ["autodocs"],
 } satisfies Meta<typeof Popover>;

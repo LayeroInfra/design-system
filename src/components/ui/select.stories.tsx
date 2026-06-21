@@ -11,7 +11,7 @@ import {
 } from "./select";
 
 const meta = {
-  title: "Primitives/Select",
+  title: "Molecules/Select",
   component: Select,
   tags: ["autodocs"],
   parameters: {
