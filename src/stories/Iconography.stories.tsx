@@ -44,7 +44,7 @@ export const IconsOverview: Story = {
         const needle = q.trim().toLowerCase();
         return NAMES.filter((n) => !needle || n.toLowerCase().includes(needle))
           .map((n) => [n, (Lucide as Record<string, unknown>)[n]] as const)
-          .filter(([, C]) => typeof C === "function");
+          .filter(([, C]) => Boolean(C));
       }, [q]);
       return (
         <div className="max-w-4xl">
