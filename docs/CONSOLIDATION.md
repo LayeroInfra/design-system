@@ -92,11 +92,12 @@ support-bubble, внутренности `SupportWidget`/`CommandPalette`.
 
 ---
 
-## 4. Поля ввода 🟡 — частично
+## 4. Поля ввода ✅ — сделано
 
-> Стандартные text-поля → `<Input>` (Settings hex, DropDeploy name). Сырые поиски
-> в пикерах/Command Palette — категория 7; спец-типы (color/radio/checkbox/file/
-> сгруппированные/mono-строки env) оставлены.
+> Стандартные text-поля → `<Input>`: Settings (hex), DropDeploy (name), все поля
+> мастера ProjectSetup (build/output, пути монорепо, env key/value). Осознанно
+> оставлены: спец-типы (color/radio/checkbox/file), сгруппированные поля с
+> префиксом (slug/labelDraft) и поиски внутри bespoke-пикеров (категория 7).
 
 
 | Что | Где | Решение |
