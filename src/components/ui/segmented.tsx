@@ -27,29 +27,26 @@ export interface SegmentedItemProps
   icon?: React.ReactNode;
 }
 
-export function SegmentedItem({
-  active,
-  icon,
-  className,
-  children,
-  ...props
-}: SegmentedItemProps) {
-  return (
-    <button
-      type="button"
-      role="tab"
-      aria-selected={active}
-      className={cn(
-        "inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 transition",
-        active
-          ? "bg-primary font-medium text-primary-foreground"
-          : "text-neutral-600 hover:text-neutral-900",
-        className,
-      )}
-      {...props}
-    >
-      {icon}
-      {children}
-    </button>
-  );
-}
+export const SegmentedItem = React.forwardRef<
+  HTMLButtonElement,
+  SegmentedItemProps
+>(({ active, icon, className, children, ...props }, ref) => (
+  <button
+    ref={ref}
+    type="button"
+    role="tab"
+    aria-selected={active}
+    className={cn(
+      "inline-flex items-center gap-1.5 rounded-md px-2.5 py-1.5 transition",
+      active
+        ? "bg-primary font-medium text-primary-foreground"
+        : "text-neutral-600 hover:text-neutral-900",
+      className,
+    )}
+    {...props}
+  >
+    {icon}
+    {children}
+  </button>
+));
+SegmentedItem.displayName = "SegmentedItem";

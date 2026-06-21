@@ -36,14 +36,21 @@ function sentenceCase(s: string) {
   return s ? s.charAt(0).toUpperCase() + s.slice(1).toLowerCase() : s;
 }
 
-function Badge({ className, variant, children, ...props }: BadgeProps) {
-  const content =
-    typeof children === "string" ? sentenceCase(children) : children;
-  return (
-    <div className={cn(badgeVariants({ variant }), className)} {...props}>
-      {content}
-    </div>
-  );
-}
+const Badge = React.forwardRef<HTMLDivElement, BadgeProps>(
+  ({ className, variant, children, ...props }, ref) => {
+    const content =
+      typeof children === "string" ? sentenceCase(children) : children;
+    return (
+      <div
+        ref={ref}
+        className={cn(badgeVariants({ variant }), className)}
+        {...props}
+      >
+        {content}
+      </div>
+    );
+  },
+);
+Badge.displayName = "Badge";
 
 export { Badge, badgeVariants };

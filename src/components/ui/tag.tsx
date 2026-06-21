@@ -8,9 +8,10 @@ export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
 }
 
 /** Compact removable label (e.g. selected filters, keywords). */
-export function Tag({ children, onRemove, className, ...props }: TagProps) {
-  return (
+export const Tag = React.forwardRef<HTMLSpanElement, TagProps>(
+  ({ children, onRemove, className, ...props }, ref) => (
     <span
+      ref={ref}
       className={cn(
         "inline-flex items-center gap-1 rounded-md bg-secondary px-2 py-0.5 text-xs font-medium text-secondary-foreground",
         className,
@@ -31,5 +32,6 @@ export function Tag({ children, onRemove, className, ...props }: TagProps) {
         </button>
       )}
     </span>
-  );
-}
+  ),
+);
+Tag.displayName = "Tag";

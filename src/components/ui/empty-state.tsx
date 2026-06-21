@@ -34,7 +34,7 @@ export function EmptyState({
           {icon}
         </div>
       )}
-      <div className="text-base font-medium text-[color:var(--ink)]">{title}</div>
+      <div className="text-base font-medium text-foreground">{title}</div>
       {description && (
         <p className="mx-auto mt-1.5 max-w-md text-sm text-neutral-500">
           {description}

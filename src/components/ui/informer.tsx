@@ -91,7 +91,7 @@ export function Informer({
         )}
         <div className="min-w-0 flex-1">
           {title && (
-            <div className="text-base font-semibold leading-snug text-[color:var(--ink)]">
+            <div className="text-base font-semibold leading-snug text-foreground">
               {title}
             </div>
           )}
@@ -135,7 +135,7 @@ export function InformerAction({
     <button
       type="button"
       className={cn(
-        "inline-flex items-center rounded-lg bg-green-100 px-3.5 py-2 text-sm font-semibold text-[color:var(--ink)] transition hover:bg-green-200 dark:bg-green-900/50 dark:text-white dark:hover:bg-green-900",
+        "inline-flex items-center rounded-lg bg-green-100 px-3.5 py-2 text-sm font-semibold text-foreground transition hover:bg-green-200 dark:bg-green-900/50 dark:text-white dark:hover:bg-green-900",
         className,
       )}
       {...props}

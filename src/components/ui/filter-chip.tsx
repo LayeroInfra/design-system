@@ -20,16 +20,10 @@ export interface FilterChipProps
 }
 
 /** Pill-shaped toggle for filtering lists — optional status dot + count. */
-export function FilterChip({
-  active,
-  count,
-  tone,
-  className,
-  children,
-  ...props
-}: FilterChipProps) {
-  return (
+export const FilterChip = React.forwardRef<HTMLButtonElement, FilterChipProps>(
+  ({ active, count, tone, className, children, ...props }, ref) => (
     <button
+      ref={ref}
       type="button"
       aria-pressed={active}
       className={cn(
@@ -54,5 +48,6 @@ export function FilterChip({
         </span>
       )}
     </button>
-  );
-}
+  ),
+);
+FilterChip.displayName = "FilterChip";
