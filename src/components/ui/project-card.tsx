@@ -14,6 +14,8 @@ export interface ProjectCardProps extends React.HTMLAttributes<HTMLDivElement> {
   image?: string | null;
   /** Background gradient for the preview area (deterministic per project). */
   gradient?: string;
+  /** Empty-preview content (e.g. a faint brand logo). Defaults to initials. */
+  placeholder?: React.ReactNode;
   /** Top-right status pill content (a Badge or dot+label). */
   status?: React.ReactNode;
   /** Top-left overlay (e.g. a branches popover trigger). */
@@ -29,7 +31,7 @@ export interface ProjectCardProps extends React.HTMLAttributes<HTMLDivElement> {
  *  — wrap the body in a Link/button at the call site. */
 export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(
   (
-    { name, repo, host, meta, image, gradient, status, topLeft, action, dimmed, className, ...props },
+    { name, repo, host, meta, image, gradient, placeholder, status, topLeft, action, dimmed, className, ...props },
     ref,
   ) => (
     <div
@@ -54,8 +56,12 @@ export const ProjectCard = React.forwardRef<HTMLDivElement, ProjectCardProps>(
             )}
           />
         ) : (
-          <div className="absolute inset-0 flex select-none items-center justify-center text-xs font-semibold uppercase tracking-wide text-foreground/30">
-            {typeof name === "string" ? name.slice(0, 2) : null}
+          <div className="absolute inset-0 flex select-none items-center justify-center">
+            {placeholder ?? (
+              <span className="text-xs font-semibold uppercase tracking-wide text-neutral-900/30">
+                {typeof name === "string" ? name.slice(0, 2) : null}
+              </span>
+            )}
           </div>
         )}
         {topLeft && <div className="absolute left-2 top-2">{topLeft}</div>}

@@ -37,7 +37,7 @@ export const PaymentMethodCard = React.forwardRef<
           </span>
         </div>
       ) : (
-        <div className="rounded-lg border border-dashed border-border bg-muted/40 px-3 py-4 text-center text-sm text-neutral-500">
+        <div className="rounded-lg border border-dashed border-border bg-muted px-3 py-4 text-center text-sm text-neutral-500">
           Карта не привязана
         </div>
       )}

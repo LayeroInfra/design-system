@@ -46,7 +46,7 @@ export const IntegrationCard = React.forwardRef<
       </div>
     </div>
     {unavailable && (
-      <div className="mx-5 mb-1 rounded-lg bg-muted/40 px-3 py-2 text-sm text-neutral-600">
+      <div className="mx-5 mb-1 rounded-lg bg-muted px-3 py-2 text-sm text-neutral-600">
         {unavailable}
       </div>
     )}

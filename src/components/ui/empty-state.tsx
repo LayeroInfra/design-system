@@ -34,7 +34,7 @@ export function EmptyState({
           ? cn(
               "rounded-xl border px-6 py-10",
               dashed
-                ? "border-dashed border-border bg-muted/40"
+                ? "border-dashed border-border bg-muted"
                 : "border-border bg-card",
             )
           : "py-4",

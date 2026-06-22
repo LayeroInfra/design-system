@@ -46,12 +46,12 @@ export const Grid: Story = {
 };
 
 const DropPreview = (
-  <div className="flex h-full items-center justify-center rounded-xl border-2 border-dashed border-border bg-muted/40 text-xs text-neutral-400">
+  <div className="flex h-full items-center justify-center rounded-xl border-2 border-dashed border-border bg-muted text-xs text-neutral-400">
     Перетащите папку
   </div>
 );
 const RepoPreview = (
-  <div className="space-y-2 rounded-xl border border-border bg-muted/40 p-3">
+  <div className="space-y-2 rounded-xl border border-border bg-muted p-3">
     {["demo/cli-uploads", "demo/storefront", "demo/tables"].map((r) => (
       <div key={r} className="flex items-center justify-between rounded-md bg-card px-2 py-1.5 text-xs">
         <span className="font-mono text-neutral-600">{r}</span>
@@ -68,7 +68,7 @@ const CliPreview = (
   </div>
 );
 const McpPreview = (
-  <div className="flex h-full items-center justify-center rounded-xl border border-border bg-muted/40 px-3 text-center font-mono text-[11px] text-neutral-500">
+  <div className="flex h-full items-center justify-center rounded-xl border border-border bg-muted px-3 text-center font-mono text-[11px] text-neutral-500">
     @layero задеплой в production
   </div>
 );

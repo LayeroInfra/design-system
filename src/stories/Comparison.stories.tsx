@@ -48,7 +48,7 @@ function Compare({ before, after }: { before: ReactNode; after: ReactNode }) {
 
 /* ── shared bits ───────────────────────────────────────────────────── */
 const DropPreview = (
-  <div className="flex h-full items-center justify-center rounded-xl border-2 border-dashed border-border bg-muted/40 text-xs text-neutral-400">
+  <div className="flex h-full items-center justify-center rounded-xl border-2 border-dashed border-border bg-muted text-xs text-neutral-400">
     Перетащите папку
   </div>
 );
@@ -61,6 +61,16 @@ const Kebab = (
   <Button variant="ghost" size="icon-sm" aria-label="Меню">
     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden><circle cx="12" cy="5" r="1.6" /><circle cx="12" cy="12" r="1.6" /><circle cx="12" cy="19" r="1.6" /></svg>
   </Button>
+);
+// Faint brand wordmark shown in empty project/production previews (prod shows /logo.svg @ 30%).
+const LayeroMark = (
+  <span className="select-none text-lg font-bold tracking-tight text-neutral-900/25">layero</span>
+);
+const BranchesPill = (
+  <span className="inline-flex items-center gap-1 rounded-full bg-white/90 px-2 py-1 text-xs font-medium leading-none text-neutral-600 shadow-sm backdrop-blur">
+    <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" aria-hidden><circle cx="4" cy="3.5" r="1.5" /><circle cx="4" cy="12.5" r="1.5" /><circle cx="12" cy="8" r="1.5" /><path d="M4 5v6" /><path d="M4 8h4a4 4 0 0 0 4-4" /></svg>
+    2 веток <span className="text-neutral-400">+1</span>
+  </span>
 );
 
 /* ── 1. CtaCard (LauncherCard) ─────────────────────────────────────── */
@@ -101,29 +111,35 @@ export const Project: Story = {
     <Compare
       before={
         <div className="w-72 overflow-hidden rounded-2xl border border-neutral-200/80 bg-card shadow-[0_1px_2px_rgba(20,20,19,0.04)]">
-          <div className="relative aspect-[16/9] overflow-hidden border-b border-neutral-100" style={{ background: avatarGradient("cli-uploads") }}>
+          <div className="relative aspect-[16/9] overflow-hidden border-b border-neutral-100" style={{ background: avatarGradient("paper-test") }}>
+            <div className="absolute inset-0 flex items-center justify-center">{LayeroMark}</div>
+            <div className="absolute left-2 top-2">{BranchesPill}</div>
             <div className="absolute right-2 top-2 inline-flex items-center rounded-full bg-white/90 px-2 py-1 shadow-sm backdrop-blur">
               <span className="inline-flex items-center gap-1.5 text-xs font-medium leading-none">
                 <span className="h-1.5 w-1.5 rounded-full bg-success-500" />
-                Готов
+                Активен
               </span>
             </div>
           </div>
           <div className="p-4">
-            <div className="truncate font-semibold">cli-uploads</div>
-            <div className="mt-0.5 truncate text-sm text-neutral-500">demo/cli-uploads</div>
-            <div className="mt-2 truncate font-mono text-xs text-neutral-400">cli-uploads.layero.ru</div>
+            <div className="truncate font-semibold">paper-test</div>
+            <div className="mt-0.5 truncate text-sm text-neutral-500">demo/paper-test</div>
+            <div className="mt-2 truncate font-mono text-xs text-neutral-400">paper-test.layero.ru</div>
+            <div className="mt-2 truncate text-xs text-neutral-500">CDN активен</div>
           </div>
         </div>
       }
       after={
         <ProjectCard
           className="w-72"
-          name="cli-uploads"
-          repo="demo/cli-uploads"
-          host="cli-uploads.layero.ru"
-          gradient={avatarGradient("cli-uploads")}
-          status={<StatusDot tone="success">Готов</StatusDot>}
+          name="paper-test"
+          repo="demo/paper-test"
+          host="paper-test.layero.ru"
+          meta="CDN активен"
+          gradient={avatarGradient("paper-test")}
+          placeholder={LayeroMark}
+          topLeft={BranchesPill}
+          status={<StatusDot tone="success">Активен</StatusDot>}
         />
       }
     />
@@ -160,7 +176,7 @@ export const Deploy: Story = {
               </div>
               <div className="flex flex-col gap-1 text-sm sm:w-[140px] sm:text-right">
                 <span className="text-neutral-600">5 дн назад</span>
-                <span className="text-neutral-400">git push</span>
+                <span className="text-neutral-400">Git push</span>
               </div>
             </div>
           </div>
@@ -176,7 +192,7 @@ export const Deploy: Story = {
           commitSha="4139037"
           commitMessage="Initial commit"
           timeAgo="5 дн назад"
-          source="git push"
+          source="Git push"
           active
           action={Kebab}
         />
@@ -262,11 +278,46 @@ export const Branches: Story = {
   ),
 };
 
-/* ── 6. ProductionCard (approx) ────────────────────────────────────── */
+/* ── 6. ProductionCard ─────────────────────────────────────────────── */
 const ProdActions = (
   <>
     <Button variant="outline" size="sm">GitHub</Button>
     <Button size="sm">Открыть ↗</Button>
+  </>
+);
+const ProdFooter = (
+  <>
+    <span className="mr-auto text-xs text-neutral-500">Чтобы обновить production, сделайте push в ветку main</span>
+    <Button variant="outline" size="sm">Деплой из ветки</Button>
+    <Button variant="outline" size="sm">Откатить</Button>
+    <Button variant="ghost" size="sm">Все деплои</Button>
+  </>
+);
+const ProdPreview = (
+  <div className="flex h-full w-full flex-col items-center justify-center gap-1" style={{ background: avatarGradient("paper-test") }}>
+    {LayeroMark}
+    <span className="font-mono text-[11px] text-neutral-900/30">paper-test.layero.ru</span>
+  </div>
+);
+const ProdInfo = (
+  <>
+    <ProductionField label="Адрес">
+      <a className="break-all font-mono text-sm text-foreground hover:underline" href="#">paper-test.layero.ru</a>
+    </ProductionField>
+    <ProductionField label="Домены">
+      <a className="text-sm text-foreground hover:underline" href="#">Добавить домен</a>
+    </ProductionField>
+    <div className="grid grid-cols-2 gap-4">
+      <ProductionField label="Статус">
+        <StatusDot tone="success" className="text-sm text-foreground">Готов</StatusDot>
+      </ProductionField>
+      <ProductionField label="Опубликован">
+        <span className="text-sm text-foreground">5 дн назад</span>
+      </ProductionField>
+    </div>
+    <ProductionField label="Источник">
+      <span className="font-mono text-sm text-neutral-600">main · 4139037 Initial commit</span>
+    </ProductionField>
   </>
 );
 export const Production: Story = {
@@ -274,40 +325,29 @@ export const Production: Story = {
   render: () => (
     <Compare
       before={
-        <div className="overflow-hidden rounded-xl border border-[color:var(--border-soft)] bg-card">
-          <div className="flex items-center justify-between gap-2 border-b border-[color:var(--border-soft)] px-5 py-3">
-            <h2 className="truncate text-[15px] font-semibold tracking-tightish text-foreground">paper-test</h2>
+        <div className="max-w-3xl overflow-hidden rounded-xl border border-border bg-card">
+          <div className="flex items-center justify-between gap-2 border-b border-border px-5 py-3">
+            <h2 className="truncate text-[15px] font-semibold tracking-tightish text-foreground">Production</h2>
             <div className="flex items-center gap-2">{ProdActions}</div>
           </div>
           <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-            <div className="border-b border-[color:var(--border-soft)] bg-[#fafafa] lg:border-b-0 lg:border-r">
-              <div className="aspect-[16/10] w-full" style={{ background: avatarGradient("paper-test") }} />
+            <div className="border-b border-border bg-muted lg:border-b-0 lg:border-r">
+              <div className="aspect-[16/10] w-full">{ProdPreview}</div>
             </div>
-            <div className="space-y-5 p-5">
-              <div>
-                <div className="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-neutral-400">Адрес</div>
-                <a className="break-all font-mono text-sm text-foreground" href="#">paper-test.layero.ru</a>
-              </div>
-              <div>
-                <div className="mb-1.5 text-[11px] font-medium uppercase tracking-wide text-neutral-400">Статус</div>
-                <span className="inline-flex items-center gap-1.5 text-sm"><span className="h-1.5 w-1.5 rounded-full bg-success-500" />Опубликован · 5 дн назад</span>
-              </div>
-            </div>
+            <div className="space-y-5 p-5">{ProdInfo}</div>
           </div>
+          <div className="flex flex-wrap items-center gap-2 border-t border-border px-5 py-3">{ProdFooter}</div>
         </div>
       }
       after={
         <ProductionCard
-          name="paper-test"
+          className="max-w-3xl"
+          name="Production"
           actions={ProdActions}
-          preview={<div className="h-full w-full" style={{ background: avatarGradient("paper-test") }} />}
+          preview={ProdPreview}
+          footer={ProdFooter}
         >
-          <ProductionField label="Адрес">
-            <a className="break-all font-mono text-sm text-foreground hover:underline" href="#">paper-test.layero.ru</a>
-          </ProductionField>
-          <ProductionField label="Статус">
-            <StatusDot tone="success" className="text-sm text-foreground">Опубликован · 5 дн назад</StatusDot>
-          </ProductionField>
+          {ProdInfo}
         </ProductionCard>
       }
     />

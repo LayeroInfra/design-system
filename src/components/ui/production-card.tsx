@@ -12,6 +12,8 @@ export interface ProductionCardProps
   preview?: React.ReactNode;
   /** Right info column — a labeled stack (Адрес / Домены / Статус / Источник). */
   children?: React.ReactNode;
+  /** Bottom action bar (push hint + deploy buttons). */
+  footer?: React.ReactNode;
 }
 
 /** The production hero card on a project's overview: a header (title + actions)
@@ -20,7 +22,7 @@ export interface ProductionCardProps
 export const ProductionCard = React.forwardRef<
   HTMLDivElement,
   ProductionCardProps
->(({ name, actions, preview, children, className, ...props }, ref) => (
+>(({ name, actions, preview, children, footer, className, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
@@ -36,13 +38,18 @@ export const ProductionCard = React.forwardRef<
       {actions && <div className="flex shrink-0 items-center gap-2">{actions}</div>}
     </div>
     <div className="grid grid-cols-1 lg:grid-cols-[minmax(0,1.1fr)_minmax(0,1fr)]">
-      <div className="flex items-center justify-center border-b border-border bg-muted/40 lg:border-b-0 lg:border-r">
+      <div className="flex items-center justify-center border-b border-border bg-muted lg:border-b-0 lg:border-r">
         <div className="relative flex aspect-[16/10] w-full items-center justify-center overflow-hidden">
           {preview}
         </div>
       </div>
       <div className="space-y-5 p-5">{children}</div>
     </div>
+    {footer && (
+      <div className="flex flex-wrap items-center gap-2 border-t border-border px-5 py-3">
+        {footer}
+      </div>
+    )}
   </div>
 ));
 ProductionCard.displayName = "ProductionCard";

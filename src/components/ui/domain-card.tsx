@@ -54,7 +54,7 @@ export const DomainCard = React.forwardRef<HTMLDivElement, DomainCardProps>(
         </div>
         {records && records.length > 0 && (
           <div className="mx-5 mb-3 overflow-hidden rounded-lg border border-border">
-            <div className="grid grid-cols-[auto_1fr_1.4fr] gap-x-4 bg-muted/40 px-3 py-1.5 text-[11px] uppercase tracking-wide text-neutral-400">
+            <div className="grid grid-cols-[auto_1fr_1.4fr] gap-x-4 bg-muted px-3 py-1.5 text-[11px] uppercase tracking-wide text-neutral-400">
               <span>Тип</span>
               <span>Имя</span>
               <span>Значение</span>
