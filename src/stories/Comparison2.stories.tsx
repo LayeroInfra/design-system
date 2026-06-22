@@ -49,19 +49,25 @@ function Compare({ before, after }: { before: ReactNode; after: ReactNode }) {
 }
 
 const FEATURES = [
-  "Мониторинг и метрики",
+  "Без лимита проектов (вместо 5)",
+  "Свои домены и SSL",
+  "Командные организации",
+  "Мониторинг",
   "Веб-аналитика",
-  "Команды и роли",
-  "Кастомные домены",
+  "Производительность",
+  "Runtime-приложения",
+  "Бесплатные viewer-места",
+  "Без лейбла Layero",
   "Приоритетная поддержка",
-  "Бета-функции",
 ];
+// Prod feature row: leading bullet, label, then a green check on the RIGHT.
 const FeatureGridBefore = (
-  <div className="mt-6 grid gap-x-6 gap-y-2.5 sm:grid-cols-2">
+  <div className="mt-6 grid gap-x-8 gap-y-3 sm:grid-cols-2">
     {FEATURES.map((f) => (
-      <div key={f} className="flex items-start gap-2 text-sm text-neutral-600">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 text-success-500" aria-hidden><polyline points="20 6 9 17 4 12" /></svg>
-        {f}
+      <div key={f} className="flex items-center gap-2.5 text-sm text-neutral-700">
+        <span className="h-1.5 w-1.5 shrink-0 rounded-full bg-neutral-300" />
+        <span className="flex-1">{f}</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-success-500" aria-hidden><polyline points="20 6 9 17 4 12" /></svg>
       </div>
     ))}
   </div>
@@ -73,7 +79,7 @@ export const Plan: Story = {
   render: () => (
     <Compare
       before={
-        <section className="max-w-lg overflow-hidden rounded-2xl border border-border bg-card">
+        <section className="max-w-2xl overflow-hidden rounded-2xl border border-border bg-card">
           <div className="p-6">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
@@ -82,6 +88,7 @@ export const Plan: Story = {
               </div>
               <span className="text-sm text-neutral-500">990 ₽ / мес</span>
             </div>
+            <p className="mt-2 text-sm text-neutral-600">Следующее списание — 22 июля 2026 г.</p>
             {FeatureGridBefore}
           </div>
           <div className="flex items-center justify-end gap-3 border-t border-border bg-muted px-6 py-3">
@@ -91,7 +98,7 @@ export const Plan: Story = {
       }
       after={
         <PlanPanel
-          className="max-w-lg"
+          className="max-w-2xl"
           planName="Pro"
           price="990 ₽/мес"
           badge={<Badge variant="secondary">Текущий</Badge>}
@@ -290,29 +297,59 @@ export const Integration: Story = {
   render: () => (
     <Compare
       before={
-        <div className="max-w-xl rounded-xl border border-border bg-card p-4">
-          <div className="flex flex-wrap items-start justify-between gap-3">
-            <div className="min-w-0">
-              <div className="flex items-center gap-2">
-                <h2 className="text-base font-semibold tracking-tightish">Яндекс.Метрика</h2>
-                <Badge variant="success">подключено</Badge>
-              </div>
-              <p className="mt-1 text-sm text-neutral-500">Визиты, источники трафика и устройства — прямо в панели Layero.</p>
-            </div>
+        <div className="max-w-2xl rounded-xl border border-border bg-card p-4">
+          <div className="flex items-center gap-2">
+            <h2 className="text-base font-semibold tracking-tightish">Яндекс.Метрика</h2>
+            <Badge variant="success">Подключено</Badge>
           </div>
-          <div className="mt-4 rounded-lg border border-border px-3 py-2 text-sm text-neutral-600">Счётчик 98765432 · ветка production</div>
+          <p className="mt-1 text-sm text-neutral-500">Визиты, просмотры, источники трафика и устройства — прямо в панели Layero</p>
+          <div className="mt-4 grid gap-x-8 gap-y-3 sm:grid-cols-2">
+            {[
+              ["Номер счётчика", "99887766"],
+              ["Аккаунт Яндекса", "demo@yandex.ru"],
+              ["Сайт счётчика", "https://paper-test.layero.ru"],
+              ["Отслеживаемая ветка", "main"],
+              ["Способ установки", "автоматически (вшивается в билд)"],
+            ].map(([k, v]) => (
+              <div key={k}>
+                <div className="text-xs text-neutral-500">{k}</div>
+                <div className="mt-0.5 text-sm text-foreground">{v}</div>
+              </div>
+            ))}
+          </div>
+          <div className="mt-4 flex flex-wrap items-center gap-3">
+            <Button size="sm">Открыть веб-аналитику</Button>
+            <Button size="sm" variant="outline">Дашборд Метрики ↗</Button>
+            <button className="text-sm text-negative-600">Отключить</button>
+          </div>
+          <p className="mt-4 text-xs text-neutral-500">Чтобы сменить ветку, отключите интеграцию и подключите заново — счётчик сохранится.</p>
         </div>
       }
       after={
         <IntegrationCard
-          className="max-w-xl"
+          className="max-w-2xl"
           icon={ChartIcon}
           title="Яндекс Метрика"
           description="Трафик, источники и популярные страницы прямо в дашборде."
           connected
-          footer={<Button size="sm" variant="outline">Открыть в Метрике</Button>}
+          footer={
+            <>
+              <Button size="sm">Открыть веб-аналитику</Button>
+              <Button size="sm" variant="outline">Дашборд Метрики ↗</Button>
+            </>
+          }
         >
-          <div className="rounded-lg border border-border px-3 py-2 text-sm text-neutral-600">Счётчик 98765432 · ветка production</div>
+          <div className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
+            {[
+              ["Номер счётчика", "99887766"],
+              ["Отслеживаемая ветка", "main"],
+            ].map(([k, v]) => (
+              <div key={k}>
+                <div className="text-xs text-neutral-500">{k}</div>
+                <div className="mt-0.5 text-sm text-foreground">{v}</div>
+              </div>
+            ))}
+          </div>
         </IntegrationCard>
       }
     />
