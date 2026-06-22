@@ -9,6 +9,20 @@ import { Meta } from "@storybook/blocks";
 
 ---
 
+## 0.19.0
+
+**Синхронизация с Figma + размеры/иконки Badge**
+
+- **Figma ↔ Storybook**: подключён `@storybook/addon-designs` — у `Button` и
+  `Badge` появилась вкладка **Design** со встроенным компонентом из Figma-
+  библиотеки (Layero Design System).
+- **Code Connect**: маппинги `Button` (sm/default/lg) и `Badge` (sm/md/lg) →
+  Figma-узлы (`*.figma.tsx` + `figma.config.json`). В Dev Mode Figma показывает
+  реальный `<Button>` / `<Badge>` с пропами вместо CSS.
+- **`Badge`** догнал `Button`: проп `size` (**sm / md / lg**, md по умолчанию) +
+  слоты `leftIcon` / `rightIcon` (иконка слева, шеврон-вниз справа). Обратно
+  совместимо. В Figma — отдельные компоненты `Badge/400 · 500 · 600`.
+
 ## 0.18.0
 
 **Организмы экранов + атомы/молекулы под них**

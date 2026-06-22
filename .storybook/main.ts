@@ -6,6 +6,7 @@ const config: StorybookConfig = {
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "@storybook/addon-themes",
+    "@storybook/addon-designs",
   ],
   framework: { name: "@storybook/react-vite", options: {} },
   core: { disableTelemetry: true },

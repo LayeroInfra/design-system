@@ -1,0 +1,10 @@
+{
+  "codeConnect": {
+    "parser": "react",
+    "include": [
+      "src/components/ui/**/*.figma.tsx",
+      "src/components/ui/button.tsx",
+      "src/components/ui/badge.tsx"
+    ]
+  }
+}

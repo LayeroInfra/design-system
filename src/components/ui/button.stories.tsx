@@ -30,6 +30,12 @@ const meta = {
           "icon-sm / icon / icon-lg.",
       },
     },
+    // Figma ↔ Storybook: вкладка «Design» показывает компонент-сет Button/500
+    // из библиотеки Layero Design System.
+    design: {
+      type: "figma",
+      url: "https://www.figma.com/design/MmHTzOAWbir8pBzt5HtOtM/Layero-Design-System?node-id=14-132",
+    },
   },
   argTypes: {
     variant: {
