@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import type { ReactNode } from "react";
 import { ProjectCard } from "../../components/ui/project-card";
 import { CtaCard } from "../../components/ui/cta-card";
+import { StatusDot } from "../../components/ui/status-dot";
 import { avatarGradient } from "../../components/ui/avatar";
 
 const meta: Meta = {
@@ -19,19 +19,10 @@ const meta: Meta = {
 export default meta;
 type Story = StoryObj;
 
-function Status({ tone, children }: { tone: string; children: ReactNode }) {
-  return (
-    <span className="inline-flex items-center gap-1.5 whitespace-nowrap text-xs font-medium leading-none">
-      <span className={`h-1.5 w-1.5 rounded-full ${tone}`} />
-      {children}
-    </span>
-  );
-}
-
 const PROJECTS = [
-  { name: "cli-uploads", repo: "demo/cli-uploads", host: "cli-uploads.layero.ru", status: <Status tone="bg-success-500">Готов</Status> },
-  { name: "storefront", repo: "demo/storefront", host: "storefront.layero.ru", status: <Status tone="bg-info-500">Сборка</Status> },
-  { name: "err-cdn-failed", repo: "demo/err-cdn", host: "err-cdn.layero.ru", status: <Status tone="bg-negative-500">Ошибка</Status>, dimmed: true },
+  { name: "cli-uploads", repo: "demo/cli-uploads", host: "cli-uploads.layero.ru", status: <StatusDot tone="success">Готов</StatusDot> },
+  { name: "storefront", repo: "demo/storefront", host: "storefront.layero.ru", status: <StatusDot tone="info">Сборка</StatusDot> },
+  { name: "err-cdn-failed", repo: "demo/err-cdn", host: "err-cdn.layero.ru", status: <StatusDot tone="negative">Ошибка</StatusDot>, dimmed: true },
 ];
 
 export const Grid: Story = {

@@ -9,6 +9,23 @@ import { Meta } from "@storybook/blocks";
 
 ---
 
+## 0.18.0
+
+**Организмы экранов + атомы/молекулы под них**
+
+- Новые **атомы**: `StatusDot` (статус-точка с тоном/подписью), `CopyButton`.
+- Новые **молекулы**: `FormCard`, `WarmupPanel`, `BranchRow`, `Metric`/`Sparkline`
+  (ранее) — переиспользуются организмами.
+- Новые **организмы**: `ProjectCard`, `CtaCard` (страница всех проектов),
+  `DeployRow`, `ProductionCard` (+`ProductionField`), `BranchesPopover`,
+  `MemberRow`, `IntegrationCard`, `DomainCard`, `AddDomainCard`, и биллинг —
+  `PlanPanel`, `PaymentMethodCard`, `PaymentHistory`, `DiscountBanner`,
+  `BetaProgramCard`.
+- Консистентность «организмы из атомов»: `DeployRow`/`DomainCard`/`BranchCard`
+  переведены на `StatusDot`; `DiscountBanner`/`BranchRow` — на `CopyButton`.
+- Все презентационные (слоты через props, без данных/логики) — готовы к
+  миграции экранов.
+
 ## 0.17.0
 
 **Организмы экранов + единая система ховера**

@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { CopyButton } from "./copy-button";
 
 export interface DiscountBannerProps
   extends Omit<React.HTMLAttributes<HTMLDivElement>, "title"> {
@@ -49,12 +50,11 @@ export const DiscountBanner = React.forwardRef<
         <code className="rounded-md border border-border bg-card px-3 py-1.5 font-mono text-sm text-foreground">
           {code}
         </code>
-        <button
-          type="button"
-          className="rounded-md px-2 py-1.5 text-sm text-neutral-600 transition hover:bg-overlay"
-        >
-          Скопировать
-        </button>
+        <CopyButton
+          value={code}
+          label="Скопировать"
+          className="border-transparent px-2 py-1.5 text-sm"
+        />
       </div>
     )}
   </div>
