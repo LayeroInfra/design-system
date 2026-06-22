@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 import { Badge } from "./badge";
+import { StatusDot, type StatusTone } from "./status-dot";
 
 export interface BranchCardProps extends React.HTMLAttributes<HTMLDivElement> {
   name: string;
@@ -17,11 +18,11 @@ export interface BranchCardProps extends React.HTMLAttributes<HTMLDivElement> {
   production?: boolean;
 }
 
-const DOT: Record<NonNullable<BranchCardProps["status"]>, string> = {
-  ready: "bg-success-500",
-  building: "bg-warning-500",
-  error: "bg-negative-500",
-  idle: "bg-neutral-400",
+const TONE: Record<NonNullable<BranchCardProps["status"]>, StatusTone> = {
+  ready: "success",
+  building: "warning",
+  error: "negative",
+  idle: "neutral",
 };
 
 /** A git branch / deployment row: status dot + name + PRODUCTION badge, the
@@ -37,7 +38,7 @@ export const BranchCard = React.forwardRef<HTMLDivElement, BranchCardProps>(
       {...props}
     >
       <div className="flex items-center gap-2">
-        <span className={cn("h-2 w-2 shrink-0 rounded-full", DOT[status])} />
+        <StatusDot tone={TONE[status]} dotClassName="h-2 w-2" />
         <span className="truncate font-medium text-foreground">{name}</span>
         {production && (
           <Badge variant="secondary" className="ml-auto shrink-0">

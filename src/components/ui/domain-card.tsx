@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { StatusDot, type StatusTone } from "./status-dot";
 
 export type DomainStage =
   | "needs-dns"
@@ -9,12 +10,12 @@ export type DomainStage =
   | "live"
   | "failed";
 
-const STAGE: Record<DomainStage, { dot: string; label: string }> = {
-  "needs-dns": { dot: "bg-neutral-400", label: "Нужны DNS-записи" },
-  checking: { dot: "bg-warning-500", label: "Проверка DNS" },
-  issuing: { dot: "bg-warning-500", label: "Выпуск сертификата" },
-  live: { dot: "bg-success-500", label: "Активен" },
-  failed: { dot: "bg-negative-500", label: "Ошибка" },
+const STAGE: Record<DomainStage, { tone: StatusTone; label: string }> = {
+  "needs-dns": { tone: "neutral", label: "Нужны DNS-записи" },
+  checking: { tone: "warning", label: "Проверка DNS" },
+  issuing: { tone: "warning", label: "Выпуск сертификата" },
+  live: { tone: "success", label: "Активен" },
+  failed: { tone: "negative", label: "Ошибка" },
 };
 
 export interface DnsRecord {
@@ -47,10 +48,9 @@ export const DomainCard = React.forwardRef<HTMLDivElement, DomainCardProps>(
           <span className="truncate font-mono text-sm font-medium text-foreground">
             {domain}
           </span>
-          <span className="inline-flex shrink-0 items-center gap-1.5 text-xs font-medium text-neutral-600">
-            <span className={cn("h-1.5 w-1.5 rounded-full", s.dot)} />
+          <StatusDot tone={s.tone} className="shrink-0">
             {s.label}
-          </span>
+          </StatusDot>
         </div>
         {records && records.length > 0 && (
           <div className="mx-5 mb-3 overflow-hidden rounded-lg border border-border">

@@ -34,7 +34,7 @@ export const Deploys: Story = {
     <ul className="max-w-3xl space-y-3">
       <li>
         <DeployRow
-          status={{ dot: "bg-success-500", label: "Готов" }}
+          status={{ tone: "success", label: "Готов" }}
           duration="1m 12s"
           branch="main"
           env="Production"
@@ -48,7 +48,7 @@ export const Deploys: Story = {
       </li>
       <li>
         <DeployRow
-          status={{ dot: "bg-success-500", label: "Готов" }}
+          status={{ tone: "success", label: "Готов" }}
           duration="48s"
           branch="feature/new-checkout"
           env="Preview"
@@ -61,7 +61,7 @@ export const Deploys: Story = {
       </li>
       <li>
         <DeployRow
-          status={{ dot: "bg-negative-500", label: "Ошибка" }}
+          status={{ tone: "negative", label: "Ошибка" }}
           branch="fix/build"
           env="Preview"
           commitSha="9f8e7d6"

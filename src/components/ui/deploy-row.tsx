@@ -2,6 +2,7 @@ import * as React from "react";
 
 import { cn } from "@/lib/utils";
 import { Badge } from "./badge";
+import { StatusDot, type StatusTone } from "./status-dot";
 
 const BranchGlyph = ({ className }: { className?: string }) => (
   <svg
@@ -44,8 +45,8 @@ const CommitGlyph = ({ className }: { className?: string }) => (
 
 export interface DeployRowProps
   extends React.HTMLAttributes<HTMLDivElement> {
-  /** Status dot colour class (e.g. "bg-success-500") + a label node. */
-  status?: { dot: string; label: React.ReactNode };
+  /** Status tone + label. */
+  status?: { tone: StatusTone; label: React.ReactNode };
   /** Build duration, shown in mono under the status. */
   duration?: React.ReactNode;
   /** Git branch name, shown in mono. */
@@ -102,21 +103,15 @@ export const DeployRow = React.forwardRef<HTMLDivElement, DeployRowProps>(
         <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:gap-6">
           {/* Status — label on row 1, build duration on row 2 */}
           <div className="flex flex-col gap-1 pr-12 sm:w-[120px] sm:shrink-0 sm:pr-0">
-            <div className="flex items-center gap-2 text-sm">
-              {status && (
-                <span
-                  className={cn(
-                    "inline-block h-2 w-2 shrink-0 rounded-full",
-                    status.dot,
-                  )}
-                />
-              )}
-              {status && (
-                <span className="font-medium text-foreground">
-                  {status.label}
-                </span>
-              )}
-            </div>
+            {status && (
+              <StatusDot
+                tone={status.tone}
+                dotClassName="h-2 w-2"
+                className="text-sm text-foreground"
+              >
+                {status.label}
+              </StatusDot>
+            )}
             {duration && (
               <div className="ml-4 font-mono text-sm text-neutral-600">
                 {duration}
