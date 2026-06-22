@@ -8,6 +8,8 @@ import { BetaProgramCard } from "../components/ui/beta-card";
 import { MemberRow } from "../components/ui/member-row";
 import { IntegrationCard } from "../components/ui/integration-card";
 import { DomainCard } from "../components/ui/domain-card";
+import { AddDomainCard } from "../components/ui/add-domain";
+import { Input } from "../components/ui/input";
 import { Badge } from "../components/ui/badge";
 import { Button } from "../components/ui/button";
 import { Switch } from "../components/ui/switch";
@@ -362,23 +364,57 @@ export const Domain: Story = {
   render: () => (
     <Compare
       before={
-        <article className="max-w-xl overflow-hidden rounded-xl border border-border bg-card">
-          <div className="flex items-center justify-between gap-3 p-4">
-            <span className="truncate font-mono text-sm font-medium text-foreground">app.example.com</span>
-            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-neutral-600">
-              <span className="h-1.5 w-1.5 rounded-full bg-success-500" />
-              Активен
-            </span>
-          </div>
+        <article className="max-w-2xl overflow-hidden rounded-xl border border-border bg-card">
+          <header className="flex flex-wrap items-center gap-3 px-5 py-4">
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <span className="h-2 w-2 rounded-full bg-success-500" />
+                <a href="#" className="truncate font-mono text-sm font-medium hover:underline">app.example.com</a>
+              </div>
+              <div className="mt-1 text-xs text-neutral-500">Работает</div>
+            </div>
+            <div className="flex shrink-0 items-center gap-2">
+              <Button size="sm" variant="outline">Проверить</Button>
+              <Button size="sm" variant="outline">Изменить</Button>
+            </div>
+          </header>
         </article>
       }
       after={
         <DomainCard
-          className="max-w-xl"
+          className="max-w-2xl"
           domain="app.example.com"
           stage="live"
-          footer={<Button size="sm" variant="ghost" className="text-neutral-500">Удалить</Button>}
+          action={
+            <>
+              <Button size="sm" variant="outline">Проверить</Button>
+              <Button size="sm" variant="outline">Изменить</Button>
+            </>
+          }
         />
+      }
+    />
+  ),
+};
+
+/* ── 9. AddDomainCard ──────────────────────────────────────────────── */
+export const AddDomain: Story = {
+  name: "Добавить домен",
+  render: () => (
+    <Compare
+      before={
+        <form className="max-w-2xl space-y-2 rounded-xl border border-border bg-card p-4">
+          <label className="block text-xs font-medium uppercase tracking-wider text-neutral-500">
+            Добавить домен
+          </label>
+          <div className="flex flex-col gap-2 sm:flex-row">
+            <Input placeholder="mysite.ru или shop.mysite.ru" className="flex-1 font-mono" />
+            <Button className="shrink-0">Добавить</Button>
+          </div>
+        </form>
+      }
+      after={
+        <AddDomainCard className="max-w-2xl" action={<Button>Добавить</Button>} />
       }
     />
   ),

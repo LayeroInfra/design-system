@@ -92,36 +92,30 @@ export const Domains: Story = {
   name: "Домены",
   render: () => (
     <div className="max-w-2xl space-y-4">
-      <AddDomainCard
-        action={<Button size="sm">Добавить</Button>}
-        hint="Например, app.example.com — после добавления покажем DNS-записи."
-      />
+      <AddDomainCard action={<Button size="sm">Добавить</Button>} />
       <DomainCard
         domain="app.example.com"
         stage="live"
-        footer={
-          <Button size="sm" variant="ghost" className="text-neutral-500">
-            Удалить
-          </Button>
+        action={
+          <>
+            <Button size="sm" variant="outline">Проверить</Button>
+            <Button size="sm" variant="outline">Изменить</Button>
+          </>
         }
       />
       <DomainCard
         domain="shop.example.com"
-        stage="needs-dns"
+        stage="needs_dns"
+        action={
+          <>
+            <Button size="sm" variant="outline">Проверить</Button>
+            <Button size="sm" variant="outline">Изменить</Button>
+          </>
+        }
         records={[
           { type: "CNAME", name: "shop", value: "cname.layero.ru" },
           { type: "TXT", name: "_layero", value: "verify=ab12cd34" },
         ]}
-        footer={
-          <>
-            <Button size="sm" variant="outline">
-              Проверить
-            </Button>
-            <Button size="sm" variant="ghost" className="text-neutral-500">
-              Удалить
-            </Button>
-          </>
-        }
       />
     </div>
   ),

@@ -4,18 +4,18 @@ import { cn } from "@/lib/utils";
 import { StatusDot, type StatusTone } from "./status-dot";
 
 export type DomainStage =
-  | "needs-dns"
+  | "needs_dns"
   | "checking"
   | "issuing"
   | "live"
   | "failed";
 
-const STAGE: Record<DomainStage, { tone: StatusTone; label: string }> = {
-  "needs-dns": { tone: "neutral", label: "Нужны DNS-записи" },
-  checking: { tone: "warning", label: "Проверка DNS" },
-  issuing: { tone: "warning", label: "Выпуск сертификата" },
-  live: { tone: "success", label: "Активен" },
-  failed: { tone: "negative", label: "Ошибка" },
+const STAGE: Record<DomainStage, { tone: StatusTone; headline: string }> = {
+  needs_dns: { tone: "warning", headline: "Ждём DNS-записи" },
+  checking: { tone: "warning", headline: "Проверяем DNS" },
+  issuing: { tone: "warning", headline: "Выпускаем сертификат" },
+  failed: { tone: "negative", headline: "Не удалось подключить" },
+  live: { tone: "success", headline: "Работает" },
 };
 
 export interface DnsRecord {
@@ -27,53 +27,60 @@ export interface DnsRecord {
 export interface DomainCardProps extends React.HTMLAttributes<HTMLDivElement> {
   domain: React.ReactNode;
   stage?: DomainStage;
-  /** DNS records to add, shown as a mono table. */
+  /** Header actions (Проверить / Изменить). */
+  action?: React.ReactNode;
+  /** DNS records to add (shown in an expandable area). */
   records?: DnsRecord[];
-  /** Footer action buttons (Verify / Change / Delete). */
-  footer?: React.ReactNode;
 }
 
-/** Domain status card: domain + stage indicator, optional DNS-records table and
- *  a footer action row. */
+/** Domain card: header with a status dot + domain (mono) + stage headline and
+ *  Проверить / Изменить actions; optional DNS-records table below. */
 export const DomainCard = React.forwardRef<HTMLDivElement, DomainCardProps>(
-  ({ domain, stage = "needs-dns", records, footer, className, ...props }, ref) => {
+  ({ domain, stage = "needs_dns", action, records, className, ...props }, ref) => {
     const s = STAGE[stage];
+    const hasBody = !!records?.length;
     return (
       <div
         ref={ref}
-        className={cn("rounded-2xl border border-border bg-card", className)}
+        className={cn("overflow-hidden rounded-xl border border-border bg-card", className)}
         {...props}
       >
-        <div className="flex items-center justify-between gap-3 p-5 pb-3">
-          <span className="truncate font-mono text-sm font-medium text-foreground">
-            {domain}
-          </span>
-          <StatusDot tone={s.tone} className="shrink-0">
-            {s.label}
-          </StatusDot>
-        </div>
-        {records && records.length > 0 && (
-          <div className="mx-5 mb-3 overflow-hidden rounded-lg border border-border">
-            <div className="grid grid-cols-[auto_1fr_1.4fr] gap-x-4 bg-muted px-3 py-1.5 text-[11px] uppercase tracking-wide text-neutral-400">
-              <span>Тип</span>
-              <span>Имя</span>
-              <span>Значение</span>
+        <header
+          className={cn(
+            "flex flex-wrap items-center gap-3 px-5 py-4",
+            hasBody && "border-b border-border",
+          )}
+        >
+          <div className="min-w-0 flex-1">
+            <div className="flex items-center gap-2">
+              <StatusDot tone={s.tone} dotClassName="h-2 w-2" />
+              <span className="truncate font-mono text-sm font-medium text-foreground">
+                {domain}
+              </span>
             </div>
-            {records.map((r, i) => (
-              <div
-                key={i}
-                className="grid grid-cols-[auto_1fr_1.4fr] gap-x-4 border-t border-border px-3 py-1.5 font-mono text-xs text-neutral-600"
-              >
-                <span>{r.type}</span>
-                <span className="truncate">{r.name}</span>
-                <span className="truncate">{r.value}</span>
-              </div>
-            ))}
+            <div className="mt-1 text-xs text-neutral-500">{s.headline}</div>
           </div>
-        )}
-        {footer && (
-          <div className="flex items-center justify-end gap-2 border-t border-border px-5 py-3">
-            {footer}
+          {action && <div className="flex shrink-0 items-center gap-2">{action}</div>}
+        </header>
+        {hasBody && (
+          <div className="overflow-hidden px-5 py-4">
+            <div className="overflow-hidden rounded-lg border border-border">
+              <div className="grid grid-cols-[auto_1fr_1.4fr] gap-x-4 bg-muted px-3 py-1.5 text-[11px] uppercase tracking-wide text-neutral-400">
+                <span>Тип</span>
+                <span>Имя</span>
+                <span>Значение</span>
+              </div>
+              {records!.map((r, i) => (
+                <div
+                  key={i}
+                  className="grid grid-cols-[auto_1fr_1.4fr] gap-x-4 border-t border-border px-3 py-1.5 font-mono text-xs text-neutral-600"
+                >
+                  <span>{r.type}</span>
+                  <span className="truncate">{r.name}</span>
+                  <span className="truncate">{r.value}</span>
+                </div>
+              ))}
+            </div>
           </div>
         )}
       </div>
