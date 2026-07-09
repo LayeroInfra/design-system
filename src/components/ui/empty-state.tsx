@@ -47,12 +47,14 @@ export function EmptyState({
         </div>
       )}
       {title && (
-        <div className="text-base font-medium text-foreground">{title}</div>
+        <div className="mx-auto max-w-[320px] text-base font-medium text-foreground">
+          {title}
+        </div>
       )}
       {description && (
         <p
           className={cn(
-            "mx-auto max-w-[240px] text-sm text-neutral-500",
+            "mx-auto max-w-[320px] text-sm text-neutral-500",
             title && "mt-1.5",
           )}
         >
