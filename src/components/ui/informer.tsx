@@ -24,9 +24,8 @@ const TONE: Record<
     badge: "bg-warning-500 text-white dark:text-warning-950",
     action: "bg-warning-100 hover:bg-warning-200 dark:bg-warning-900/50 dark:text-white dark:hover:bg-warning-900",
     glyph: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M12 9v4M12 17h.01" />
-        <path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M12 5v9M12 18.5h.01" />
       </svg>
     ),
   },
@@ -45,8 +44,8 @@ const TONE: Record<
     badge: "bg-info-500 text-white",
     action: "bg-info-100 hover:bg-info-200 dark:bg-info-900/50 dark:text-white dark:hover:bg-info-900",
     glyph: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-        <path d="M12 11v5M12 8h.01" />
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <path d="M12 11v8.5M12 5.5h.01" />
       </svg>
     ),
   },
@@ -154,7 +153,7 @@ export function InformerAction({
     <Comp
       type={asChild ? undefined : "button"}
       className={cn(
-        "inline-flex items-center rounded-lg px-3.5 py-2 text-sm font-semibold text-foreground transition",
+        "inline-flex h-8 items-center rounded-lg px-3 text-sm font-semibold text-foreground transition",
         TONE[tone].action,
         className,
       )}
