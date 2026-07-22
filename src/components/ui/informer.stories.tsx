@@ -45,16 +45,32 @@ export const Playground: Story = {};
 export const Tones: Story = {
   render: () => (
     <div className="max-w-xl space-y-3">
-      <Informer tone="success" title="Готово">
+      <Informer
+        tone="success"
+        title="Готово"
+        actions={<InformerAction>Действие</InformerAction>}
+      >
         Деплой опубликован и доступен по основному домену.
       </Informer>
-      <Informer tone="info" title="К сведению">
+      <Informer
+        tone="info"
+        title="К сведению"
+        actions={<InformerAction>Действие</InformerAction>}
+      >
         Сертификат продлится автоматически за 30 дней до истечения.
       </Informer>
-      <Informer tone="warning" title="Внимание">
+      <Informer
+        tone="warning"
+        title="Внимание"
+        actions={<InformerAction>Действие</InformerAction>}
+      >
         Лимит сборок почти исчерпан — осталось 2 из 100 в этом месяце.
       </Informer>
-      <Informer tone="danger" title="Ошибка">
+      <Informer
+        tone="danger"
+        title="Ошибка"
+        actions={<InformerAction>Действие</InformerAction>}
+      >
         Контейнер упал при старте (OOM) — приложению не хватает памяти.
       </Informer>
     </div>
