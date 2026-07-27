@@ -1,0 +1,54 @@
+# Каталог компонентов публикуется на самой Layero — тем же Action, что мы
+# предлагаем пользователям. Storybook есть в списке автодетекта платформы, но
+# живого подтверждения этому нигде не было; теперь оно есть.
+#
+# Сборка идёт ЗДЕСЬ, а на Layero уходит готовый `storybook-static`
+# (`prebuilt`). Так быстрее и не заставляет платформу ставить Storybook со
+# всеми аддонами.
+#
+# `project`, а НЕ `name`: `name` задаёт имя только при создании проекта, а без
+# закоммиченного `.layero/project.json` первым деплой оказывается каждый раз —
+# и каждый прогон плодил бы новый проект.
+name: Deploy Storybook
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - '.storybook/**'
+      - 'package.json'
+      - 'package-lock.json'
+      - 'tailwind.config.js'
+      - '.github/workflows/deploy-storybook.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-storybook
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+
+      - run: npm run build-storybook
+
+      - uses: LayeroInfra/deploy-action@v1
+        id: deploy
+        with:
+          token: ${{ secrets.LAYERO_TOKEN }}
+          project: ui-catalog-ds
+          prebuilt: storybook-static
+          prod: true
+
+      - run: 'echo "Storybook — ${{ steps.deploy.outputs.url }}"'
