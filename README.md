@@ -33,11 +33,25 @@ npm run build-storybook   # → storybook-static/
 | Параметр | Значение |
 |---|---|
 | Репозиторий | `LayeroInfra/design-system` |
-| Build-команда | `npm run build-storybook` |
-| Output-директория | `storybook-static` |
+| Проект на Layero | `ui-catalog-ds` |
+| Что уезжает | готовый `storybook-static` (`prebuilt`) |
 
-На каждый push в `main` Layero пересобирает каталог. SPA-rewrite не нужен —
-Storybook отдаёт реальный `index.html` и навигирует через `?path=`.
+Сборка идёт **здесь**, в GitHub Actions (`deploy-storybook.yml`), а на Layero
+уходит уже собранная статика: так быстрее и не заставляет платформу ставить
+Storybook со всеми аддонами. То есть платформа каталог не пересобирает — она
+его раздаёт. SPA-rewrite не нужен: Storybook отдаёт реальный `index.html` и
+навигирует через `?path=`.
+
+Выкатить вручную (например, когда CI недоступен) — той же командой, что и в
+workflow:
+
+```bash
+npm run build-storybook
+npx layero@latest deploy --project ui-catalog-ds --prebuilt storybook-static --prod --yes
+```
+
+`--project`, а не `--name`: без закоммиченного `.layero/project.json` каждый
+запуск считается первым, и `--name` плодил бы новый проект на каждый прогон.
 
 ## Структура
 
