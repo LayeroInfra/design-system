@@ -46,7 +46,19 @@ export const SegmentedItem = React.forwardRef<
     {...props}
   >
     {icon}
-    {children}
+    {/* Ширина пункта считается по ЖИРНОМУ тексту всегда: активный пункт
+        полужирный, и без этой распорки переключение двигало соседей на
+        пару пикселей — по такому «дрожанию» и заметно, что контрол
+        самодельный. Копия под aria-hidden, читалке она не видна. */}
+    <span className="inline-grid">
+      <span
+        aria-hidden
+        className="invisible col-start-1 row-start-1 font-medium"
+      >
+        {children}
+      </span>
+      <span className="col-start-1 row-start-1">{children}</span>
+    </span>
   </button>
 ));
 SegmentedItem.displayName = "SegmentedItem";

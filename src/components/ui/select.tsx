@@ -8,6 +8,17 @@ const Select = SelectPrimitive.Root;
 const SelectGroup = SelectPrimitive.Group;
 const SelectValue = SelectPrimitive.Value;
 
+/**
+ * Внешний вид «поля-кнопки»: высота, рамка, фон, фокус.
+ *
+ * Вынесен отдельно, потому что так выглядит не только селект: тем же полем
+ * открываются окна выбора папок (`FolderField`). Раньше эти классы там были
+ * скопированы строкой — две копии одного вида расходятся молча, и поля в
+ * одном ряду начинают отличаться на пиксель рамки.
+ */
+export const fieldTriggerClass =
+  "flex h-9 w-full items-center justify-between gap-2 whitespace-nowrap rounded-md border border-input bg-card px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus:outline-none focus:border-ring focus:ring-2 focus:ring-neutral-900/10 focus-visible:outline-none focus-visible:border-ring focus-visible:ring-2 focus-visible:ring-neutral-900/10 disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground";
+
 const SelectTrigger = React.forwardRef<
   React.ElementRef<typeof SelectPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof SelectPrimitive.Trigger>
@@ -15,7 +26,8 @@ const SelectTrigger = React.forwardRef<
   <SelectPrimitive.Trigger
     ref={ref}
     className={cn(
-      "flex h-9 w-full items-center justify-between gap-2 whitespace-nowrap rounded-md border border-input bg-card px-3 py-2 text-sm shadow-sm transition-colors placeholder:text-muted-foreground focus:outline-none focus:border-ring focus:ring-2 focus:ring-neutral-900/10 disabled:cursor-not-allowed disabled:opacity-50 data-[placeholder]:text-muted-foreground [&>span]:line-clamp-1",
+      fieldTriggerClass,
+      "[&>span]:line-clamp-1",
       className,
     )}
     {...props}

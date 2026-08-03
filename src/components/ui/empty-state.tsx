@@ -12,6 +12,8 @@ export interface EmptyStateProps {
   dashed?: boolean;
   /** Visual frame. `plain` drops the border/fill — for embedding inside a Card. */
   variant?: "default" | "plain";
+  /** Extra content under the action — примеры, подсказки, ссылки. */
+  children?: React.ReactNode;
   className?: string;
 }
 
@@ -23,6 +25,7 @@ export function EmptyState({
   action,
   dashed,
   variant = "default",
+  children,
   className,
 }: EmptyStateProps) {
   const framed = variant !== "plain";
@@ -62,6 +65,7 @@ export function EmptyState({
         </p>
       )}
       {action && <div className="mt-4">{action}</div>}
+      {children}
     </div>
   );
 }

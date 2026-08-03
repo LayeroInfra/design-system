@@ -26,7 +26,7 @@ export const ChecklistItem = React.forwardRef<
   <li
     ref={ref}
     className={cn(
-      "flex items-center gap-2.5 rounded-md px-2 py-1.5 text-sm",
+      "flex min-w-0 items-center gap-2.5 rounded-md px-2 py-1.5 text-sm",
       interactive && "-mx-2 cursor-pointer transition hover:bg-overlay",
       className,
     )}
@@ -41,7 +41,13 @@ export const ChecklistItem = React.forwardRef<
     ) : (
       <span className="h-4 w-4 shrink-0 rounded-full border border-neutral-300" />
     )}
-    <span className={cn(done && "text-neutral-400 line-through")}>{children}</span>
+    {/* Строка держится в одну: длинная подпись обрезается многоточием, а не
+        переносится — иначе соседние пункты разъезжаются по высоте и чек-лист
+        перестаёт читаться столбиком. Полный текст стоит отдавать через title
+        на самом пункте. */}
+    <span className={cn("min-w-0 flex-1 truncate", done && "text-neutral-400 line-through")}>
+      {children}
+    </span>
   </li>
 ));
 ChecklistItem.displayName = "ChecklistItem";
