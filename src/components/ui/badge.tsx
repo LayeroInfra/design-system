@@ -4,7 +4,12 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "inline-flex items-center gap-1 rounded-md border font-medium normal-case transition-colors focus:outline-none [&_svg]:shrink-0",
+  // tracking и leading заданы явно: без них бейдж наследует типографику
+  // контейнера и меняет форму от места — в заголовке диалога с плотным
+  // межстрочным он выходил на 5px ниже, чем такой же бейдж на карточке.
+  // leading живёт в размерах, а не здесь: tailwind-merge считает text-* и
+  // leading-* одной группой и вырезал бы его как перебитый размером.
+  "inline-flex items-center gap-1 rounded-md border font-medium normal-case tracking-normal transition-colors focus:outline-none [&_svg]:shrink-0",
   {
     variants: {
       variant: {
@@ -22,9 +27,9 @@ const badgeVariants = cva(
       },
       // Sizes mirror the Figma «Badge/400 · 500 · 600» components (sm · md · lg).
       size: {
-        sm: "px-1.5 py-0.5 text-[10px] [&_svg]:size-3",
-        md: "px-2 py-0.5 text-[11px] [&_svg]:size-3.5",
-        lg: "px-2.5 py-1 text-[12px] [&_svg]:size-4",
+        sm: "px-1.5 py-0.5 text-[10px] leading-[1.5] [&_svg]:size-3",
+        md: "px-2 py-0.5 text-[11px] leading-[1.5] [&_svg]:size-3.5",
+        lg: "px-2.5 py-1 text-[12px] leading-[1.5] [&_svg]:size-4",
       },
     },
     defaultVariants: {
