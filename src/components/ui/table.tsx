@@ -15,7 +15,6 @@ import { cn } from "@/lib/utils";
  * справа читаются как один список, а не как два разных.
  */
 const INSET = [
-  "px-3",
   "[&_table]:border-separate [&_table]:border-spacing-y-0.5",
   // Шапка: скруглённая полоса без линий сверху и снизу. Липкость — на
   // ячейках: у `border-separate` sticky на самом thead браузеры игнорируют.
@@ -62,10 +61,17 @@ export function Table({
         wrapperClassName,
       )}
     >
-      <div className={cn("overflow-x-auto", inset && INSET)}>
-        <table className={cn("w-full text-sm", className)} {...props}>
-          {children}
-        </table>
+      <div className={cn(inset && "px-3")}>
+        {/* 🚨 СКРУГЛЕНИЕ — НА ОБЛАСТИ ПРОКРУТКИ, а не только на крайних
+            ячейках. Пока оно жило на ячейках, широкая таблица на телефоне
+            уезжала вправо, и серая шапка обрывалась о край экрана прямым
+            срезом: слева скруглена, справа обрублена. Обрезка по контуру
+            области держит оба края скруглёнными в любой прокрутке. */}
+        <div className={cn("overflow-x-auto", inset && "rounded-lg", inset && INSET)}>
+          <table className={cn("w-full text-sm", className)} {...props}>
+            {children}
+          </table>
+        </div>
       </div>
     </div>
   );
