@@ -15,12 +15,17 @@ import { cn } from "@/lib/utils";
  * справа читаются как один список, а не как два разных.
  */
 const INSET = [
-  "[&_table]:border-separate [&_table]:border-spacing-y-0.5",
-  // Шапка: скруглённая полоса без линий сверху и снизу. Липкость — на
-  // ячейках: у `border-separate` sticky на самом thead браузеры игнорируют.
+  // Верхний зазор `border-separate` съеден отрицательным полем: он оставлял
+  // над липкой шапкой щель в два пикселя, сквозь которую при прокрутке
+  // просвечивали уезжающие строки.
+  "[&_table]:border-separate [&_table]:border-spacing-y-0.5 [&_table]:-mt-[2px]",
+  // Шапка ведёт себя РОВНО КАК СТРОКА: фон на ячейках, скругления по краям
+  // таблицы. Значит и при горизонтальной прокрутке она выглядит так же —
+  // край со скруглением, середина без. Липкость — на ячейках: у
+  // `border-separate` sticky на самом thead браузеры игнорируют.
   "[&_thead]:border-0 [&_thead_tr]:border-0 [&_thead_tr]:bg-transparent",
-  "[&_thead_th]:sticky [&_thead_th]:top-0 [&_thead_th]:z-10 [&_thead_th]:bg-muted",
-  "[&_thead_th]:whitespace-nowrap [&_thead_th]:py-2",
+  "[&_thead_th]:sticky [&_thead_th]:top-0 [&_thead_th]:z-20 [&_thead_th]:bg-muted",
+  "[&_thead_th]:whitespace-nowrap [&_thead_th]:h-9 [&_thead_th]:py-0",
   "[&_thead_th:first-child]:rounded-l-lg [&_thead_th:last-child]:rounded-r-lg",
   "[&_tbody_tr]:border-0",
   "[&_tbody_tr>*]:h-8",
@@ -61,13 +66,13 @@ export function Table({
         wrapperClassName,
       )}
     >
-      <div className={cn(inset && "px-3")}>
-        {/* 🚨 СКРУГЛЕНИЕ — НА ОБЛАСТИ ПРОКРУТКИ, а не только на крайних
-            ячейках. Пока оно жило на ячейках, широкая таблица на телефоне
-            уезжала вправо, и серая шапка обрывалась о край экрана прямым
-            срезом: слева скруглена, справа обрублена. Обрезка по контуру
-            области держит оба края скруглёнными в любой прокрутке. */}
-        <div className={cn("overflow-x-auto", inset && "rounded-lg", inset && INSET)}>
+      <div className={cn(inset && "h-full")}>
+        {/* Прокрутка в inset-режиме — ОБЕ оси на одном элементе. Пока
+            вертикальная жила снаружи, а горизонтальная здесь, липкая шапка не
+            липла ни к чему: `sticky` меряется по ближайшему прокручиваемому
+            предку, а им оказывался этот контейнер, внутри которого вертикально
+            ничего не двигалось. Шапка уезжала вверх, оставляя пустую полосу. */}
+        <div className={cn(inset ? "h-full overflow-auto px-3" : "overflow-x-auto", inset && INSET)}>
           <table className={cn("w-full text-sm", className)} {...props}>
             {children}
           </table>
