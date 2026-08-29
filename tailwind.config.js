@@ -30,6 +30,23 @@ const INFO = {
   700: "#1d4ed8", 800: "#1e40af", 900: "#1e3a8a", 950: "#172554",
 };
 
+/**
+ * Токен палитры, понимающий модификатор непрозрачности: `border-border/60`,
+ * `bg-muted/30`, `text-foreground/70`.
+ *
+ * 🚨 БЕЗ ЭТОГО МОДИФИКАТОР МОЛЧА ТЕРЯЛСЯ. Цвета объявлялись как `var(--border)`
+ * — строкой, в которой Tailwind некуда подставить альфу, — и правило целиком
+ * падало на умолчание Tailwind (`#e5e7eb`). В светлой теме подмена почти
+ * совпадала с токеном и была незаметна, а в тёмной разделители строк таблицы
+ * светились белым поверх карточки.
+ *
+ * Через `color-mix` альфа применяется к цвету любого формата, поэтому сами
+ * переменные остаются hex-ами: их читают напрямую и разметка
+ * (`border-[color:var(--border-soft)]`), и `@apply` в index.css.
+ */
+const token = (name) =>
+  `color-mix(in srgb, var(${name}) calc(<alpha-value> * 100%), transparent)`;
+
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: "class",
@@ -75,42 +92,42 @@ export default {
         },
         // shadcn/ui semantic tokens — used by components/ui primitives and
         // the migrated screens.
-        border: "var(--border)",
-        input: "var(--input)",
-        ring: "var(--ring)",
-        background: "var(--background)",
-        foreground: "var(--foreground)",
+        border: token("--border"),
+        input: token("--input"),
+        ring: token("--ring"),
+        background: token("--background"),
+        foreground: token("--foreground"),
         primary: {
-          DEFAULT: "var(--primary)",
-          foreground: "var(--primary-foreground)",
+          DEFAULT: token("--primary"),
+          foreground: token("--primary-foreground"),
         },
         secondary: {
-          DEFAULT: "var(--secondary)",
-          foreground: "var(--secondary-foreground)",
+          DEFAULT: token("--secondary"),
+          foreground: token("--secondary-foreground"),
         },
         destructive: {
-          DEFAULT: "var(--destructive)",
-          foreground: "var(--destructive-foreground)",
+          DEFAULT: token("--destructive"),
+          foreground: token("--destructive-foreground"),
         },
         muted: {
-          DEFAULT: "var(--muted)",
-          foreground: "var(--muted-foreground)",
+          DEFAULT: token("--muted"),
+          foreground: token("--muted-foreground"),
         },
         accent: {
-          DEFAULT: "var(--accent)",
-          foreground: "var(--accent-foreground)",
+          DEFAULT: token("--accent"),
+          foreground: token("--accent-foreground"),
         },
         popover: {
-          DEFAULT: "var(--popover)",
-          foreground: "var(--popover-foreground)",
+          DEFAULT: token("--popover"),
+          foreground: token("--popover-foreground"),
         },
         card: {
-          DEFAULT: "var(--card)",
-          foreground: "var(--card-foreground)",
+          DEFAULT: token("--card"),
+          foreground: token("--card-foreground"),
         },
         // Translucent hover overlay (full rgba, theme-aware) — composites over any
         // backdrop; over the white card it equals the warm hover shade #f3f1ea.
-        overlay: "var(--hover-overlay)",
+        overlay: token("--hover-overlay"),
       },
       borderRadius: {
         lg: "var(--radius)",
