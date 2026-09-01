@@ -14,16 +14,48 @@ export interface TimeSeriesProps
   format?: (value: number) => string;
   /** Pins the top of the scale — a quota, a limit, 100 %. */
   max?: number;
-  tone?: "default" | "warning" | "danger";
+  tone?: "default" | "success" | "warning" | "danger";
   height?: number;
+  /** `area` — a filled line, `bars` — one column per sample. Bars read better
+   *  for counts you compare point to point; the line, for a level that drifts. */
+  variant?: "area" | "bars";
+  /** Index of the sample under the cursor — drawn emphasised. */
+  activeIndex?: number | null;
   /** Shown instead of the plot when there is nothing to draw. */
   emptyLabel?: React.ReactNode;
 }
 
-const TONE: Record<string, { stroke: string; fill: string }> = {
-  default: { stroke: "stroke-neutral-800 dark:stroke-neutral-200", fill: "fill-neutral-800/10 dark:fill-neutral-200/10" },
-  warning: { stroke: "stroke-warning-500", fill: "fill-warning-500/10" },
-  danger: { stroke: "stroke-negative-500", fill: "fill-negative-500/10" },
+/** Поле внутри графика. Экспортируется, потому что подписи и курсор рисуются
+ *  снаружи SVG и должны считать ту же геометрию. */
+export const TIME_SERIES_PAD = 4;
+
+const TONE: Record<string, { stroke: string; fill: string; bar: string; barActive: string }> = {
+  // Спокойное состояние — зелёным: показатель не просто «какой-то», а в
+  // пределах нормы, и это видно до чтения подписей.
+  success: {
+    stroke: "stroke-success-500",
+    fill: "fill-success-500/10",
+    bar: "fill-success-500/70",
+    barActive: "fill-success-500",
+  },
+  default: {
+    stroke: "stroke-neutral-800 dark:stroke-neutral-200",
+    fill: "fill-neutral-800/10 dark:fill-neutral-200/10",
+    bar: "fill-neutral-800/60 dark:fill-neutral-200/60",
+    barActive: "fill-neutral-900 dark:fill-neutral-100",
+  },
+  warning: {
+    stroke: "stroke-warning-500",
+    fill: "fill-warning-500/10",
+    bar: "fill-warning-500/70",
+    barActive: "fill-warning-500",
+  },
+  danger: {
+    stroke: "stroke-negative-500",
+    fill: "fill-negative-500/10",
+    bar: "fill-negative-500/70",
+    barActive: "fill-negative-500",
+  },
 };
 
 /**
@@ -47,6 +79,8 @@ export const TimeSeries = React.forwardRef<SVGSVGElement, TimeSeriesProps>(
       max,
       tone = "default",
       height = 72,
+      variant = "area",
+      activeIndex = null,
       emptyLabel = "нет данных",
       className,
       ...props
@@ -55,7 +89,7 @@ export const TimeSeries = React.forwardRef<SVGSVGElement, TimeSeriesProps>(
   ) => {
     const W = 600;
     const H = height;
-    const pad = 4;
+    const pad = TIME_SERIES_PAD;
 
     if (!points || points.length === 0) {
       return (
@@ -109,23 +143,45 @@ export const TimeSeries = React.forwardRef<SVGSVGElement, TimeSeriesProps>(
         aria-label={`График: последнее значение ${format(last[1])}`}
         {...props}
       >
-        {segments.map((seg, i) => {
-          const line = seg.map((p) => `${x(p[0])},${y(p[1])}`).join(" ");
-          const area = `${x(seg[0][0])},${H - pad} ${line} ${x(seg[seg.length - 1][0])},${H - pad}`;
-          return (
-            <g key={i}>
-              <polygon points={area} className={t.fill} />
-              <polyline
-                points={line}
-                fill="none"
-                strokeWidth={1.5}
-                vectorEffect="non-scaling-stroke"
-                className={t.stroke}
-              />
-            </g>
-          );
-        })}
-        <circle cx={x(last[0])} cy={y(last[1])} r={2.5} className={cn(t.stroke, "fill-current")} />
+        {variant === "bars"
+          ? points.map((p, i) => {
+              // Ширина столбца — по шагу ряда, с зазором. Так столбцы не
+              // слипаются на редком ряде и не исчезают на плотном.
+              const w = Math.max(
+                1.5,
+                ((W - pad * 2) / Math.max(points.length, 1)) * 0.7,
+              );
+              const top = y(p[1]);
+              return (
+                <rect
+                  key={p[0]}
+                  x={x(p[0]) - w / 2}
+                  y={top}
+                  width={w}
+                  height={Math.max(0.5, H - pad - top)}
+                  className={cn(t.bar, i === activeIndex && t.barActive)}
+                />
+              );
+            })
+          : segments.map((seg, i) => {
+              const line = seg.map((p) => `${x(p[0])},${y(p[1])}`).join(" ");
+              const area = `${x(seg[0][0])},${H - pad} ${line} ${x(seg[seg.length - 1][0])},${H - pad}`;
+              return (
+                <g key={i}>
+                  <polygon points={area} className={t.fill} />
+                  <polyline
+                    points={line}
+                    fill="none"
+                    strokeWidth={1.5}
+                    vectorEffect="non-scaling-stroke"
+                    className={t.stroke}
+                  />
+                </g>
+              );
+            })}
+        {variant === "area" && (
+          <circle cx={x(last[0])} cy={y(last[1])} r={2.5} className={cn(t.stroke, "fill-current")} />
+        )}
       </svg>
     );
   },
