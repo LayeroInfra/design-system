@@ -6,8 +6,9 @@
  *
  *     cd design-system && make fields
  *
- * Только светлая тема: в дизайн-системе тёмная включается классом .dark, а на
- * лендинге тёмной темы нет — .dark-блок потемнил бы форму на светлой странице.
+ * Тёмная тема — блоком .dark в конце файла. Она включается КЛАССОМ, а не
+ * медиазапросом, поэтому потребитель без тёмной темы (статический лендинг)
+ * её просто не ставит: форма остаётся светлой на светлой странице.
  */
 :root {
   --ds-field-h: 36px;
@@ -21,6 +22,7 @@
   --ds-field-ring-shadow: 0 0 0 2px rgba(20, 20, 19, 0.1);
   --ds-field-textarea-min: 80px;
   --ds-field-textarea-pad-y: 8px;
+  --ds-field-chevron: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23141413' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
 }
 
 .ds-label {
@@ -74,9 +76,19 @@ select.ds-field {
   appearance: none;
   -webkit-appearance: none;
   padding-right: calc(var(--ds-field-pad-x) * 2 + 10px);
-  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23141413' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-image: var(--ds-field-chevron);
   background-repeat: no-repeat;
   background-position: right calc(var(--ds-field-pad-x) - 1px) center;
 }
 
 select.ds-field:invalid { color: var(--ds-field-muted); }
+
+.dark {
+  --ds-field-border: #3c3c44;
+  --ds-field-bg: #1e1e22;
+  --ds-field-fg: #f5f5f7;
+  --ds-field-muted: #9b9ba6;
+  --ds-field-ring: #d4d4d8;
+  --ds-field-ring-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  --ds-field-chevron: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23d4d4d8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+}

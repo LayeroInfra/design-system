@@ -17,9 +17,9 @@
  * ровно те утилиты, что описывают поле, и ПАДАЕТ, если не нашёл. Молчаливый
  * вывод «по умолчанию» здесь опаснее отказа — он выглядит как рабочий CSS.
  *
- * Тёмной темы в выводе нет намеренно: в дизайн-системе она включается классом
- * `.dark`, а на лендинге тёмной темы нет вовсе. Отдай мы `.dark`-блок — форма
- * потемнела бы на светлой странице у того, у кого системная тема тёмная.
+ * Тёмная тема отдаётся блоком `.dark` — правило 2: компонент обязан работать
+ * в обеих. Именно классом, а не медиазапросом: медиазапрос потемнил бы форму
+ * на светлом лендинге у того, у кого системная тема тёмная.
  *
  *   node scripts/gen-fields-css.mjs           # записать
  *   node scripts/gen-fields-css.mjs --check   # сверить, ничего не писать
@@ -49,6 +49,13 @@ function die(msg) {
 /** Значение CSS-переменной из светлой темы (первое объявление в `:root`). */
 function cssVar(css, name) {
   const m = css.match(new RegExp(`^\\s*${name}:\\s*([^;]+);`, "m"));
+  return m ? m[1].trim() : null;
+}
+
+/** То же из блока `.dark` — тема переключается токенами, а не ветвлением. */
+function darkVar(css, name) {
+  const block = css.slice(css.indexOf(".dark {"));
+  const m = block.match(new RegExp(`^\\s*${name}:\\s*([^;]+);`, "m"));
   return m ? m[1].trim() : null;
 }
 
@@ -138,13 +145,32 @@ const vars = {
 };
 for (const [k, v] of Object.entries(vars)) if (!v) die(`значение для ${k} не выведено`);
 
+// Тёмная тема — правило 2 дизайн-системы: компонент обязан работать в обеих.
+// Переключается КЛАССОМ `.dark`, а не медиазапросом, поэтому потребитель без
+// тёмной темы (статический лендинг) её просто не включает и ничего не теряет.
+const darkRingRgb = darkVar(tokens, `--neutral-${ringM[1]}`);
+if (!darkRingRgb) die(`тёмный токен --neutral-${ringM[1]} не найден`);
+const darkVars = {
+  "--ds-field-border": darkVar(tokens, "--input"),
+  "--ds-field-bg": darkVar(tokens, "--card"),
+  "--ds-field-fg": darkVar(tokens, "--foreground"),
+  "--ds-field-muted": darkVar(tokens, "--muted-foreground"),
+  "--ds-field-ring": darkVar(tokens, "--ring"),
+  "--ds-field-ring-shadow": `0 0 0 ${ringPx}px rgba(${darkRingRgb.replace(/\s+/g, ", ")}, ${ringAlpha})`,
+};
+for (const [k, v] of Object.entries(darkVars)) if (!v) die(`тёмное значение для ${k} не выведено`);
+
 // Стрелка селектора — lucide ChevronDown, 16px, прозрачность 50% (см.
-// SelectTrigger). Цвет берём из того же токена, что и рамка фокуса.
-const chevron =
+// SelectTrigger). Цвет запечён в data-URI, токен туда не подставить, поэтому
+// стрелка сама становится переменной: своя для каждой темы. Иначе в тёмной
+// теме поле посветлело бы, а стрелка осталась чёрной.
+const chevron = (hex) =>
   `url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' ` +
   `width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23` +
-  `${vars["--ds-field-ring"].replace("#", "")}' stroke-width='2' stroke-linecap='round' ` +
+  `${hex.replace("#", "")}' stroke-width='2' stroke-linecap='round' ` +
   `stroke-linejoin='round' opacity='.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E")`;
+vars["--ds-field-chevron"] = chevron(vars["--ds-field-ring"]);
+darkVars["--ds-field-chevron"] = chevron(darkVars["--ds-field-ring"]);
 
 const css = `/* СГЕНЕРИРОВАНО design-system/scripts/gen-fields-css.mjs — НЕ ПРАВИТЬ РУКАМИ.
  *
@@ -154,8 +180,9 @@ const css = `/* СГЕНЕРИРОВАНО design-system/scripts/gen-fields-css.
  *
  *     cd design-system && make fields
  *
- * Только светлая тема: в дизайн-системе тёмная включается классом .dark, а на
- * лендинге тёмной темы нет — .dark-блок потемнил бы форму на светлой странице.
+ * Тёмная тема — блоком .dark в конце файла. Она включается КЛАССОМ, а не
+ * медиазапросом, поэтому потребитель без тёмной темы (статический лендинг)
+ * её просто не ставит: форма остаётся светлой на светлой странице.
  */
 :root {
 ${Object.entries(vars).map(([k, v]) => `  ${k}: ${v};`).join("\n")}
@@ -212,12 +239,16 @@ select.ds-field {
   appearance: none;
   -webkit-appearance: none;
   padding-right: calc(var(--ds-field-pad-x) * 2 + 10px);
-  background-image: ${chevron};
+  background-image: var(--ds-field-chevron);
   background-repeat: no-repeat;
   background-position: right calc(var(--ds-field-pad-x) - 1px) center;
 }
 
 select.ds-field:invalid { color: var(--ds-field-muted); }
+
+.dark {
+${Object.entries(darkVars).map(([k, v]) => `  ${k}: ${v};`).join("\n")}
+}
 `;
 
 const check = process.argv.includes("--check");
