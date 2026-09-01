@@ -1,9 +1,10 @@
-.PHONY: help setup check typecheck build storybook
+.PHONY: help setup check typecheck build storybook fields
 
 help:
 	@echo "design-system — компоненты и токены Layero"
 	@echo ""
-	@echo "  make check      — типы + сборка витрины"
+	@echo "  make check      — типы + сборка витрины + CSS полей"
+	@echo "  make fields     — перегенерировать styles/fields.css"
 	@echo "  make typecheck  — tsc --noEmit"
 	@echo "  make build      — сборка Storybook"
 	@echo "  make storybook  — витрина локально"
@@ -28,7 +29,18 @@ typecheck:
 build:
 	npm run build-storybook
 
-check: typecheck build
+# Вид полей ввода для поверхностей БЕЗ React и Tailwind (статический лендинг).
+# Файл генерируется из токенов и классов компонентов — правится источник, не он.
+fields:
+	node scripts/gen-fields-css.mjs
+
+# `--check` в общей проверке: отставший styles/fields.css — это разъехавшиеся
+# поля на layero.ru при зелёном прогоне здесь. Файл вендорится в
+# frontend/landing, то есть уезжает за пределы этого репозитория.
+check-fields:
+	node scripts/gen-fields-css.mjs --check
+
+check: typecheck build check-fields
 	@echo ""
 	@echo "✅ ALL CHECKS PASSED"
 

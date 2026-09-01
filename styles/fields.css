@@ -1,0 +1,82 @@
+/* СГЕНЕРИРОВАНО design-system/scripts/gen-fields-css.mjs — НЕ ПРАВИТЬ РУКАМИ.
+ *
+ * Вид полей ввода для поверхностей без React и Tailwind (статический лендинг).
+ * Значения выведены из src/index.css и src/components/ui/{select,input,
+ * textarea,label}.tsx — правьте ТАМ и перегенерируйте:
+ *
+ *     cd design-system && make fields
+ *
+ * Только светлая тема: в дизайн-системе тёмная включается классом .dark, а на
+ * лендинге тёмной темы нет — .dark-блок потемнил бы форму на светлой странице.
+ */
+:root {
+  --ds-field-h: 36px;
+  --ds-field-radius: 8px;
+  --ds-field-pad-x: 12px;
+  --ds-field-border: #dedcd1;
+  --ds-field-bg: #ffffff;
+  --ds-field-fg: #141413;
+  --ds-field-muted: #73726c;
+  --ds-field-ring: #141413;
+  --ds-field-ring-shadow: 0 0 0 2px rgba(20, 20, 19, 0.1);
+  --ds-field-textarea-min: 80px;
+  --ds-field-textarea-pad-y: 8px;
+}
+
+.ds-label {
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--ds-field-fg);
+}
+
+.ds-field {
+  display: block;
+  box-sizing: border-box;
+  width: 100%;
+  height: var(--ds-field-h);
+  padding: 0 var(--ds-field-pad-x);
+  font-family: inherit;
+  /* 16px на мобильном — иначе iOS зумит вьюпорт при фокусе; 14px от sm. */
+  font-size: 16px;
+  color: var(--ds-field-fg);
+  background: var(--ds-field-bg);
+  border: 1px solid var(--ds-field-border);
+  border-radius: var(--ds-field-radius);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, .05);
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+
+@media (min-width: 640px) {
+  .ds-field { font-size: 14px; }
+}
+
+.ds-field::placeholder { color: var(--ds-field-muted); }
+
+.ds-field:focus {
+  outline: none;
+  border-color: var(--ds-field-ring);
+  box-shadow: var(--ds-field-ring-shadow);
+}
+
+.ds-field:disabled { cursor: not-allowed; opacity: .5; }
+
+textarea.ds-field {
+  height: auto;
+  min-height: var(--ds-field-textarea-min);
+  padding: var(--ds-field-textarea-pad-y) var(--ds-field-pad-x);
+  line-height: 1.5;
+  resize: vertical;
+}
+
+select.ds-field {
+  appearance: none;
+  -webkit-appearance: none;
+  padding-right: calc(var(--ds-field-pad-x) * 2 + 10px);
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23141413' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' opacity='.5'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right calc(var(--ds-field-pad-x) - 1px) center;
+}
+
+select.ds-field:invalid { color: var(--ds-field-muted); }
