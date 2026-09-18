@@ -72,7 +72,7 @@ make setup       # npm ci
 
 Подписи компонентов и заготовки пустых состояний — через `/ru-text:ru-check`
 и `references/ux-writing.md`. Типографику отдельно ловит
-`core/cli/check-typography.py`, он смотрит в байты: неразрывные пробелы,
+`../cli/check-typography.py` (репозиторий `LayeroInfra/cli`), он смотрит в байты: неразрывные пробелы,
 тире, кавычки.
 
 ---
