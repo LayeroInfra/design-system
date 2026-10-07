@@ -19,3 +19,5 @@ export const Steps: Story = {
     </div>
   ),
 };
+
+export const Indeterminate: Story = { args: { indeterminate: true, label: "Подготавливаем API" } };
