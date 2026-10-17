@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { Card } from "./card";
 import { cn } from "@/lib/utils";
 import { StatusDot, type StatusTone } from "./status-dot";
 
@@ -40,9 +41,9 @@ export const DomainCard = React.forwardRef<HTMLDivElement, DomainCardProps>(
     const s = STAGE[stage];
     const hasBody = !!records?.length;
     return (
-      <div
+      <Card
         ref={ref}
-        className={cn("overflow-hidden rounded-xl border border-border bg-card", className)}
+        className={cn("overflow-hidden", className)}
         {...props}
       >
         <header
@@ -83,7 +84,7 @@ export const DomainCard = React.forwardRef<HTMLDivElement, DomainCardProps>(
             </div>
           </div>
         )}
-      </div>
+      </Card>
     );
   },
 );

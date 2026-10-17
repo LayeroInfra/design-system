@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { Card } from "./card";
 import { cn } from "@/lib/utils";
 
 export interface ProductionCardProps
@@ -23,10 +24,10 @@ export const ProductionCard = React.forwardRef<
   HTMLDivElement,
   ProductionCardProps
 >(({ name, actions, preview, children, footer, className, ...props }, ref) => (
-  <div
+  <Card
     ref={ref}
     className={cn(
-      "overflow-hidden rounded-xl border border-border bg-card",
+      "overflow-hidden",
       className,
     )}
     {...props}
@@ -50,7 +51,7 @@ export const ProductionCard = React.forwardRef<
         {footer}
       </div>
     )}
-  </div>
+  </Card>
 ));
 ProductionCard.displayName = "ProductionCard";
 

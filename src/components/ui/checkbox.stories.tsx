@@ -14,7 +14,10 @@ export const Checkboxes: Story = {
     <div className="space-y-3 text-sm">
       <label className="flex items-center gap-2"><Checkbox defaultChecked /> Включено</label>
       <label className="flex items-center gap-2"><Checkbox /> Выключено</label>
-      <label className="flex items-center gap-2 opacity-60"><Checkbox disabled /> Disabled</label>
+      <label className="flex items-center gap-2"><Checkbox aria-checked="mixed" ref={(node) => { if (node) node.indeterminate = true; }} /> Частично выбрано</label>
+      <label className="flex items-center gap-2"><Checkbox disabled /> Недоступно</label>
+      <label className="flex items-center gap-2"><Checkbox disabled defaultChecked /> Включено, недоступно</label>
+      <label className="flex items-center gap-2"><Checkbox aria-invalid="true" /> Ошибка</label>
     </div>
   ),
 };

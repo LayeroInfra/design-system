@@ -16,6 +16,16 @@
       new components/ui primitives.
 */
 :root {
+  /* Inverse surface uses the opposite platform theme. */
+  --inverse-card: #1e1e22;
+  --inverse-foreground: #f5f5f7;
+  --inverse-primary: #f5f5f7;
+  --inverse-primary-foreground: #18181b;
+  --inverse-muted-foreground: #9b9ba6;
+  --inverse-border: #3c3c44;
+  --inverse-hover-overlay: rgba(255, 255, 255, 0.08);
+
+
   color-scheme: light;
 
   /* ── neutral scale (light) — warm vellum. Space-separated RGB channels so
@@ -91,6 +101,15 @@
 }
 
 .dark {
+  /* Inverse surface uses the opposite platform theme. */
+  --inverse-card: #ffffff;
+  --inverse-foreground: #141413;
+  --inverse-primary: #141413;
+  --inverse-primary-foreground: #fafafa;
+  --inverse-muted-foreground: #73726c;
+  --inverse-border: #dedcd1;
+  --inverse-hover-overlay: rgba(135, 115, 45, 0.1);
+
   color-scheme: dark;
 
   /* ── neutral scale (dark) — refined zinc, inverted lightness.
@@ -336,4 +355,17 @@ kbd,
   .animate-rise {
     animation: none;
   }
+}
+
+/* Scoped inverse palette for floating bulk actions. */
+.selection-bar {
+  --background: var(--inverse-card);
+  --card: var(--inverse-card);
+  --foreground: var(--inverse-foreground);
+  --primary: var(--inverse-primary);
+  --primary-foreground: var(--inverse-primary-foreground);
+  --muted-foreground: var(--inverse-muted-foreground);
+  --border: var(--inverse-border);
+  --hover-overlay: var(--inverse-hover-overlay);
+  --ring: var(--inverse-foreground);
 }

@@ -1,5 +1,6 @@
 import * as React from "react";
 
+import { Card } from "./card";
 import { cn } from "@/lib/utils";
 import { Badge } from "./badge";
 import { StatusDot, type StatusTone } from "./status-dot";
@@ -88,10 +89,10 @@ export const DeployRow = React.forwardRef<HTMLDivElement, DeployRowProps>(
     },
     ref,
   ) => (
-    <div
+    <Card
       ref={ref}
       className={cn(
-        "overflow-hidden rounded-xl border border-border bg-card",
+        "overflow-hidden",
         className,
       )}
       {...props}
@@ -153,7 +154,7 @@ export const DeployRow = React.forwardRef<HTMLDivElement, DeployRowProps>(
           </div>
         </div>
       </div>
-    </div>
+    </Card>
   ),
 );
 DeployRow.displayName = "DeployRow";
