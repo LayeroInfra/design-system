@@ -5,15 +5,15 @@
   --pricing-text-base: 1rem;
   --pricing-text-lg: 1.125rem;
   --pricing-text-xl: 1.5rem;
-  --pricing-title: 3rem;
+  --pricing-title: clamp(2.1rem, 5vw, 3.2rem);
   --pricing-heading-weight: 600;
-  --pricing-heading-tracking: -.03em;
+  --pricing-heading-tracking: -.04em;
   --pricing-number: 3rem;
   --pricing-line: 1px;
   --pricing-weight: 500;
   --pricing-tight: -.045em;
   --pricing-leading: 1.5;
-  --pricing-heading-leading: 1.15;
+  --pricing-heading-leading: 1.08;
   --pricing-focus: 2px;
   --pricing-focus-offset: 4px;
   --pricing-width: 73.75rem;
@@ -260,3 +260,8 @@
 .pricing-faq::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100vw; border-top: var(--pricing-line) solid var(--border-soft); }
 
 .pricing-page .pricing-final > .container { max-width: var(--pricing-width); }
+
+/* Four usage columns must not inherit the three-column mobile comparison widths. */
+.pricing-page .pricing-usage-table { table-layout: fixed; min-width: calc(var(--pricing-unit) * 160); }
+.pricing-page .pricing-usage-table th:first-child { width: 40%; }
+.pricing-page .pricing-usage-table td, .pricing-page .pricing-usage-table thead th:not(:first-child) { width: 20%; overflow-wrap: normal; word-break: normal; }
