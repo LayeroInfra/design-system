@@ -1,0 +1,114 @@
+/* Compact agents directory. Canonical styles vendored by the static landing. */
+.agents-hub {
+  --agent-unit: .25rem;
+  --agent-text-sm: .875rem;
+  --agent-text-base: 1rem;
+  --agent-text-lead: 1.125rem;
+  --agent-text-name: 1.25rem;
+  --agent-title: clamp(2.75rem, 6vw, 4.5rem);
+  --agent-section-title: clamp(2rem, 4vw, 3rem);
+  --agent-weight: 500;
+  --agent-line: 1.15;
+  --agent-tracking: -.045em;
+  --agent-hairline: 1px;
+  --agent-icon: 1.75rem;
+  --agent-terminal-height: 19rem;
+  --agent-grid-size: 2rem;
+  --agent-motion-opacity: 1;
+}
+.agents-hub [hidden] { display: none !important; }
+.agents-hub :is(section, article)[id] { scroll-margin-top: calc(var(--agent-unit) * 24); }
+.agents-hub :is(a, button, select, summary):focus-visible { outline: calc(var(--agent-hairline) * 2) solid var(--ink); outline-offset: var(--agent-unit); }
+.agents-hero { position: relative; isolation: isolate; overflow: hidden; text-align: center; padding: calc(var(--agent-unit) * 26) 0 calc(var(--agent-unit) * 27); }
+.agents-hero h1 { font-size: var(--agent-title); font-weight: var(--agent-weight); line-height: var(--agent-line); letter-spacing: var(--agent-tracking); margin-bottom: calc(var(--agent-unit) * 6); }
+.agents-hero p { color: var(--graphite); font-size: var(--agent-text-lead); line-height: 1.6; }
+.agents-hero .btn { margin-top: calc(var(--agent-unit) * 7); }
+.agents-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--agent-unit) * 6); margin-top: 0; }
+.agents-entry { display: flex; flex-direction: column; min-width: 0; padding: calc(var(--agent-unit) * 8); border-radius: var(--r-lg); background: var(--bg-app); }
+.agents-mark { display: flex; align-items: center; width: var(--agent-icon); height: var(--agent-icon); margin-bottom: calc(var(--agent-unit) * 7); color: var(--graphite); }
+.agents-mark svg { display: block; width: 100%; height: 100%; }
+.agents-entry h3 { font-size: var(--agent-text-name); font-weight: var(--agent-weight); margin: 0; }
+.agents-entry p { color: var(--graphite); font-size: var(--agent-text-sm); line-height: 1.65; margin-top: calc(var(--agent-unit) * 3); margin-bottom: calc(var(--agent-unit) * 5); }
+.agents-more { display: inline-flex; align-items: center; gap: calc(var(--agent-unit) * 2); font-size: var(--agent-text-sm); font-weight: var(--agent-weight); width: fit-content; }
+.agents-more::after { content: '→'; font-size: var(--agent-text-base); line-height: 1; transition: transform 180ms ease; }
+.agents-more:hover { text-decoration: none; }
+.agents-more:is(:hover, :focus-visible)::after { transform: translateX(var(--agent-unit)); }
+.agents-entry .agents-more { margin-top: auto; }
+.agents-mcp { padding: calc(var(--agent-unit) * 32) 0 0; }
+.agents-mcp-surface { background: var(--ink); color: var(--bg); border-radius: var(--r-xl); padding: calc(var(--agent-unit) * 12); }
+.agents-mcp-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: calc(var(--agent-unit) * 20); }
+.agents-label { display: block; font-size: var(--agent-text-sm); color: var(--graphite); margin-bottom: calc(var(--agent-unit) * 5); }
+.agents-mcp h2 { font-size: var(--agent-section-title); font-weight: var(--agent-weight); line-height: var(--agent-line); letter-spacing: var(--agent-tracking); }
+.agents-mcp h2 { max-width: 15ch; }
+.agents-mcp p { font-size: var(--agent-text-lead); color: var(--graphite); margin-top: calc(var(--agent-unit) * 5); max-width: 42ch; }
+.agents-mcp-links { display: flex; flex-wrap: wrap; align-items: center; gap: calc(var(--agent-unit) * 7); margin-top: calc(var(--agent-unit) * 7); }
+.agents-terminal { align-self: stretch; border: var(--agent-hairline) solid var(--border-soft); border-radius: var(--r-lg); min-width: 0; min-height: var(--agent-terminal-height); }
+.agents-terminal-bar { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--agent-unit) * 4); padding: calc(var(--agent-unit) * 5) calc(var(--agent-unit) * 6); color: var(--graphite); font-family: var(--mono); font-size: var(--agent-text-sm); }
+.agents-terminal-bar select { font: inherit; font-family: var(--sans); color: var(--graphite); border: 0; padding: var(--agent-unit); background: transparent; cursor: pointer; max-width: 75%; }
+.agents-command { position: relative; }
+.agents-command pre { white-space: pre-wrap; overflow-wrap: anywhere; font-family: var(--mono); font-size: var(--agent-text-sm); padding: calc(var(--agent-unit) * 7) calc(var(--agent-unit) * 6); margin: 0; line-height: 1.8; }
+.agents-command code { font: inherit; padding: 0; background: none; }
+.agents-copy { display: block; margin: 0 calc(var(--agent-unit) * 6) calc(var(--agent-unit) * 5) auto; font-size: var(--agent-text-sm); color: var(--graphite); padding: var(--agent-unit) 0; }
+.agents-copy:hover { color: var(--ink); }
+.agents-sr-only, .agents-copy-status { position: absolute; width: var(--agent-hairline); height: var(--agent-hairline); overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.agents-hub section.agents-faq { border-top: none; padding-block: calc(var(--agent-unit) * 29); }
+.agents-mcp .agents-label, .agents-mcp p { color: var(--border); }
+.agents-mcp .btn-primary { background: var(--bg); color: var(--ink); border-color: var(--bg); }
+.agents-mcp .btn-primary:hover { background: var(--bg-mute); border-color: var(--bg-mute); }
+.agents-mcp .agents-terminal { border-color: var(--inverse-border); background: var(--inverse-primary-foreground); }
+.agents-mcp .agents-terminal-bar, .agents-mcp .agents-terminal-bar select, .agents-mcp .agents-copy { color: var(--inverse-muted-foreground); }
+.agents-mcp .agents-terminal-bar select option { color: var(--inverse-foreground); background: var(--inverse-primary-foreground); }
+.agents-mcp .agents-copy:hover { color: var(--inverse-foreground); }
+.agents-mcp :is(a, button, select):focus-visible { outline-color: var(--inverse-foreground); }
+.agents-hero-motion { position: absolute; inset: 0; z-index: -1; pointer-events: none; opacity: var(--agent-motion-opacity); }
+
+.agents-hero-grid { position: absolute; inset: 0; background-image: radial-gradient(var(--border-soft) var(--agent-hairline), transparent var(--agent-hairline)); background-size: var(--agent-grid-size) var(--agent-grid-size); }
+.agents-hero-motion svg { position: absolute; inset: 0; display: block; width: 100%; height: 100%; fill: none; stroke-width: var(--agent-hairline); }
+.agents-hero-wires { stroke: var(--border); }
+@media (max-width: 900px) {
+  .agents-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .agents-mcp-grid { gap: calc(var(--agent-unit) * 10); }
+
+}
+@media (max-width: 640px) {
+  .agents-hero { padding: calc(var(--agent-unit) * 18) 0 calc(var(--agent-unit) * 20); }
+  .agents-hero h1 { max-width: 12ch; margin-inline: auto; }
+  .agents-hero p { font-size: var(--agent-text-base); }
+  .agents-grid { grid-template-columns: 1fr; gap: calc(var(--agent-unit) * 4); }
+  .agents-entry { padding: calc(var(--agent-unit) * 7); }
+  .agents-mark { margin-bottom: calc(var(--agent-unit) * 5); }
+  .agents-mcp { padding: calc(var(--agent-unit) * 20) 0 0; }
+  .agents-hub section.agents-faq { padding-block: calc(var(--agent-unit) * 20); }
+  .agents-mcp-grid { grid-template-columns: 1fr; gap: calc(var(--agent-unit) * 9); }
+  .agents-mcp p { font-size: var(--agent-text-base); }
+  .agents-mcp-surface { padding: calc(var(--agent-unit) * 7); }
+  .agents-mcp .agents-mcp-links { gap: calc(var(--agent-unit) * 4); }
+}
+@media (prefers-reduced-motion: reduce) {
+  html:has(.agents-hub) { scroll-behavior: auto; }
+  .agents-hero-beams { display: none; }
+  .agents-more::after { transition: none; }
+}
+
+.agents-picker { position: relative; font: var(--agent-text-sm) var(--sans); }
+.agents-picker summary { display: flex; align-items: center; gap: calc(var(--agent-unit) * 2); cursor: pointer; list-style: none; padding: calc(var(--agent-unit) * 2) calc(var(--agent-unit) * 3); border: var(--agent-hairline) solid var(--inverse-border); border-radius: var(--r-sm); color: var(--inverse-foreground); }
+.agents-picker summary::-webkit-details-marker { display: none; }
+.agents-picker summary > svg { width: var(--agent-text-base); height: var(--agent-text-base); transition: transform 160ms ease; }
+.agents-picker[open] summary > svg { transform: rotate(180deg); }
+.agents-picker summary:hover, .agents-picker[open] summary { background: var(--inverse-hover-overlay); }
+.agents-picker-menu { position: absolute; top: calc(100% + var(--agent-unit) * 2); right: 0; min-width: calc(var(--agent-unit) * 46); z-index: 5; padding: var(--agent-unit); border: var(--agent-hairline) solid var(--inverse-border); border-radius: var(--r-md); background: var(--inverse-card); color: var(--inverse-foreground); box-shadow: 0 calc(var(--agent-unit) * 2) calc(var(--agent-unit) * 6) color-mix(in srgb, var(--ink) 35%, transparent); }
+.agents-picker-menu button { display: flex; align-items: center; justify-content: space-between; gap: calc(var(--agent-unit) * 4); width: 100%; padding: calc(var(--agent-unit) * 2) calc(var(--agent-unit) * 3); text-align: left; border-radius: var(--r-sm); }
+.agents-picker-menu button > svg { width: var(--agent-text-base); height: var(--agent-text-base); visibility: hidden; }
+.agents-picker-menu button[aria-pressed="true"] > svg { visibility: visible; }
+.agents-picker-menu button:hover, .agents-picker-menu button[aria-pressed="true"] { background: var(--inverse-hover-overlay); }
+.agents-picker :is(summary, button):focus-visible { outline: calc(var(--agent-hairline) * 2) solid var(--inverse-muted-foreground); outline-offset: var(--agent-unit); }
+@media (prefers-reduced-motion: reduce) { .agents-picker summary > svg { transition: none; } }
+
+.agents-hero-wires { opacity: .55; }
+.agents-hero-beams { stroke-width: 2; }
+.agents-hero-motion stop { stop-color: var(--stone); }
+.agents-entry { transition: background 180ms ease; text-decoration: none; }
+.agents-entry:is(:hover, :focus-visible) { background: var(--bg-soft); text-decoration: none; }
+.agents-entry:is(:hover, :focus-visible) .agents-more::after { transform: translateX(var(--agent-unit)); }
+.agents-snippet-file { padding: calc(var(--agent-unit) * 4) calc(var(--agent-unit) * 6) 0; font: var(--agent-text-sm) var(--mono); color: var(--inverse-muted-foreground); }
+@media (prefers-reduced-motion: reduce) { .agents-entry { transition: none; } }
