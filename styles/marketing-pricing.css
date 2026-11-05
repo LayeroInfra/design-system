@@ -1,0 +1,262 @@
+/* Layero pricing. Shared marketing palette; composition tokens live here. */
+.pricing-page {
+  --pricing-unit: .25rem;
+  --pricing-text-sm: .875rem;
+  --pricing-text-base: 1rem;
+  --pricing-text-lg: 1.125rem;
+  --pricing-text-xl: 1.5rem;
+  --pricing-title: 3rem;
+  --pricing-heading-weight: 600;
+  --pricing-heading-tracking: -.03em;
+  --pricing-number: 3rem;
+  --pricing-line: 1px;
+  --pricing-weight: 500;
+  --pricing-tight: -.045em;
+  --pricing-leading: 1.5;
+  --pricing-heading-leading: 1.15;
+  --pricing-focus: 2px;
+  --pricing-focus-offset: 4px;
+  --pricing-width: 73.75rem;
+  --pricing-control-bg: var(--bg-app);
+  --pricing-control-border: var(--border-soft);
+  --pricing-muted: #666666;
+  --pricing-label: #404040;
+  color: var(--ink);
+  line-height: var(--pricing-leading);
+}
+.pricing-page .pricing-layout { max-width: var(--pricing-width); }
+.pricing-hero { display: flex; justify-content: space-between; align-items: end; gap: calc(var(--pricing-unit) * 6); padding-block: calc(var(--pricing-unit) * 14) calc(var(--pricing-unit) * 12); }
+.pricing-hero h1 { font-size: var(--pricing-title); font-weight: var(--pricing-heading-weight); letter-spacing: var(--pricing-heading-tracking); line-height: var(--pricing-heading-leading); margin: 0; }
+.pricing-hero p { color: var(--pricing-muted); font-size: var(--pricing-text-base); margin-top: calc(var(--pricing-unit) * 3); }
+.pricing-period { display: flex; gap: var(--pricing-unit); align-items: center; border: 0; margin: 0; padding: 0; flex-shrink: 0; font-size: var(--pricing-text-sm); }
+.pricing-period label { position: relative; cursor: pointer; }
+.pricing-period input { position: absolute; opacity: 0; inset: 0; width: 100%; height: 100%; cursor: pointer; margin: 0; }
+.pricing-period label > span { display: block; padding: calc(var(--pricing-unit) * 2) calc(var(--pricing-unit) * 3); border-radius: var(--r-sm); color: var(--pricing-muted); }
+.pricing-period input:checked + span { background: var(--bg-card); color: var(--ink); }
+.pricing-saving { margin-left: calc(var(--pricing-unit) * 3); color: var(--pricing-muted); }
+.pricing-page :focus-visible, .pricing-period input:focus-visible + span { outline: var(--pricing-focus) solid var(--ink); outline-offset: var(--pricing-focus-offset); }
+.pricing-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: calc(var(--pricing-unit) * 24); }
+.pricing-plan { min-width: 0; }
+.pricing-plan h2 { font-size: var(--pricing-text-xl); font-weight: var(--pricing-weight); letter-spacing: var(--pricing-tight); }
+.pricing-description { color: var(--pricing-muted); font-size: var(--pricing-text-sm); margin-top: calc(var(--pricing-unit) * 2); }
+.pricing-price { display: flex; align-items: baseline; gap: calc(var(--pricing-unit) * 2); margin-top: calc(var(--pricing-unit) * 6); }
+.pricing-price strong { font-size: var(--pricing-number); font-weight: var(--pricing-weight); letter-spacing: var(--pricing-tight); line-height: var(--pricing-heading-leading); font-variant-numeric: tabular-nums; }
+.pricing-price > span { font-size: var(--pricing-text-sm); color: var(--pricing-muted); }
+.pricing-billing { min-height: calc(var(--pricing-unit) * 6); font-size: var(--pricing-text-sm); color: var(--pricing-muted); margin-top: calc(var(--pricing-unit) * 2); }
+.pricing-button { display: flex; width: 100%; min-height: calc(var(--pricing-unit) * 10); justify-content: center; gap: calc(var(--pricing-unit) * 3); margin-top: calc(var(--pricing-unit) * 5); border-radius: var(--r-sm); font-size: var(--pricing-text-sm); }
+.pricing-button.btn-ghost { background: var(--pricing-control-bg); border-color: transparent; }
+.pricing-button.btn-ghost:hover { background: var(--pricing-control-border); }
+.pricing-button > span { font-weight: normal; opacity: .7; }
+.pricing-includes { margin-top: calc(var(--pricing-unit) * 7); font-size: var(--pricing-text-sm); font-weight: var(--pricing-weight); }
+.pricing-features { list-style: none; margin: calc(var(--pricing-unit) * 4) 0 0; padding: 0; display: grid; gap: calc(var(--pricing-unit) * 3); color: var(--pricing-label); font-size: var(--pricing-text-sm); }
+.pricing-yearly { display: none; }
+.pricing-shell:has(#billing-year:checked) .pricing-monthly { display: none; }
+.pricing-shell:has(#billing-year:checked) .pricing-yearly { display: inline; }
+.pricing-under { display: flex; justify-content: space-between; align-items: center; gap: calc(var(--pricing-unit) * 4); color: var(--pricing-muted); font-size: var(--pricing-text-sm); margin-top: calc(var(--pricing-unit) * 10); }
+.pricing-under a { color: var(--ink); }
+.pricing-page a:hover { text-decoration: underline; text-underline-offset: var(--pricing-focus-offset); }
+.pricing-page .btn:hover { text-decoration: none; }
+.pricing-section { padding-top: calc(var(--pricing-unit) * 24); }
+.pricing-page .table-wrap { margin-top: calc(var(--pricing-unit) * 7); overflow-x: auto; border: 0; border-radius: 0; box-shadow: none; }
+.pricing-compare { width: 100%; border-collapse: collapse; font-size: var(--pricing-text-sm); text-align: left; }
+.pricing-compare th, .pricing-compare td { padding: calc(var(--pricing-unit) * 3) calc(var(--pricing-unit) * 4); border: 0; border-bottom: var(--pricing-line) solid var(--pricing-control-bg); vertical-align: middle; font-weight: normal; background: transparent; }
+.pricing-compare th:first-child { width: 52%; padding-left: 0; color: var(--pricing-label); }
+.pricing-compare td, .pricing-compare thead th:not(:first-child) { width: 24%; }
+.pricing-compare thead th { padding-block: calc(var(--pricing-unit) * 4); border-bottom-color: var(--pricing-control-border); font-weight: var(--pricing-weight); color: var(--ink); }
+.pricing-compare thead th:first-child { color: var(--pricing-muted); }
+.pricing-compare .pricing-group th { padding-top: calc(var(--pricing-unit) * 9); padding-bottom: calc(var(--pricing-unit) * 4); color: var(--ink); font-weight: var(--pricing-weight); border-bottom-color: var(--pricing-control-border); }
+.pricing-check { color: var(--ink); }
+.pricing-unavailable { color: var(--pricing-muted); }
+.pricing-table-note { margin-top: calc(var(--pricing-unit) * 5); font-size: var(--pricing-text-sm); color: var(--pricing-muted); max-width: calc(var(--pricing-unit) * 200); }
+.pricing-usage { margin-top: calc(var(--pricing-unit) * 9); border-top: var(--pricing-line) solid var(--pricing-control-border); border-bottom: var(--pricing-line) solid var(--pricing-control-border); }
+.pricing-usage summary { display: flex; justify-content: space-between; gap: calc(var(--pricing-unit) * 6); cursor: pointer; padding-block: calc(var(--pricing-unit) * 5); font-size: var(--pricing-text-base); list-style: none; }
+.pricing-usage summary::-webkit-details-marker { display: none; }
+.pricing-usage details[open] .pricing-expand { transform: rotate(45deg); }
+.pricing-usage-content { padding-bottom: calc(var(--pricing-unit) * 7); }
+.pricing-usage-content > p { font-size: var(--pricing-text-sm); color: var(--pricing-muted); max-width: calc(var(--pricing-unit) * 200); }
+.pricing-usage-table th:first-child { width: 40%; }
+.pricing-usage-table td, .pricing-usage-table thead th:not(:first-child) { width: 20%; }
+.pricing-addons { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: calc(var(--pricing-unit) * 24); margin-top: calc(var(--pricing-unit) * 8); }
+.pricing-addons h3 { font-size: var(--pricing-text-base); font-weight: var(--pricing-weight); }
+.pricing-addons p { color: var(--pricing-muted); font-size: var(--pricing-text-sm); margin-top: calc(var(--pricing-unit) * 3); }
+.pricing-addons .pricing-addon-price { color: var(--ink); font-size: var(--pricing-text-xl); margin-top: calc(var(--pricing-unit) * 4); }
+.pricing-addon-price span { color: var(--pricing-muted); font-size: var(--pricing-text-sm); }
+.pricing-addons a { display: inline-block; font-size: var(--pricing-text-sm); margin-top: calc(var(--pricing-unit) * 4); }
+.pricing-page .faq { margin-top: 0; border-top: 0; }
+.pricing-page .faq details:last-child { border-bottom: 0; }
+.pricing-page .faq details { border: 0; border-bottom: var(--pricing-line) solid var(--pricing-control-border); border-radius: 0; background: transparent; margin: 0; padding: 0; }
+.pricing-legal { padding-block: calc(var(--pricing-unit) * 15); font-size: var(--pricing-text-sm); color: var(--pricing-muted); }
+.pricing-legal a { text-decoration: underline; text-underline-offset: var(--pricing-focus-offset); }
+.pricing-sr-only { position: absolute; width: var(--pricing-line); height: var(--pricing-line); padding: 0; margin: calc(var(--pricing-line) * -1); overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
+@media (max-width: 640px) {
+  .pricing-hero { align-items: start; flex-direction: column; gap: calc(var(--pricing-unit) * 6); padding-top: calc(var(--pricing-unit) * 9); padding-bottom: calc(var(--pricing-unit) * 9); }
+  .pricing-grid { grid-template-columns: minmax(0,1fr); gap: calc(var(--pricing-unit) * 12); }
+  .pricing-plan-pro { padding-top: calc(var(--pricing-unit) * 10); border-top: var(--pricing-line) solid var(--pricing-control-border); }
+  .pricing-under { flex-wrap: wrap; margin-top: calc(var(--pricing-unit) * 8); }
+  .pricing-section { padding-top: calc(var(--pricing-unit) * 16); }
+  .pricing-compare th, .pricing-compare td { padding-inline: calc(var(--pricing-unit) * 2); overflow-wrap: anywhere; }
+  .pricing-compare th:first-child { width: 46%; }
+  .pricing-compare td, .pricing-compare thead th:not(:first-child) { width: 27%; }
+  .pricing-usage-table { min-width: calc(var(--pricing-unit) * 140); }
+  .pricing-addons, .pricing-faq { grid-template-columns: minmax(0,1fr); gap: calc(var(--pricing-unit) * 7); }
+}
+
+/* Pricing hero: same cards and payment marks as the main landing page. */
+
+    .pricing-page .pricing {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.25rem;
+      max-width: none;
+      margin: 0 auto;
+    }
+    .pricing-page .price-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 2rem 1.75rem 1.75rem;
+      display: flex; flex-direction: column;
+
+      position: relative;
+    }
+    .pricing-page .price-card.featured { border-color: var(--border); box-shadow: none; }
+    .pricing-page .price-card .price-badge {
+      position: absolute; top: -10px; right: 1.25rem;
+      font-family: var(--mono);
+      font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+      color: #fff; background: var(--ink);
+      padding: .3rem .65rem; border-radius: 999px;
+    }
+    .pricing-page .price-card .price-name {
+      font-family: var(--sans);
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: -.025em;
+    }
+    .pricing-page .price-card .price-value {
+      margin-top: .5rem;
+      display: flex; align-items: baseline; gap: .35rem;
+    }
+    .pricing-page .price-card .price-value .amount {
+      font-family: var(--sans);
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -.035em;
+      line-height: 1;
+    }
+    .pricing-page .price-card .price-value .period {
+      font-size: .95rem;
+      color: var(--dusty);
+    }
+    .pricing-page .price-card .price-note {
+      /* Глобальное правило центрирует абзацы (margin: auto + shrink-to-fit),
+         из-за чего подпись висела по центру карточки — гасим явно. */
+      width: 100%; max-width: none; margin: .35rem auto 0 0;
+      font-size: .82rem;
+      color: var(--dusty);
+      line-height: 1.35;
+      text-align: left;
+    }
+    .pricing-page .price-card .price-feats {
+      list-style: none;
+      margin: 1.6rem 0 1.8rem;
+      display: flex; flex-direction: column; gap: .65rem;
+      flex: 1;
+    }
+    /* Не flex: во флексе текст пункта и <code> внутри него становятся
+       ОТДЕЛЬНЫМИ элементами — их разносил зазор в .6rem, и «*.layero.app»
+       уезжал от слова «поддоменах» через полстроки. В обычном потоке код
+       идёт как часть предложения. Значок при этом вынут из потока, чтобы
+       вторая строка не подъезжала под него. */
+    .pricing-page .price-card .price-feats li {
+      position: relative;
+      padding-left: 1.75rem;
+      font-size: .94rem;
+      color: var(--graphite);
+      line-height: 1.4;
+    }
+    .pricing-page .price-card .price-feats li .ic {
+      position: absolute; left: 0; top: 1px;
+      width: 18px; height: 18px; border-radius: 50%;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700;
+      background: rgba(53,170,96,.12); color: var(--leaf);
+    }
+    .pricing-page .price-card .price-feats li.off { color: var(--graphite); }
+    .pricing-page .price-card .price-feats li.off .ic { background: var(--bg-soft); color: var(--stone); }
+    .pricing-page .price-card .price-cta { display: flex; }
+    .pricing-page .price-card .price-cta .btn { width: 100%; justify-content: center; }
+    .pricing-page .price-note {
+      margin: 1.2rem auto 0;
+      max-width: none;
+      text-align: center;
+      font-size: .88rem;
+      color: var(--dusty);
+      line-height: 1.55;
+    }
+    .pricing-page .price-note a { color: var(--graphite); text-decoration: underline; text-decoration-color: var(--border); }
+    .pricing-page .price-note a:hover { color: var(--ink); text-decoration-color: var(--ink); }
+
+    .pricing-page .price-pay {
+      margin-top: 2.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 1.75rem;
+    }
+    .pricing-page .price-pay .pay-mark {
+      display: block;
+      height: 22px;
+      width: auto;
+      opacity: .85;
+    }
+    .pricing-page .price-pay .pay-mark.pay-mc { height: 30px; }
+    .pricing-page .price-secure {
+      margin-top: 1rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      width: 100%;
+      justify-content: center;
+      font-size: .82rem;
+      color: var(--dusty);
+      letter-spacing: .01em;
+    }
+    .pricing-page .price-secure svg { flex-shrink: 0; color: var(--graphite); }
+
+
+@media (max-width: 640px) {
+  .pricing-page .pricing { grid-template-columns: minmax(0, 1fr); gap: calc(var(--pricing-unit) * 8); }
+  .pricing-page .price-card { padding: calc(var(--pricing-unit) * 7) calc(var(--pricing-unit) * 5); }
+}
+
+.pricing-page .price-feats code { padding: 0; border: 0; background: transparent; font-family: var(--mono); font-size: inherit; }
+
+/* Page headings, full-grid FAQ and the final product CTA. */
+.pricing-hero { flex-direction: row; align-items: flex-start; text-align: left; }
+.pricing-page h1, .pricing-page h2, .pricing-page h3 { text-align: left; }
+.pricing-period { margin-top: 0; padding: var(--pricing-unit); background: var(--bg-soft); border-radius: var(--r-md); }
+.pricing-faq { display: block; padding-bottom: calc(var(--pricing-unit) * 24); }
+.pricing-page .faq { margin: calc(var(--pricing-unit) * 7) 0 0; max-width: none; }
+.pricing-page .price-note#payment { max-width: calc(var(--pricing-unit) * 220); }
+.pricing-page #compare { position: relative; margin-top: calc(var(--pricing-unit) * 20); padding-top: calc(var(--pricing-unit) * 16); border-top: 0; }
+.pricing-page #compare::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100vw; border-top: var(--pricing-line) solid var(--border-soft); }
+@media (max-width: 640px) {
+  .pricing-hero { flex-direction: column; align-items: flex-start; }
+}
+
+.pricing-page { overflow-x: clip; }
+.pricing-period-control { display: flex; align-items: center; gap: calc(var(--pricing-unit) * 3); margin-top: calc(var(--pricing-unit) * 2); flex-shrink: 0; }
+.pricing-period-control .pricing-saving { margin-left: 0; font-size: var(--pricing-text-sm); }
+
+/* Use the shared feature-page / block-cta styles, as on /agents. */
+.pricing-page .pricing-final h2 { text-align: center; }
+
+/* Same section typography as /agents; the hero uses its title scale. */
+.pricing-faq { position: relative; margin-top: calc(var(--pricing-unit) * 20); padding-top: calc(var(--pricing-unit) * 16); }
+.pricing-faq::before { content: ""; position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 100vw; border-top: var(--pricing-line) solid var(--border-soft); }
+
+.pricing-page .pricing-final > .container { max-width: var(--pricing-width); }
