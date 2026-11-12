@@ -16,6 +16,15 @@
       new components/ui primitives.
 */
 :root {
+  --gift-surface: #faf5ff;
+  --gift-icon: #9333ea;
+  --gift-action: #f3e8ff;
+  --gift-action-hover: #e9d5ff;
+  --gift-icon-foreground: #ffffff;
+  --cell-icon-size: 2.25rem;
+  --cell-icon-glyph-size: 1.125rem;
+  --cell-icon-large-size: 2.5rem;
+  --cell-icon-large-glyph-size: 1.25rem;
   /* Inverse surface uses the opposite platform theme. */
   --inverse-card: #1e1e22;
   --inverse-foreground: #f5f5f7;
@@ -101,6 +110,11 @@
 }
 
 .dark {
+  --gift-surface: #291438;
+  --gift-icon: #a855f7;
+  --gift-action: #45205e;
+  --gift-action-hover: #582978;
+  --gift-icon-foreground: #ffffff;
   /* Inverse surface uses the opposite platform theme. */
   --inverse-card: #ffffff;
   --inverse-foreground: #141413;

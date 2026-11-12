@@ -1,14 +1,21 @@
 import * as React from "react";
+import { Percent } from "lucide-react";
 import { Slot } from "@radix-ui/react-slot";
 
 import { cn } from "@/lib/utils";
 
-export type InformerTone = "success" | "warning" | "danger" | "info";
+export type InformerTone = "success" | "warning" | "danger" | "info" | "gift";
 
 const TONE: Record<
   InformerTone,
   { box: string; badge: string; action: string; glyph: React.ReactNode }
 > = {
+  gift: {
+    box: "bg-[var(--gift-surface)]",
+    badge: "bg-[var(--gift-icon)] text-[var(--gift-icon-foreground)]",
+    action: "bg-[var(--gift-action)] hover:bg-[var(--gift-action-hover)]",
+    glyph: <Percent aria-hidden="true" strokeWidth={2} />,
+  },
   success: {
     box: "bg-success-50 dark:bg-success-950",
     badge: "bg-success-500 text-white dark:text-success-950",
