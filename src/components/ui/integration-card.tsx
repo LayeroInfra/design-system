@@ -1,6 +1,7 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { CellIcon } from "./cell-icon";
 import { Badge } from "./badge";
 
 export interface IntegrationCardProps
@@ -31,9 +32,7 @@ export const IntegrationCard = React.forwardRef<
   >
     <div className="flex items-start gap-3 p-5">
       {icon && (
-        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-border bg-muted text-neutral-600">
-          {icon}
-        </div>
+        <CellIcon>{icon}</CellIcon>
       )}
       <div className="min-w-0 flex-1">
         <div className="flex items-center gap-2">

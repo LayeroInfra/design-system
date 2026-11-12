@@ -9,7 +9,7 @@ const meta = {
     docs: {
       description: {
         component:
-          "Инлайн-уведомление с тоном (success/warning/danger/info). Крутится в " +
+          "Инлайн-уведомление с тоном (success/warning/danger/info/gift). Крутится в " +
           "Playground: тон, заголовок, текст, крестик. Кнопки действий — " +
           "<InformerAction>.",
       },
@@ -18,7 +18,7 @@ const meta = {
   argTypes: {
     tone: {
       control: "inline-radio",
-      options: ["success", "warning", "danger", "info"],
+      options: ["success", "warning", "danger", "info", "gift"],
     },
     title: { control: "text" },
     children: { control: "text" },
@@ -91,4 +91,13 @@ export const WithActions: Story = {
 
 export const BodyOnly: Story = {
   args: { title: undefined, onDismiss: (() => {}) as () => void },
+};
+
+export const Gift: Story = {
+  args: {
+    tone: "gift",
+    title: "Вам начислены бонусы",
+    children: "Активируйте бонусы, чтобы оплатить ими ближайшие списания.",
+    actions: <InformerAction>Активировать</InformerAction>,
+  },
 };
