@@ -10,6 +10,9 @@ import { Input } from "./input";
 export interface ListPickerProps {
   query: string;
   onQueryChange: (value: string) => void;
+  /** Показывать ли поле поиска. Список из пяти строк ищут глазами, и поле над
+   *  ним — лишний элемент, который к тому же забирает фокус. */
+  searchable?: boolean;
   searchPlaceholder?: string;
   autoFocus?: boolean;
   /** Pinned at the bottom of the list (e.g. a «create» action). */
@@ -22,6 +25,7 @@ export interface ListPickerProps {
 export function ListPicker({
   query,
   onQueryChange,
+  searchable = true,
   searchPlaceholder = "Поиск…",
   autoFocus,
   footer,
@@ -30,13 +34,20 @@ export function ListPicker({
 }: ListPickerProps) {
   return (
     <div className={className}>
-      <Input
-        value={query}
-        onChange={(e) => onQueryChange(e.target.value)}
-        placeholder={searchPlaceholder}
-        autoFocus={autoFocus}
-      />
-      <ul className="mt-2 divide-y divide-border overflow-hidden rounded-xl border border-border bg-card">
+      {searchable && (
+        <Input
+          value={query}
+          onChange={(e) => onQueryChange(e.target.value)}
+          placeholder={searchPlaceholder}
+          autoFocus={autoFocus}
+        />
+      )}
+      <ul
+        className={cn(
+          "divide-y divide-border overflow-hidden rounded-xl border border-border bg-card",
+          searchable && "mt-2",
+        )}
+      >
         {children}
         {footer ? <li>{footer}</li> : null}
       </ul>

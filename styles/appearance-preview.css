@@ -1,0 +1,66 @@
+/* Opt-in appearance study. Canonical source: design-system/styles/appearance-preview.css.
+   Copied to control-plane/src/dev; loaded only by the Vite development entry. */
+:root {
+  --preview-border-width: 2px;
+  --preview-control-border-width: 1px;
+  --preview-border: color-mix(in srgb, var(--border) 40%, var(--card));
+  --preview-toolbar-bottom: 1rem;
+  --preview-toolbar-width: calc(100vw - 2rem);
+  --preview-toolbar-layer: 60;
+}
+
+:root:not(.dark)[data-facelift="white"] {
+  --background: var(--card);
+  --bg: var(--bg-card);
+}
+
+/* Controls keep their finer outline in both experiments. */
+:root:is([data-facelift="current"], [data-facelift="white"]) :is(button, a.inline-flex.justify-center, input, textarea, select, [role="button"], [role="combobox"]) {
+  --preview-border-width: var(--preview-control-border-width);
+}
+
+/* Visible border sides are marked by the development preview, so internal
+   dividers, tables, navigation and controls share the same treatment. */
+:root:is([data-facelift="current"], [data-facelift="white"]) [data-preview-border~="Top"] {
+  border-top-width: var(--preview-border-width) !important;
+  border-top-color: var(--preview-border) !important;
+}
+
+:root:is([data-facelift="current"], [data-facelift="white"]) [data-preview-border~="Right"] {
+  border-right-width: var(--preview-border-width) !important;
+  border-right-color: var(--preview-border) !important;
+}
+
+:root:is([data-facelift="current"], [data-facelift="white"]) [data-preview-border~="Bottom"] {
+  border-bottom-width: var(--preview-border-width) !important;
+  border-bottom-color: var(--preview-border) !important;
+}
+
+:root:is([data-facelift="current"], [data-facelift="white"]) [data-preview-border~="Left"] {
+  border-left-width: var(--preview-border-width) !important;
+  border-left-color: var(--preview-border) !important;
+}
+
+:root:is([data-facelift="current"], [data-facelift="white"]) :is(.bg-border, .h-px[class*="bg-"], .w-px[class*="bg-"]) {
+  background-color: var(--preview-border);
+}
+:root:is([data-facelift="current"], [data-facelift="white"]) .h-px[class*="bg-"] {
+  height: var(--preview-border-width);
+}
+:root:is([data-facelift="current"], [data-facelift="white"]) .w-px[class*="bg-"] {
+  width: var(--preview-border-width);
+}
+
+:root:is([data-facelift="current"], [data-facelift="white"]) .before\:w-px::before {
+  width: var(--preview-border-width);
+  background-color: var(--preview-border);
+}
+
+.appearance-preview-toolbar {
+  position: fixed;
+  bottom: var(--preview-toolbar-bottom);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--preview-toolbar-layer);
+  max-width: var(--preview-toolbar-width);
+}

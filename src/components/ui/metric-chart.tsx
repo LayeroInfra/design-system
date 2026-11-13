@@ -7,6 +7,7 @@ import { Card } from "@/components/ui/card";
 import {
   TimeSeries,
   TIME_SERIES_PAD,
+  seriesXPadding,
   type TimeSeriesPoint,
 } from "@/components/ui/time-series";
 
@@ -27,10 +28,26 @@ export interface MetricChartProps
   /** A ceiling the series is measured against — a quota, a connection limit,
    *  100 %. Drawn as a dashed rule and pins the top of the scale. */
   limit?: number;
+  /** Всегда включать предел в шкалу и подписывать линию. */
+  keepLimitVisible?: boolean;
+  /** Отделяет далёкий лимит явным разрывом от линейной шкалы фактических значений. */
+  compressLimitGap?: boolean;
+  /** Состояние лимита за расчётный период. */
+  limitTone?: "default" | "danger";
   /** What the dashed rule is, e.g. «квота». Shown in the hovered readout. */
   limitLabel?: React.ReactNode;
   tone?: "default" | "success" | "warning" | "danger";
   height?: number;
+  /** Доля интервала, занятая столбцом. */
+  barRatio?: number;
+  /** Промежуточные даты по всей временной оси. */
+  timeTicks?: boolean;
+  /** Число интервалов горизонтальной сетки. */
+  gridIntervals?: 2 | 5;
+  /** Фиксированный шаг шкалы: верх округляется до ближайшего деления. */
+  axisStep?: number;
+  /** Внешний контейнер уже содержит заголовок графика. */
+  hideHeader?: boolean;
   /** Ends of the time axis, e.g. «16:45» … «17:45». */
   startLabel?: React.ReactNode;
   endLabel?: React.ReactNode;
@@ -71,9 +88,17 @@ export const MetricChart = React.forwardRef<HTMLDivElement, MetricChartProps>(
       format = (v) => String(Math.round(v)),
       formatTime,
       limit,
+      keepLimitVisible = false,
+      compressLimitGap = false,
+      limitTone,
       limitLabel,
       tone = "default",
       height = 132,
+      gridIntervals = 2,
+      axisStep,
+      hideHeader = false,
+      barRatio = 0.7,
+      timeTicks = false,
       startLabel,
       endLabel,
       footer,
@@ -92,8 +117,14 @@ export const MetricChart = React.forwardRef<HTMLDivElement, MetricChartProps>(
     // линия рисовалась по другому.
     const ys = points.map((p) => p[1]);
     const peak = Math.max(...ys, 0);
-    const top = Math.max(limit ?? 0, peak, 0.0001);
-    const hasLimit = typeof limit === "number" && limit > 0 && limit >= peak;
+    const separatedLimit = compressLimitGap && keepLimitVisible && typeof limit === "number" && limit > Math.max(peak, 0) * 4 && limit > 0;
+    const dataMagnitude = Math.pow(10, Math.floor(Math.log10(Math.max(peak, 0.0001))));
+    const zoomedTop = Math.ceil(Math.max(peak, 0.0001) * 1.1 / dataMagnitude) * dataMagnitude;
+    const rawTop = separatedLimit ? zoomedTop : Math.max(keepLimitVisible ? (limit ?? 0) * 1.1 : limit ?? 0, peak, 0.0001);
+    const step = axisStep && axisStep > 0 ? axisStep : null;
+    const top = step ? Math.max(step, Math.ceil(rawTop / step) * step) : rawTop;
+    const intervals = step ? Math.round(top / step) : separatedLimit ? 4 : gridIntervals;
+    const hasLimit = typeof limit === "number" && limit > 0 && (keepLimitVisible || limit >= peak);
     // Ровный ноль без потолка: шкалы у такого ряда нет, и «0 · 0 · 0» слева
     // выглядит поломкой. Оставляем одно основание — оно и есть весь ответ.
     const flat = !hasLimit && peak <= 0;
@@ -101,17 +132,18 @@ export const MetricChart = React.forwardRef<HTMLDivElement, MetricChartProps>(
     const minX = points.length ? points[0][0] : 0;
     const maxX = points.length ? points[points.length - 1][0] : 1;
     const W = 600;
-    const inner = W - TIME_SERIES_PAD * 2;
+    const xPad = seriesXPadding(points.length, variant, W);
+    const inner = W - xPad * 2;
 
     /** Доля ширины, на которой стоит точка ряда, — от 0 до 1. */
     const atX = (t: number) =>
-      (TIME_SERIES_PAD + ((t - minX) / (maxX - minX || 1)) * inner) / W;
+      (xPad + ((t - minX) / (maxX - minX || 1)) * inner) / W;
 
     const track = (e: React.PointerEvent<HTMLDivElement>) => {
       const box = plotRef.current?.getBoundingClientRect();
       if (!box || !points.length) return;
       const rel = (e.clientX - box.left) / box.width;
-      const frac = (rel * W - TIME_SERIES_PAD) / inner;
+      const frac = (rel * W - xPad) / inner;
       const t = minX + frac * (maxX - minX);
       let best = 0;
       for (let i = 1; i < points.length; i += 1) {
@@ -137,7 +169,7 @@ export const MetricChart = React.forwardRef<HTMLDivElement, MetricChartProps>(
 
     return (
       <Card ref={ref} className={cn("p-5", className)} {...props}>
-        <div className="flex items-start gap-3">
+        {!hideHeader && <div className="flex items-start gap-3">
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-1.5">
               <span className="text-sm text-neutral-500">{title}</span>
@@ -165,19 +197,32 @@ export const MetricChart = React.forwardRef<HTMLDivElement, MetricChartProps>(
               </Button>
             ))}
           </div>
-        </div>
+        </div>}
 
-        <div className="mt-4 flex gap-3">
-          {/* Подписи уровней: потолок, середина, ноль. Больше делений на карточке
-              такой высоты уже не читается. */}
+        {/* Сетка вместо двух рядов: ось значений занимает столько, сколько
+            нужно её самой длинной подписи, а подписи времени под графиком
+            начинаются ровно от его левого края. Фиксированная колонка
+            оставляла на телефоне полосу пустоты в треть ширины карточки. */}
+        <div className={cn("grid grid-cols-[auto_minmax(0,1fr)] gap-x-2 sm:gap-x-3", !hideHeader && "mt-4")}>
+          {separatedLimit && <>
+            <div className="text-right text-[11px] tabular-nums text-neutral-400">{format(limit as number)}</div>
+            <div className="relative h-10">
+              <div className={cn("absolute inset-x-0 top-2 border-t-2", limitTone === "danger" ? "border-negative-500 text-negative-500" : "border-foreground text-foreground")}>
+                <span className="absolute bottom-1 right-0 text-[11px] font-semibold">{limitLabel ?? "Лимит"} · {format(limit as number)}</span>
+              </div>
+              <div className="absolute bottom-1 left-0 -translate-x-1/2 text-neutral-400" role="img" aria-label="Разрыв шкалы">
+                <svg width="14" height="12" viewBox="0 0 14 12" fill="none" stroke="currentColor" aria-hidden="true"><path d="M2 8 6 4M8 8 12 4" /></svg>
+              </div>
+            </div>
+          </>}
           <div
-            className="flex w-14 shrink-0 flex-col justify-between text-right text-[11px] tabular-nums text-neutral-400"
+            className="flex flex-col justify-between text-right text-[11px] tabular-nums text-neutral-400"
             style={{ height }}
             aria-hidden="true"
           >
-            <span>{flat ? "" : format(top)}</span>
-            <span>{flat ? "" : format(top / 2)}</span>
-            <span>{format(0)}</span>
+            {Array.from({ length: intervals + 1 }, (_, i) => (
+              <span key={i}>{flat && i < intervals ? "" : format(top * (1 - i / intervals))}</span>
+            ))}
           </div>
 
           <div
@@ -190,25 +235,36 @@ export const MetricChart = React.forwardRef<HTMLDivElement, MetricChartProps>(
             {/* Сетка под графиком: середина и основание. Верх занят либо
                 пунктиром предела, либо ничем. */}
             <div className="pointer-events-none absolute inset-0">
-              <div className="absolute inset-x-0 top-1/2 border-t border-[color:var(--border-soft)]" />
-              <div className="absolute inset-x-0 bottom-0 border-t border-[color:var(--border-soft)]" />
-              {hasLimit && (
-                <div className="absolute inset-x-0 top-0 border-t border-dashed border-neutral-400/70" />
-              )}
+              {Array.from({ length: intervals + 1 }, (_, i) => (
+                (i > 0 || intervals > 2) && <div key={i}
+                  className="absolute inset-x-0 border-t border-[color:var(--border-soft)]"
+                  style={{ top: `${i / intervals * 100}%` }} />
+              ))}
+
             </div>
             <TimeSeries
               points={points}
-              max={limit}
+              max={keepLimitVisible ? top : limit}
               format={format}
               tone={tone}
               height={height}
               variant={variant}
+              barRatio={barRatio}
               activeIndex={hover}
               emptyLabel={emptyLabel}
             />
 
+              {hasLimit && !separatedLimit && (
+                <div
+                  className={cn("pointer-events-none absolute inset-x-0 z-20", keepLimitVisible ? "border-t-2" : "border-t", limitTone === "danger" ? "border-negative-500 text-negative-500" : limitTone === "default" ? "border-foreground text-foreground" : "border-dashed border-neutral-400/70 text-neutral-500")}
+                  style={{ top: keepLimitVisible ? height - TIME_SERIES_PAD - (limit as number) / top * (height - TIME_SERIES_PAD * 2) : 0 }}
+                >
+                  {keepLimitVisible && <span className="absolute bottom-1 right-0 text-[11px] font-semibold">{limitLabel ?? "Лимит"} · {format(limit as number)}</span>}
+                </div>
+              )}
+
             {active && (
-              <div className="pointer-events-none absolute inset-0">
+              <div className="pointer-events-none absolute inset-0 z-30">
                 <div
                   className="absolute top-0 h-full w-px bg-neutral-400"
                   style={{ left: `${activeLeft * 100}%` }}
@@ -245,14 +301,24 @@ export const MetricChart = React.forwardRef<HTMLDivElement, MetricChartProps>(
               </div>
             )}
           </div>
-        </div>
 
-        {(startLabel || endLabel) && (
-          <div className="mt-1.5 flex justify-between pl-[4.25rem] text-[11px] text-neutral-400">
-            <span>{startLabel}</span>
-            <span>{endLabel}</span>
-          </div>
-        )}
+          {timeTicks && points.length > 0 ? (
+            <><span /><div className="relative mt-1.5 h-4 text-[11px] text-neutral-400">
+              {Array.from({ length: Math.min(7, points.length) }, (_, i) => {
+                const index = Math.round(i * (points.length - 1) / Math.max(1, Math.min(7, points.length) - 1));
+                return <span key={index} className="absolute -translate-x-1/2 whitespace-nowrap" style={{ left: `${atX(points[index][0]) * 100}%` }}>{stamp(points[index][0])}</span>;
+              })}
+            </div></>
+          ) : (startLabel || endLabel) && (
+            <>
+              <span />
+              <div className="mt-1.5 flex justify-between text-[11px] text-neutral-400">
+                <span>{startLabel}</span>
+                <span>{endLabel}</span>
+              </div>
+            </>
+          )}
+        </div>
 
         {footer && <div className="mt-3 text-[11px] text-neutral-500">{footer}</div>}
       </Card>

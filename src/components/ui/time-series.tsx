@@ -16,6 +16,8 @@ export interface TimeSeriesProps
   max?: number;
   tone?: "default" | "success" | "warning" | "danger";
   height?: number;
+  /** Доля ширины дневного интервала, занятая столбцом. */
+  barRatio?: number;
   /** `area` — a filled line, `bars` — one column per sample. Bars read better
    *  for counts you compare point to point; the line, for a level that drifts. */
   variant?: "area" | "bars";
@@ -28,6 +30,13 @@ export interface TimeSeriesProps
 /** Поле внутри графика. Экспортируется, потому что подписи и курсор рисуются
  *  снаружи SVG и должны считать ту же геометрию. */
 export const TIME_SERIES_PAD = 4;
+
+/** Оставляет место для крайних столбцов и использует ту же геометрию для курсора. */
+export function seriesXPadding(count: number, variant: "area" | "bars", width = 600): number {
+  return variant === "bars"
+    ? Math.max(TIME_SERIES_PAD, (width - TIME_SERIES_PAD * 2) / Math.max(count, 1) / 2)
+    : TIME_SERIES_PAD;
+}
 
 const TONE: Record<string, { stroke: string; fill: string; bar: string; barActive: string }> = {
   // Спокойное состояние — зелёным: показатель не просто «какой-то», а в
@@ -80,6 +89,7 @@ export const TimeSeries = React.forwardRef<SVGSVGElement, TimeSeriesProps>(
       tone = "default",
       height = 72,
       variant = "area",
+      barRatio = 0.7,
       activeIndex = null,
       emptyLabel = "нет данных",
       className,
@@ -110,7 +120,8 @@ export const TimeSeries = React.forwardRef<SVGSVGElement, TimeSeriesProps>(
     const minX = Math.min(...xs);
     const maxX = Math.max(...xs) || minX + 1;
     const top = Math.max(max ?? 0, ...ys, 0.0001);
-    const x = (t: number) => pad + ((t - minX) / (maxX - minX || 1)) * (W - pad * 2);
+    const xPad = seriesXPadding(points.length, variant, W);
+    const x = (t: number) => xPad + ((t - minX) / (maxX - minX || 1)) * (W - xPad * 2);
     const y = (v: number) => H - pad - (v / top) * (H - pad * 2);
 
     // Разрыв во времени больше трёх ожидаемых шагов — это пропуск, а не спад.
@@ -149,7 +160,7 @@ export const TimeSeries = React.forwardRef<SVGSVGElement, TimeSeriesProps>(
               // слипаются на редком ряде и не исчезают на плотном.
               const w = Math.max(
                 1.5,
-                ((W - pad * 2) / Math.max(points.length, 1)) * 0.7,
+                ((W - pad * 2) / Math.max(points.length, 1)) * barRatio,
               );
               const top = y(p[1]);
               return (

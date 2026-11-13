@@ -1,0 +1,36 @@
+/* Solution landing illustrations. Shared Layero typography and palette. */
+.solution-page { --solution-unit: .25rem; --solution-icon: 2rem; --solution-visual-width: 56rem; }
+.solution-page .solution-visual { max-width: var(--solution-visual-width); margin: calc(var(--solution-unit) * 12) auto 0; border: 1px solid var(--border); border-radius: var(--r-lg); background: var(--bg-soft); text-align: left; overflow: hidden; }
+.solution-visual-head { display: flex; justify-content: space-between; gap: calc(var(--solution-unit) * 4); padding: calc(var(--solution-unit) * 4) calc(var(--solution-unit) * 6); border-bottom: 1px solid var(--border-soft); color: var(--dusty); font-family: var(--mono); font-size: .75rem; }
+.solution-pipeline { display: flex; align-items: center; justify-content: center; gap: calc(var(--solution-unit) * 5); padding: calc(var(--solution-unit) * 8); }
+.solution-pipeline > div { flex: 1; min-width: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: calc(var(--solution-unit) * 3); min-height: calc(var(--solution-unit) * 32); padding: calc(var(--solution-unit) * 5); background: var(--bg-card, var(--bg)); border: 1px solid var(--border); border-radius: var(--r-md); }
+.solution-page .solution-pipeline svg { width: var(--solution-icon); height: var(--solution-icon); }
+.solution-pipeline code { font-size: .8rem; }
+.solution-pipeline strong { font-weight: 500; }
+.solution-pipeline span { font-size: .75rem; color: var(--dusty); }
+.solution-pipeline .solution-connector { font-size: 1.25rem; color: var(--dusty); }
+.solution-pipeline .solution-status { color: var(--leaf); border: 1px solid var(--border-soft); border-radius: var(--r-pill, 999px); padding: var(--solution-unit) calc(var(--solution-unit) * 2); background: var(--leaf-soft); }
+.solution-commerce { display: grid; grid-template-columns: 2fr 1fr; gap: calc(var(--solution-unit) * 6); padding: calc(var(--solution-unit) * 6); }
+.solution-storefront, .solution-integrations { padding: calc(var(--solution-unit) * 5); border: 1px solid var(--border); border-radius: var(--r-md); background: var(--bg-card, var(--bg)); }
+.solution-storefront > strong { display: block; margin-bottom: calc(var(--solution-unit) * 4); font-weight: 500; }
+.solution-products { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: calc(var(--solution-unit) * 3); }
+.solution-product-shape { display: grid; place-items: center; height: calc(var(--solution-unit) * 20); border-radius: var(--r-sm); background: var(--bg-soft); border: 1px solid var(--border-soft); }
+.solution-product-shape svg { width: var(--solution-icon); height: var(--solution-icon); }
+.solution-product .shape-1 { background: var(--leaf-soft); color: var(--leaf); }
+.solution-product span { display: block; margin-top: calc(var(--solution-unit) * 2); color: var(--dusty); font-size: .75rem; }
+.solution-integrations { display: flex; flex-direction: column; justify-content: center; gap: calc(var(--solution-unit) * 5); }
+.solution-integrations > div { display: flex; align-items: center; gap: calc(var(--solution-unit) * 3); font-size: .875rem; }
+.solution-integrations svg { width: 1.125rem; height: 1.125rem; flex: none; }
+.solution-page .solution-config { background: var(--bg-soft); border: 1px solid var(--border); }
+.solution-page .solution-config ul { padding-left: calc(var(--solution-unit) * 4); list-style: disc; }
+.solution-page .solution-config li { padding-left: 0; }
+.solution-note { padding: calc(var(--solution-unit) * 5) calc(var(--solution-unit) * 6); border-left: 2px solid var(--border); margin-top: calc(var(--solution-unit) * 6); }
+.solution-note strong { font-weight: 500; }
+.solution-note p { margin: var(--solution-unit) 0 0; color: var(--dusty); }
+@media (max-width: 640px) {
+  .solution-pipeline { flex-direction: column; padding: calc(var(--solution-unit) * 5); gap: calc(var(--solution-unit) * 3); }
+  .solution-pipeline > div { width: 100%; min-height: calc(var(--solution-unit) * 24); }
+  .solution-pipeline .solution-connector { transform: rotate(90deg); }
+  .solution-commerce { grid-template-columns: 1fr; padding: calc(var(--solution-unit) * 4); }
+  .solution-visual-head { padding-inline: calc(var(--solution-unit) * 4); }
+}

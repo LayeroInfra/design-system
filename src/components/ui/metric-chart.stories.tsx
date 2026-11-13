@@ -98,3 +98,30 @@ export const Empty: Story = {
     format: (v) => String(Math.round(v)),
   },
 };
+
+/** Подробная сетка для графика потребления. */
+export const DetailedGrid: Story = {
+  args: { gridIntervals: 5, defaultVariant: "bars" },
+};
+
+export const ThinDailyBars: Story = {
+  args: {
+    defaultVariant: "bars", barRatio: 0.5, timeTicks: true, gridIntervals: 5,
+    formatTime: value => new Date(value * 1000).toLocaleDateString("ru-RU", { day: "numeric", month: "short", timeZone: "UTC" }),
+  },
+};
+
+export const RoundPercentageAxis: Story = {
+  args: { points: series(30, 80, 40), limit: undefined, format: value => `${value}%`, axisStep: 25, hideHeader: true, defaultVariant: "bars" },
+};
+
+export const VisibleLimit: Story = {
+  args: { points: series(30, 2, 1), limit: 100, keepLimitVisible: true, limitTone: "default", format: value => `${Math.round(value)} шт.` },
+};
+export const ExceededLimit: Story = {
+  args: { points: series(30, 110, 20), limit: 100, keepLimitVisible: true, limitTone: "danger", format: value => `${Math.round(value)} шт.` },
+};
+
+export const DistantLimit: Story = {
+  args: { points: series(7, 1, 0), limit: 100, keepLimitVisible: true, compressLimitGap: true, limitTone: "default", defaultVariant: "bars", format: value => `${value.toLocaleString("ru-RU")} шт.` },
+};
